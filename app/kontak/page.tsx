@@ -1,0 +1,105 @@
+"use client";
+import PageHeader from "@/components/PageHeader";
+import { MapPin, Phone, Mail, Clock, Send, Instagram, Youtube, Facebook } from "lucide-react";
+import { useState } from "react";
+import { SCHOOL } from "@/config/school";
+
+const FAQ = [
+  { q: "Bagaimana mendaftarkan anak?", a: "Via halaman PPDB Online atau hubungi admin pada jam kerja." },
+  { q: "Apakah ada beasiswa?", a: "Ya — beasiswa prestasi & ekonomi. Detail di halaman Profil." },
+  { q: "Jam sekolah?", a: "Kegiatan belajar 07.00–16.00 WIB, Sabtu 08.00–12.00." },
+];
+
+export default function KontakPage() {
+  const [open, setOpen] = useState<number|null>(null);
+  const [sent, setSent] = useState(false);
+
+  return (
+    <div>
+      <PageHeader badge="KONTAK • HUBUNGI KAMI" title="Kami Siap" accent="Membantu" desc="Punya pertanyaan soal PPDB, akademik atau kunjungan? Tim friendly kami jawab dalam 1×24 jam." img="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop" breadcrumb="Layanan / Kontak" />
+
+      <section className="max-w-[1280px] mx-auto px-6 -mt-2">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { icon: MapPin, title: "Alamat", value: SCHOOL.address },
+            { icon: Phone, title: "Telepon", value: `${SCHOOL.phone} • WA ${SCHOOL.whatsapp}` },
+            { icon: Mail, title: "Email", value: SCHOOL.email },
+            { icon: Clock, title: "Jam Kerja", value: `${SCHOOL.hours} • Sabtu 08.00–12.00` },
+          ].map((c,i)=> (
+            <div key={i} className="bg-white rounded-[24px] p-6 shadow-card border border-slate-100 hover:-translate-y-1 transition">
+              <span className="w-11 h-11 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center"><c.icon className="w-5 h-5" /></span>
+              <h3 className="mt-4 text-[10px] font-bold tracking-[0.2em] text-navy uppercase">{c.title}</h3>
+              <p className="text-sm font-semibold text-slate-600 mt-2 leading-6">{c.value}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="bg-white rounded-[32px] p-8 shadow-card border border-slate-100">
+            {sent ? (
+              <div className="py-16 text-center">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-2xl">✓</div>
+                <h3 className="font-display font-extrabold text-xl text-navy mt-4">Pesan Terkirim! 🎉</h3>
+                <p className="text-sm text-slate-600 mt-2">(Simulasi demo) Kami akan merespons maksimal 1×24 jam kerja.</p>
+                <button onClick={()=>setSent(false)} className="mt-6 bg-navy text-white px-6 py-3 rounded-full text-sm font-bold">Kirim Pesan Lain</button>
+              </div>
+            ) : (
+              <>
+                <h3 className="font-extrabold text-xl text-navy flex gap-2 items-center"><Send className="w-5 h-5 text-primary-600" /> Kirim Pesan</h3>
+                <p className="text-sm text-slate-600 mt-2">Isi form berikut — kami balas via email/WA maksimal 1 hari kerja.</p>
+                <form onSubmit={e=>{e.preventDefault(); setSent(true);}} className="mt-6 grid sm:grid-cols-2 gap-4">
+                  <input required placeholder="Nama Lengkap" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+                  <input required type="email" placeholder="Email" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+                  <input placeholder="No. WhatsApp (opsional)" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+                  <input required placeholder="Subjek" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+                  <textarea required rows={5} placeholder="Tulis pesan Anda..." className="sm:col-span-2 resize-none border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+                  <button className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-navy text-white py-4 rounded-xl font-bold hover:bg-primary-800 transition"><Send className="w-4 h-4" /> Kirim Pesan</button>
+                </form>
+              </>
+            )}
+          </div>
+
+          <div className="space-y-6">
+            <div className="rounded-[24px] overflow-hidden shadow-card border border-slate-100 bg-white p-2">
+              <iframe title="Peta lokasi sekolah" src={SCHOOL.mapEmbedUrl} className="w-full h-[220px] rounded-[18px] border-0" loading="lazy" />
+              <div className="p-4">
+                <div className="text-xs font-bold text-navy">{SCHOOL.name}</div>
+                <div className="text-xs text-slate-500 mt-1">{SCHOOL.address}</div>
+                <a href={SCHOOL.mapOpenUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex text-xs font-bold text-primary-600">Buka di Google Maps →</a>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-extrabold text-lg text-navy mb-4">Pertanyaan Umum</h3>
+              <div className="space-y-3">
+                {FAQ.map((f,i)=> (
+                  <div key={i} className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+                    <button onClick={()=>setOpen(open===i?null:i)} className="w-full flex justify-between p-4 text-left items-center gap-3">
+                      <span className="flex gap-3 items-center"><HelpCircleIcon /><span className="font-bold text-navy text-sm">{f.q}</span></span>
+                      <span className={`text-slate-400 transition ${open===i?"rotate-180":""}`}>▾</span>
+                    </button>
+                    {open===i && <div className="px-4 pb-4 text-sm leading-6 text-slate-600">{f.a}</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              {[{ Icon: Instagram, href: SCHOOL.social.instagram },{ Icon: Youtube, href: SCHOOL.social.youtube },{ Icon: Facebook, href: SCHOOL.social.tiktok }].map(({Icon,href},i)=> (
+                <a key={i} href={href} className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-navy hover:text-white transition"><Icon className="w-4 h-4" /></a>
+              ))}
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-800">
+              Ingin kunjungan langsung? Booking via WA admin agar kami siapkan tur kampus privat untuk keluarga Anda.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function HelpCircleIcon() {
+  return <svg className="w-4 h-4 text-primary-600 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>;
+}
