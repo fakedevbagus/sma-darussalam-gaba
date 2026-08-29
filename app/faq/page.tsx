@@ -19,7 +19,7 @@ export default function FaqPage() {
   return (
     <div>
       <PageHeader badge="BANTUAN • FAQ" title="Pertanyaan" accent="Umum" desc="Jawaban cepat seputar PPDB, akademik & layanan — data demo via lib/demo-data.ts" img="https://images.unsplash.com/photo-1521791136064-7986c86c6438?q=80&w=800&auto=format&fit=crop" breadcrumb="Layanan / FAQ" />
-      <section className="max-w-[800px] mx-auto px-6 -mt-2">
+      <section className="max-w-[800px] mx-auto px-6">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
           <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Cari pertanyaan..." className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-semibold shadow-card focus:outline-none focus:ring-2 focus:ring-primary-500" />
@@ -35,7 +35,7 @@ export default function FaqPage() {
 
         <div className="mt-6 space-y-3">
           {filtered.map((faq,i)=> (
-            <div key={faq.id} className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+            <div key={faq.id} className="bg-white rounded-2xl border border-[#ece4d4] shadow-sm overflow-hidden">
               <button onClick={()=> setOpen(open===faq.id?null:faq.id)} className="w-full flex gap-3 p-5 text-left items-center">
                 <span className="w-7 h-7 rounded-lg bg-primary-50 text-primary-700 flex items-center justify-center text-[10px] font-bold shrink-0">{String(i+1).padStart(2,"0")}</span>
                 <span className="flex-1 font-bold text-navy text-sm">{faq.question}</span>

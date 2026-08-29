@@ -6,9 +6,9 @@ import { Eye, ListChecks, CheckCircle2 } from "lucide-react";
 export default function VisiMisiPage() {
   return (
     <div>
-      <PageHeader badge="PROFIL • VISI & MISI" title="Visi & Misi" accent="SMA Biru Ceria" desc="Arah & tujuan jangka panjang yang menggerakkan seluruh warga sekolah." img="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" breadcrumb="Profil / Visi & Misi" />
+      <PageHeader badge="PROFIL • VISI & MISI" title="Visi & Misi" accent={SCHOOL.shortName} desc="Arah & tujuan jangka panjang yang menggerakkan seluruh warga sekolah." img="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" breadcrumb="Profil / Visi & Misi" />
 
-      <section className="max-w-[1280px] mx-auto px-6 -mt-2 space-y-8">
+      <section className="max-w-[1280px] mx-auto px-6 space-y-8">
         <div className="bg-gradient-to-br from-navy to-primary-900 text-white rounded-[32px] p-8 md:p-10 relative overflow-hidden">
           <div className="absolute -top-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
           <div className="relative">
@@ -19,11 +19,11 @@ export default function VisiMisiPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-[32px] p-8 shadow-card border border-slate-100">
+        <div className="bg-white rounded-[32px] p-8 shadow-card border border-[#ece4d4]">
           <SectionHeading eyebrow="Misi" title="Misi Sekolah" desc="Langkah strategis untuk mewujudkan visi" number="02" />
           <div className="mt-6 grid sm:grid-cols-2 gap-4">
             {SCHOOL.misi.map((m, i) => (
-              <div key={i} className="flex gap-3 bg-slate-50 rounded-2xl p-4 border border-slate-100">
+              <div key={i} className="flex gap-3 bg-slate-50 rounded-2xl p-4 border border-[#ece4d4]">
                 <span className="w-7 h-7 rounded-full bg-primary-600 text-white flex items-center justify-center text-xs font-bold shrink-0">{i + 1}</span>
                 <span className="text-sm leading-6 text-slate-700">{m}</span>
               </div>

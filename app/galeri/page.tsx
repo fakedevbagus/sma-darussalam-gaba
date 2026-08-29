@@ -1,6 +1,7 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
 import { GALLERY } from "@/lib/demo-data";
+import { SCHOOL } from "@/config/school";
 import { useState } from "react";
 import { Camera, Film, Expand, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -14,7 +15,7 @@ export default function GaleriPage() {
     <div>
       <PageHeader badge="DOKUMENTASI • FOTO & VIDEO" title="Momen Ceria" accent="Tak Terlupakan" desc="Kegiatan, prestasi & keseharian — foto pilihan + video YouTube. Data demo siap ganti." img="https://images.unsplash.com/photo-1516450360452-9312abbf6f7e?q=80&w=800&auto=format&fit=crop" breadcrumb="Kesiswaan / Galeri" />
 
-      <section className="max-w-[1280px] mx-auto px-6 -mt-2">
+      <section className="max-w-[1280px] mx-auto px-6">
         <div className="flex flex-wrap justify-center gap-2">
           {(["all","foto","video"] as const).map(f=> (
             <button key={f} onClick={()=>{setFilter(f); setIdx(null)}} className={`px-5 py-2.5 rounded-full text-xs font-bold border flex gap-2 items-center ${filter===f?"bg-navy text-white border-navy":"bg-white text-slate-600 border-slate-200"}`}>
@@ -25,7 +26,7 @@ export default function GaleriPage() {
 
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {items.map((item,i)=> (
-            <button key={item.id} onClick={()=>setIdx(i)} className={`group relative text-left bg-white rounded-[24px] p-3 pb-5 shadow-card border border-slate-100 hover:shadow-3d hover:-translate-y-1 transition overflow-hidden ${i%4===0?"rotate-[0.5deg]": i%4===1?"-rotate-[0.5deg]": i%4===2?"rotate-[0.3deg]":"-rotate-[0.3deg]"}`}>
+            <button key={item.id} onClick={()=>setIdx(i)} className={`group relative text-left bg-white rounded-[24px] p-3 pb-5 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition overflow-hidden ${i%4===0?"rotate-[0.5deg]": i%4===1?"-rotate-[0.5deg]": i%4===2?"rotate-[0.3deg]":"-rotate-[0.3deg]"}`}>
               <div className="aspect-[4/3] overflow-hidden rounded-xl bg-slate-100 relative">
                 <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                 <span className="absolute right-2 top-2 w-7 h-7 bg-white/90 rounded-lg flex items-center justify-center shadow-card opacity-0 group-hover:opacity-100 transition">
@@ -61,7 +62,7 @@ export default function GaleriPage() {
           </div>
         )}
 
-        <div className="mt-10 bg-white rounded-[32px] p-8 shadow-card border border-slate-100">
+        <div className="mt-10 bg-white rounded-[32px] p-8 shadow-card border border-[#ece4d4]">
           <h3 className="font-extrabold text-navy">Video Pilihan</h3>
           <div className="mt-6 grid md:grid-cols-3 gap-6">
             {GALLERY.filter(g=>g.videoUrl).slice(0,3).map(v=> (
@@ -70,7 +71,7 @@ export default function GaleriPage() {
                 <div className="relative w-12 h-12 bg-white text-navy rounded-full flex items-center justify-center shadow-float">▶</div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-left">
                   <div className="font-bold text-sm">{v.title}</div>
-                  <div className="text-xs text-white/70">YouTube • SMA Biru Ceria</div>
+                  <div className="text-xs text-white/70">YouTube • {SCHOOL.shortName}</div>
                 </div>
               </button>
             ))}

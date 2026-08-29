@@ -1,7 +1,7 @@
 /**
- * Central navigation — meniru struktur smadarussalam.sch.id:
+ * Central navigation — struktur setara smadarussalam.sch.id:
  * Beranda | Profil Kami ▾ | Program Jurusan ▾ | Lainnya ▾ | WA + CTA Daftar
- * Visual tetap Biru Ceria. Single source of truth Navbar & Footer.
+ * Visual tetap tema Biru Ceria. Single source of truth Navbar & Footer.
  */
 
 export interface NavItem {
@@ -31,8 +31,6 @@ export const PUBLIC_NAV: NavItem[] = [
     children: [
       { label: "MIPA", href: "/jurusan/mipa", desc: "Matematika & Ilmu Pengetahuan Alam" },
       { label: "IPS", href: "/jurusan/ips", desc: "Ilmu Pengetahuan Sosial" },
-      { label: "BAHASA", href: "/jurusan/bahasa", desc: "Ilmu Bahasa dan Budaya" },
-      { label: "MIPA TAHFIDZ", href: "/jurusan/mipa-tahfidz", desc: "MIPA plus Tahfidz Al-Quran" },
     ],
   },
   {
@@ -46,6 +44,7 @@ export const PUBLIC_NAV: NavItem[] = [
       { label: "Kenangan", href: "/kenangan", desc: "Memories siswa" },
       { label: "Prestasi", href: "/prestasi", desc: "Rekam juara" },
       { label: "Alumni", href: "/alumni", desc: "Cerita lulusan" },
+      { label: "Portal Akademik", href: "/e-raport", desc: "E-Raport & layanan digital — dalam pengembangan" },
     ],
   },
 ];
@@ -59,6 +58,8 @@ export const FOOTER_QUICK = [
   { label: "Ekstrakurikuler", href: "/ekskul" },
   { label: "Berita & Artikel", href: "/berita" },
   { label: "Galeri", href: "/galeri" },
+  { label: "Pencarian", href: "/cari" },
+  { label: "Portal Akademik", href: "/e-raport" },
   { label: "Kontak Kami", href: "/kontak" },
 ];
 

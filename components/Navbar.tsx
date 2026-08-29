@@ -11,25 +11,33 @@ import { PUBLIC_NAV, WA_LINK, DAFTAR_LINK } from "@/config/navigation";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
+  /**
+   * Navbar overlay: SELALU transparan (tanpa kotak) dan hanya tampil
+   * di posisi paling atas halaman. Setelah digeser ke bawah, seluruh
+   * header (ticker + logo + menu) menghilang sampai kembali ke atas.
+   */
+  const overlay = pathname === "/";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setHidden(window.scrollY > 150);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "py-2" : "py-3"}`}>
+    <header className={`fixed top-0 inset-x-0 z-50 py-3 transition-all duration-500 ${hidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"}`}>
+      {/* Ticker pengumuman — strip paling atas (beranda) */}
+      {pathname === "/" && <div className="top-ticker mb-2"><NewsTicker /></div>}
       <div className="mx-auto max-w-[1280px] px-4">
-        <div className={`flex items-center justify-between rounded-[20px] px-4 md:px-6 py-3 transition-all duration-500 ${scrolled ? "bg-white/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(15,23,42,0.12)] border border-white/60" : "bg-white shadow-card border border-slate-100"}`}>
+        <div className="flex items-center justify-between rounded-[20px] px-4 md:px-6 py-3 bg-transparent border border-transparent">
           <Link href="/" className="flex items-center gap-3 group" aria-label="Beranda">
-            <Logo />
+            <Logo white={overlay} />
           </Link>
 
-          {/* Desktop */}
-          <nav className="hidden lg:flex items-center gap-0.5">
+          {/* Desktop — disembunyikan saat overlay di hero */}
+          <nav className={`${overlay ? "hidden" : "hidden lg:flex"} items-center gap-0.5`}>
             {PUBLIC_NAV.map((item) =>
               item.children ? (
                 <div key={item.label} className="relative" onMouseEnter={() => setActive(item.label)} onMouseLeave={() => setActive(null)}>
@@ -43,7 +51,7 @@ export default function Navbar() {
                     {active === item.label && (
                       <motion.div initial={{ opacity: 0, y: 10, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.96 }} transition={{ duration: 0.18 }}
                         className={item.children.length > 4 ? "absolute right-0 top-[52px] w-[340px] p-2" : "absolute left-1/2 -translate-x-1/2 top-[52px] w-[420px] p-2"}>
-                        <div className="bg-white rounded-[20px] shadow-[0_25px_60px_rgba(15,23,42,0.18)] border border-slate-100 overflow-hidden p-2">
+                        <div className="bg-white rounded-[20px] shadow-[0_25px_60px_rgba(15,23,42,0.18)] border border-[#ece4d4] overflow-hidden p-2">
                           {item.children.map((s) => (
                             <Link key={s.href} href={s.href} className="group/item flex gap-3 p-3 rounded-xl hover:bg-primary-50 transition">
                               <span className="mt-1 w-2 h-2 rounded-full bg-primary-500 shrink-0 group-hover/item:scale-125 transition" />
@@ -64,8 +72,8 @@ export default function Navbar() {
             )}
           </nav>
 
-          {/* CTA kanan: WA + Daftar */}
-          <div className="hidden lg:flex items-center gap-2">
+          {/* CTA kanan: WA + Daftar — disembunyikan saat overlay */}
+          <div className={`${overlay ? "hidden" : "hidden lg:flex"} items-center gap-2`}>
             <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-emerald-600 transition px-3 py-2.5">
               <span className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center"><MessageCircle className="w-4 h-4" /></span>
               0812-3456-7890
@@ -76,19 +84,16 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <button onClick={() => setOpen(!open)} aria-label="Menu" className="lg:hidden w-10 h-10 rounded-full bg-navy text-white flex items-center justify-center">
+          <button onClick={() => setOpen(!open)} aria-label="Menu" className={`w-10 h-10 rounded-full flex items-center justify-center transition ${overlay ? "bg-white/15 text-white border border-white/30 backdrop-blur-sm hover:bg-white/25" : "bg-navy text-white lg:hidden"}`}>
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
-        {/* Ticker info berita — bagian dari header fixed agar tidak tertutup logo */}
-        {pathname === "/" && <div className="mt-2 rounded-full overflow-hidden"><NewsTicker /></div>}
-
-        {/* Mobile */}
+        {/* Mobile / overlay menu */}
         <AnimatePresence>
           {open && (
             <motion.div initial={{ opacity: 0, y: -10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10, scale: 0.98 }}
-              className="lg:hidden mt-3 bg-white rounded-[24px] shadow-[0_20px_50px_rgba(15,23,42,0.18)] border border-slate-100 overflow-hidden max-h-[75vh] overflow-y-auto">
+              className={`${overlay ? "" : "lg:hidden"} mt-3 bg-white rounded-[24px] shadow-[0_20px_50px_rgba(15,23,42,0.18)] border border-[#ece4d4] overflow-hidden max-h-[75vh] overflow-y-auto`}>
               <div className="p-2">
                 {PUBLIC_NAV.map((item) =>
                   item.children ? (

@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import { useState } from "react";
 import Link from "next/link";
 import { ANNOUNCEMENTS, formatDateId } from "@/lib/demo-data";
+import { SCHOOL } from "@/config/school";
 import { Calendar, Tag, Search, Pin, ArrowRight } from "lucide-react";
 
 const FILTERS = [
@@ -23,9 +24,9 @@ export default function BeritaPage() {
 
   return (
     <div>
-      <PageHeader badge="INFORMASI • BERITA & PENGUMUMAN" title="Kabar Terbaru" accent="Biru Ceria" desc="Ikuti kabar terkini — prestasi, kegiatan & info resmi sekolah. Semua data demo siap diganti." img="https://images.unsplash.com/photo-1494172961521-33799ddd43a5?q=80&w=800&auto=format&fit=crop" breadcrumb="Informasi / Berita" />
+      <PageHeader badge="INFORMASI • BERITA & PENGUMUMAN" title="Kabar Terbaru" accent={SCHOOL.shortName} desc="Ikuti kabar terkini — prestasi, kegiatan & info resmi sekolah. Semua data demo siap diganti." img="https://images.unsplash.com/photo-1494172961521-33799ddd43a5?q=80&w=800&auto=format&fit=crop" breadcrumb="Informasi / Berita" />
 
-      <section className="max-w-[1280px] mx-auto px-6 -mt-2">
+      <section className="max-w-[1280px] mx-auto px-6">
         <div className="max-w-md mx-auto relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Cari berita atau pengumuman..." className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-semibold shadow-card focus:outline-none focus:ring-2 focus:ring-primary-500" />
@@ -53,7 +54,7 @@ export default function BeritaPage() {
 
         <div className="mt-8 grid md:grid-cols-3 gap-6">
           {filtered.map(a=> (
-            <Link key={a.id} href={`/berita/${a.slug}`} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-slate-100 hover:shadow-3d transition">
+            <Link key={a.id} href={`/berita/${a.slug}`} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d transition">
               {a.coverUrl && <div className="h-48 overflow-hidden"><img src={a.coverUrl} alt={a.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" /></div>}
               <div className="p-6">
                 <div className="flex gap-2 items-center text-xs"><span className="bg-primary-600 text-white px-2.5 py-1 rounded-full text-[10px] font-bold tracking-widest">{a.category}</span><span className="text-slate-500 flex gap-1 items-center"><Calendar className="w-3.5 h-3.5" /> {formatDateId(a.createdAt)}</span></div>

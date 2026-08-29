@@ -25,13 +25,13 @@ export default function ProgramPage() {
     <div>
       <PageHeader badge="AKADEMIK • KURIKULUM MERDEKA" title="Program &" accent="Kurikulum" desc="Kurikulum Merdeka + program unggulan yang mencetak siswa berprestasi, berkarakter & siap global." img="https://images.unsplash.com/photo-1509062522246-3755977927d?q=80&w=800&auto=format&fit=crop" breadcrumb="Akademik / Program" />
 
-      <section className="max-w-[1280px] mx-auto px-6 -mt-2">
+      <section className="max-w-[1280px] mx-auto px-6">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROGRAMS.map((p, i) => {
             const Icon = iconMap[p.icon] ?? Brain;
             const grad = colorMap[p.category] ?? "from-primary-600 to-accent";
             return (
-              <div key={p.slug} className="bg-white rounded-[24px] p-6 shadow-card border border-slate-100 hover:shadow-3d hover:-translate-y-1 transition">
+              <div key={p.slug} className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition">
                 <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center text-white`}><Icon className="w-5 h-5" /></div>
                 <div className="flex items-center justify-between mt-3">
                   <h3 className="font-bold text-navy">{p.name}</h3>
@@ -54,7 +54,7 @@ export default function ProgramPage() {
           <p className="text-sm text-slate-600 mt-2">Strategi modern berpusat pada siswa.</p>
           <div className="mt-6 grid sm:grid-cols-2 gap-4">
             {METODE.map((m,i)=> (
-              <div key={m.title} className="bg-white rounded-2xl p-5 shadow-card border border-slate-100 flex gap-3">
+              <div key={m.title} className="bg-white rounded-2xl p-5 shadow-card border border-[#ece4d4] flex gap-3">
                 <span className="w-8 h-8 rounded-lg bg-primary-50 text-primary-700 flex items-center justify-center font-bold text-xs shrink-0">{String(i+1).padStart(2,"0")}</span>
                 <div><div className="font-bold text-navy text-sm">{m.title}</div><div className="text-xs text-slate-600 mt-1">{m.desc}</div></div>
               </div>

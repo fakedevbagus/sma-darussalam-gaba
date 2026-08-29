@@ -34,7 +34,7 @@ export default function FasilitasPage() {
           {filtered.map((f, i) => {
             const Icon = iconMap[f.icon] ?? Building2;
             return (
-              <div key={f.id} className={`group bg-white rounded-[26px] overflow-hidden shadow-card border border-slate-100 hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
+              <div key={f.id} className={`group bg-white rounded-[26px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
                 <div className="relative h-44 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={f.image} alt={f.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />

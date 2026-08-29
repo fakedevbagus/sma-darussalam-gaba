@@ -31,7 +31,7 @@ export default function GuruPage() {
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((s, i) => (
-            <article key={s.id} className="group relative bg-white rounded-[26px] overflow-hidden shadow-card border border-slate-100 hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
+            <article key={s.id} className="group relative bg-white rounded-[26px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
               {/* Foto + overlay premium */}
               <div className="relative aspect-[4/5] overflow-hidden bg-primary-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

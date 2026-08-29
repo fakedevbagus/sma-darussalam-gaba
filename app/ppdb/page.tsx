@@ -76,11 +76,11 @@ export default function PPDBPage() {
         breadcrumb="Layanan / PPDB Online"
       />
 
-      <section className="max-w-[1280px] mx-auto px-6 -mt-2">
+      <section className="max-w-[1280px] mx-auto px-6">
         {/* Langkah */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {STEPS.map((s,i)=> (
-            <div key={s.title} className="bg-white rounded-[24px] p-5 shadow-card border border-slate-100 hover:-translate-y-1 transition">
+            <div key={s.title} className="bg-white rounded-[24px] p-5 shadow-card border border-[#ece4d4] hover:-translate-y-1 transition">
               <div className="text-[10px] font-bold tracking-[0.25em] text-accent">LANGKAH 0{i+1}</div>
               <span className="mt-3 w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center"><s.icon className="w-5 h-5" /></span>
               <h3 className="font-bold text-navy mt-3">{s.title}</h3>
@@ -93,7 +93,7 @@ export default function PPDBPage() {
         <div className="mt-8 text-center text-[11px] font-bold tracking-widest text-slate-500 uppercase">Kuota Pendaftaran Per Jalur</div>
         <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {JALUR.map(j=> (
-            <div key={j.value} className="bg-white rounded-2xl p-5 text-center shadow-card border border-slate-100 card-3d">
+            <div key={j.value} className="bg-white rounded-2xl p-5 text-center shadow-card border border-[#ece4d4] card-3d">
               <span className="w-10 h-10 mx-auto rounded-full bg-primary-50 text-primary-700 flex items-center justify-center"><Users className="w-5 h-5" /></span>
               <div className="text-2xl font-extrabold gradient-text mt-3">{j.quota}</div>
               <div className="font-bold text-navy text-sm mt-1">{j.label}</div>
@@ -104,7 +104,7 @@ export default function PPDBPage() {
 
         {/* Persyaratan + Biaya */}
         <div className="mt-8 grid lg:grid-cols-12 gap-6">
-          <div id="persyaratan" className="lg:col-span-7 bg-white rounded-[32px] p-8 shadow-card border border-slate-100">
+          <div id="persyaratan" className="lg:col-span-7 bg-white rounded-[32px] p-8 shadow-card border border-[#ece4d4]">
             <h3 className="font-extrabold text-xl text-navy flex gap-2 items-center"><FileText className="w-5 h-5 text-primary-600" /> Persyaratan Berkas</h3>
             <ul className="mt-5 space-y-2.5">
               {REQUIREMENTS.map(r=> (<li key={r} className="flex gap-3 text-sm text-navy"><CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-primary-600" />{r}</li>))}
@@ -132,7 +132,7 @@ export default function PPDBPage() {
                 </div>
               </div>
             </div>
-            <div id="beasiswa" className="bg-white rounded-[24px] p-6 shadow-card border border-slate-100">
+            <div id="beasiswa" className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4]">
               <h4 className="font-bold text-navy flex items-center gap-2"><Gift className="w-4 h-4 text-amber-600" /> Beasiswa Hingga 100%</h4>
               <ul className="mt-3 space-y-2 text-sm text-slate-600">
                 <li>• Akademik (rank 1–3 SMP)</li>
@@ -245,7 +245,7 @@ export default function PPDBPage() {
           <h3 className="font-display font-extrabold text-2xl text-navy flex gap-2 items-center justify-center"><HelpCircle className="w-6 h-6 text-primary-600" /> FAQ PPDB</h3>
           <div className="mt-6 max-w-2xl mx-auto space-y-3">
             {FAQS.map((f,i)=> (
-              <div key={i} className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+              <div key={i} className="bg-white rounded-2xl border border-[#ece4d4] overflow-hidden">
                 <button onClick={()=>setOpenFaq(openFaq===i?null:i)} className="w-full flex items-center justify-between gap-3 p-5 text-left">
                   <span className="font-bold text-navy text-sm">{f.q}</span>
                   <ChevronDown className={`w-4 h-4 text-slate-500 transition shrink-0 ${openFaq===i?"rotate-180":""}`} />

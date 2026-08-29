@@ -19,10 +19,11 @@ const ITEMS = [
   { key: "whatsapp", href: SCHOOL.social.whatsapp, Icon: WhatsappIcon, label: "WhatsApp" },
 ];
 
-export default function SocialLinks({ variant = "solid", size = 38 }: { variant?: "solid" | "light"; size?: number }) {
+export default function SocialLinks({ variant = "solid", size = 38, whatsapp = true }: { variant?: "solid" | "light"; size?: number; whatsapp?: boolean }) {
+  const list = whatsapp ? ITEMS : ITEMS.filter(i => i.key !== "whatsapp");
   return (
     <div className="flex items-center gap-2.5">
-      {ITEMS.map(({ key, href, Icon, label }) => (
+      {list.map(({ key, href, Icon, label }) => (
         <a
           key={key}
           href={href || "#"}

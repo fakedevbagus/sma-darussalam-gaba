@@ -15,10 +15,10 @@ export default function JurusanPage() {
         img="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop"
         breadcrumb="Program Jurusan"
       />
-      <section className="max-w-[1280px] mx-auto px-6 -mt-2">
+      <section className="max-w-[1280px] mx-auto px-6">
         <div className="grid sm:grid-cols-2 gap-6">
           {JURUSAN.map(j => (
-            <Link key={j.slug} href={`/jurusan/${j.slug}`} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-slate-100 hover:shadow-3d transition flex flex-col">
+            <Link key={j.slug} href={`/jurusan/${j.slug}`} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d transition flex flex-col">
               <div className="h-52 overflow-hidden relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={j.image} alt={j.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />

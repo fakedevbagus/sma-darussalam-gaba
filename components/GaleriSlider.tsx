@@ -1,0 +1,34 @@
+"use client";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import Link from "next/link";
+import { GALLERY } from "@/lib/demo-data";
+
+/** Galeri kegiatan — slide otomatis pelan (Swiper autoplay, loop) */
+export default function GaleriSlider() {
+  const items = GALLERY.filter(g => !g.videoUrl).slice(0, 8);
+  return (
+    <Swiper
+      modules={[Autoplay]}
+      slidesPerView={1.15}
+      spaceBetween={16}
+      loop
+      autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
+      breakpoints={{ 640: { slidesPerView: 2.2 }, 1024: { slidesPerView: 4 } }}
+    >
+      {items.map(g => (
+        <SwiperSlide key={g.id} className="h-auto">
+          <Link href="/galeri" className="group relative block rounded-[24px] overflow-hidden shadow-card border-4 border-white hover:shadow-3d transition h-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={g.imageUrl} alt={g.title} loading="lazy" className="w-full h-[190px] sm:h-[210px] object-cover group-hover:scale-110 transition duration-700" />
+            <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-navy/85 to-transparent">
+              <div className="text-white font-bold text-sm leading-snug">{g.title}</div>
+              <div className="text-white/60 text-[10px] font-extrabold tracking-widest uppercase">{g.category}</div>
+            </div>
+          </Link>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+}

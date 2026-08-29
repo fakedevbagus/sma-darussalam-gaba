@@ -17,8 +17,8 @@ export default function UnduhanPage() {
   return (
     <div>
       <PageHeader badge="PUSAT DOKUMEN" title="Unduhan" accent="Dokumen" desc="Formulir & dokumen resmi — gratis, demo siap ganti file real via lib/demo-data.ts" img="https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=800&auto=format&fit=crop" breadcrumb="Informasi / Unduhan" />
-      <section className="max-w-[1280px] mx-auto px-6 -mt-2">
-        <div className="bg-white rounded-2xl p-4 shadow-card border border-slate-100 flex flex-wrap justify-center gap-6 text-sm font-semibold text-slate-600">
+      <section className="max-w-[1280px] mx-auto px-6">
+        <div className="bg-white rounded-2xl p-4 shadow-card border border-[#ece4d4] flex flex-wrap justify-center gap-6 text-sm font-semibold text-slate-600">
           <span className="flex gap-2 items-center"><HardDrive className="w-4 h-4 text-primary-600" /> {DOWNLOADS.length} Dokumen</span>
           <span className="w-px bg-slate-200 hidden sm:block" />
           <span className="flex gap-2 items-center"><Download className="w-4 h-4 text-amber-500" /> Siap Unduh</span>
@@ -39,7 +39,7 @@ export default function UnduhanPage() {
 
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {filtered.map(doc=> (
-            <div key={doc.id} className="bg-white rounded-[24px] p-5 shadow-card border border-slate-100 hover:shadow-3d hover:-translate-y-1 transition flex flex-col">
+            <div key={doc.id} className="bg-white rounded-[24px] p-5 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition flex flex-col">
               <div className="flex justify-between items-start">
                 <span className={`w-10 h-10 rounded-xl flex items-center justify-center ${doc.fileType==="PDF"?"bg-red-50 text-red-500":"bg-slate-100 text-slate-500"}`}><FileText className="w-5 h-5" /></span>
                 <span className="bg-primary-50 text-primary-700 px-2 py-1 rounded-full text-[10px] font-bold tracking-widest">{doc.fileType}</span>

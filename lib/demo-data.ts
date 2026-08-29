@@ -1,6 +1,5 @@
 /**
- * Demo data production-ready — struktur mengikuti Darussalam Mimo fixtures
- * tapi disajikan sebagai static data untuk Biru Ceria (tanpa Convex).
+ * Demo data production-ready — disajikan sebagai static data (tanpa database).
  * Semua foto, nama, alamat demo — mudah diganti via file ini.
  */
 
@@ -21,7 +20,7 @@ export const ANNOUNCEMENTS = [
   },
   {
     id: "ann-002", slug: "siswa-raih-emas-osn-matematika", category: "berita" as const,
-    title: "Siswa Biru Ceria Raih Medali Emas OSN Matematika 2025",
+    title: "Siswa SMA Darussalam Raih Medali Emas OSN Matematika 2025",
     coverUrl: "https://picsum.photos/seed/sbc-osn/900/500",
     content: "Muhammad Rizky Pratama (XII MIPA 1) meraih emas OSN Matematika di Jakarta. Pembinaan intensif tim olimpiade + lab modern.",
     authorName: "Humas", pinned: false, createdAt: iso(4),
@@ -92,14 +91,17 @@ export const ACHIEVEMENTS = [
 ];
 
 export const STAFF = [
-  { id: "stf-01", name: "Muzaki Ariffin Affandi, S.Pd., M.Pd.", position: "Kepala Sekolah", subject: "Manajemen Pendidikan", bio: "Memimpin dengan visi karakter & prestasi sejak 2016. 30+ tahun pengabdian.", photoUrl: "https://i.pravatar.cc/300?img=15" },
-  { id: "stf-02", name: "Dr. Fitri Handayani, M.Si.", position: "Wakasek Kurikulum", subject: "Biologi", bio: "Pengembangan kurikulum & bina OSN. Cum laude UI.", photoUrl: "https://i.pravatar.cc/300?img=26" },
-  { id: "stf-03", name: "Bambang Sutrisno, S.Pd.", position: "Wakasek Kesiswaan", subject: "Sejarah", bio: "Pembinaan karakter & organisasi siswa.", photoUrl: "https://i.pravatar.cc/300?img=33" },
-  { id: "stf-04", name: "Ratna Wulandari, S.Pd.", position: "Guru", subject: "Matematika", bio: "Pembina OSN Matematika — UN Malang.", photoUrl: "https://i.pravatar.cc/300?img=29" },
-  { id: "stf-05", name: "Budi Santoso, M.Si.", position: "Guru", subject: "Fisika", bio: "Pembina robotik & praktikum terpadu. 15+ tahun.", photoUrl: "https://i.pravatar.cc/300?img=12" },
-  { id: "stf-06", name: "Sari Dewi, M.Pd.", position: "Guru", subject: "Bahasa Inggris", bio: "Debat & exchange — Cambridge/TESOL.", photoUrl: "https://i.pravatar.cc/300?img=5" },
-  { id: "stf-07", name: "Denny Kurniawan, S.T.", position: "Guru", subject: "Informatika", bio: "Lab komputer & robotik — ITB.", photoUrl: "https://i.pravatar.cc/300?img=8" },
-  { id: "stf-08", name: "Andi Firmansyah, S.Or.", position: "Guru", subject: "PJOK", bio: "Futsal & basket — atlet nasional.", photoUrl: "https://i.pravatar.cc/300?img=18" },
+  { id: "stf-01", name: "Muzaki Ariffin Affandi, S.Pd.", position: "Kepala Sekolah", subject: "Manajemen Pendidikan", bio: "Memimpin SMA Darussalam dengan visi cerdas, berkarakter, dan berdaya saing.", photoUrl: "https://i.pravatar.cc/300?img=15" },
+  { id: "stf-02", name: "Fitri Handayani, S.Pd.", position: "Guru", subject: "Biologi", bio: "Pengembangan kurikulum & pembinaan akademik.", photoUrl: "https://i.pravatar.cc/300?img=26" },
+  { id: "stf-03", name: "Bambang Sutrisno, S.Pd.", position: "Guru", subject: "Sejarah", bio: "Pembinaan karakter & organisasi siswa.", photoUrl: "https://i.pravatar.cc/300?img=33" },
+  { id: "stf-04", name: "Ratna Wulandari, S.Pd.", position: "Guru", subject: "Matematika", bio: "Pembina OSN Matematika & pengembangan numerasi.", photoUrl: "https://i.pravatar.cc/300?img=29" },
+  { id: "stf-05", name: "Budi Santoso, S.Pd.", position: "Guru", subject: "Fisika", bio: "Praktikum IPA & pembinaan kompetisi sains.", photoUrl: "https://i.pravatar.cc/300?img=12" },
+  { id: "stf-06", name: "Sari Dewi, S.Pd.", position: "Guru", subject: "Bahasa Inggris", bio: "Literasi bahasa & English Club.", photoUrl: "https://i.pravatar.cc/300?img=5" },
+  { id: "stf-07", name: "Denny Kurniawan, S.Kom.", position: "Guru", subject: "Informatika", bio: "Lab komputer & literasi digital.", photoUrl: "https://i.pravatar.cc/300?img=8" },
+  { id: "stf-08", name: "Andi Firmansyah, S.Or.", position: "Guru", subject: "PJOK", bio: "Pembinaan olahraga & prestasi atlet pelajar.", photoUrl: "https://i.pravatar.cc/300?img=18" },
+  { id: "stf-09", name: "Kholil Fawaid, S.Sos.I.", position: "Kepala Tata Usaha", subject: "Tendik", bio: "Administrasi & tata usaha sekolah.", photoUrl: "https://i.pravatar.cc/300?img=53" },
+  { id: "stf-10", name: "Hasib Fawaid, S.Kom.", position: "Tenaga Teknis", subject: "Tendik", bio: "Sistem informasi & dukungan teknis sekolah.", photoUrl: "https://i.pravatar.cc/300?img=59" },
+  { id: "stf-11", name: "Riza Ainur Rofiq, S.Kom.", position: "Tenaga Teknis", subject: "Tendik", bio: "Dapodik, perpustakaan & dukungan laboratorium.", photoUrl: "https://i.pravatar.cc/300?img=68" },
 ];
 
 export const EVENTS = [
@@ -112,14 +114,14 @@ export const EVENTS = [
 ];
 
 export const GALLERY = [
-  { id: "gal-01", title: "Upacara Bendera", caption: "Khidmat di lapangan utama.", category: "Kegiatan", imageUrl: "https://picsum.photos/seed/sbc-upacara/900/650", videoUrl: "" },
-  { id: "gal-02", title: "Latihan Paskibra", caption: "Menjelang HUT RI 81.", category: "Ekstrakurikuler", imageUrl: "https://picsum.photos/seed/sbc-paskibra/900/650", videoUrl: "" },
-  { id: "gal-03", title: "Pentas Seni Gelar Karya", caption: "Tari tradisional XI.", category: "Acara", imageUrl: "https://picsum.photos/seed/sbc-pentas/900/650", videoUrl: "" },
-  { id: "gal-04", title: "Bazar Kewirausahaan", caption: "Produk P5 siswa.", category: "Acara", imageUrl: "https://picsum.photos/seed/sbc-bazar/900/650", videoUrl: "" },
-  { id: "gal-05", title: "OSN Matematika", caption: "Finalis & pembimbing.", category: "Prestasi", imageUrl: "https://picsum.photos/seed/sbc-osn2/900/650", videoUrl: "" },
-  { id: "gal-06", title: "Kunjungan Edukasi", caption: "Kelas X ke pusat sains.", category: "Kegiatan", imageUrl: "https://picsum.photos/seed/sbc-kunjungan/900/650", videoUrl: "" },
-  { id: "gal-07", title: "Jumat Bersih", caption: "Gotong royong lingkungan.", category: "Kegiatan", imageUrl: "https://picsum.photos/seed/sbc-bersih/900/650", videoUrl: "" },
-  { id: "gal-08", title: "Perkemahan Pramuka", caption: "Persami bumi perkemahan.", category: "Ekstrakurikuler", imageUrl: "https://picsum.photos/seed/sbc-pramuka/900/650", videoUrl: "" },
+  { id: "gal-01", title: "Upacara Bendera", caption: "Khidmat di lapangan utama.", category: "Kegiatan", imageUrl: "https://picsum.photos/seed/sbc-upacara/900/650", photos: ["https://picsum.photos/seed/sbc-upacara/900/650", "https://picsum.photos/seed/sbc-upacara2/900/650", "https://picsum.photos/seed/sbc-upacara3/900/650"], videoUrl: "" },
+  { id: "gal-02", title: "Latihan Paskibra", caption: "Menjelang HUT RI 81.", category: "Ekstrakurikuler", imageUrl: "https://picsum.photos/seed/sbc-paskibra/900/650", photos: ["https://picsum.photos/seed/sbc-paskibra/900/650", "https://picsum.photos/seed/sbc-paskibra2/900/650", "https://picsum.photos/seed/sbc-paskibra3/900/650"], videoUrl: "" },
+  { id: "gal-03", title: "Pentas Seni Gelar Karya", caption: "Tari tradisional XI.", category: "Acara", imageUrl: "https://picsum.photos/seed/sbc-pentas/900/650", photos: ["https://picsum.photos/seed/sbc-pentas/900/650", "https://picsum.photos/seed/sbc-pentas2/900/650", "https://picsum.photos/seed/sbc-pentas3/900/650", "https://picsum.photos/seed/sbc-pentas4/900/650"], videoUrl: "" },
+  { id: "gal-04", title: "Bazar Kewirausahaan", caption: "Produk P5 siswa.", category: "Acara", imageUrl: "https://picsum.photos/seed/sbc-bazar/900/650", photos: ["https://picsum.photos/seed/sbc-bazar/900/650", "https://picsum.photos/seed/sbc-bazar2/900/650", "https://picsum.photos/seed/sbc-bazar3/900/650"], videoUrl: "" },
+  { id: "gal-05", title: "OSN Matematika", caption: "Finalis & pembimbing.", category: "Prestasi", imageUrl: "https://picsum.photos/seed/sbc-osn2/900/650", photos: ["https://picsum.photos/seed/sbc-osn2/900/650", "https://picsum.photos/seed/sbc-osn2b/900/650", "https://picsum.photos/seed/sbc-osn2c/900/650"], videoUrl: "" },
+  { id: "gal-06", title: "Kunjungan Edukasi", caption: "Kelas X ke pusat sains.", category: "Kegiatan", imageUrl: "https://picsum.photos/seed/sbc-kunjungan/900/650", photos: ["https://picsum.photos/seed/sbc-kunjungan/900/650", "https://picsum.photos/seed/sbc-kunjungan2/900/650", "https://picsum.photos/seed/sbc-kunjungan3/900/650", "https://picsum.photos/seed/sbc-kunjungan4/900/650"], videoUrl: "" },
+  { id: "gal-07", title: "Jumat Bersih", caption: "Gotong royong lingkungan.", category: "Kegiatan", imageUrl: "https://picsum.photos/seed/sbc-bersih/900/650", photos: ["https://picsum.photos/seed/sbc-bersih/900/650", "https://picsum.photos/seed/sbc-bersih2/900/650", "https://picsum.photos/seed/sbc-bersih3/900/650"], videoUrl: "" },
+  { id: "gal-08", title: "Perkemahan Pramuka", caption: "Persami bumi perkemahan.", category: "Ekstrakurikuler", imageUrl: "https://picsum.photos/seed/sbc-pramuka/900/650", photos: ["https://picsum.photos/seed/sbc-pramuka/900/650", "https://picsum.photos/seed/sbc-pramuka2/900/650", "https://picsum.photos/seed/sbc-pramuka3/900/650", "https://picsum.photos/seed/sbc-pramuka4/900/650"], videoUrl: "" },
   { id: "gal-09", title: "Video: Sambutan Kepsek", caption: "Pembukaan TA baru.", category: "Video", imageUrl: "https://picsum.photos/seed/sbc-vid1/900/500", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
   { id: "gal-10", title: "Video: Tour Virtual", caption: "Jelajahi fasilitas.", category: "Video", imageUrl: "https://picsum.photos/seed/sbc-vid2/900/500", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
   { id: "gal-11", title: "Video: Basket Final", caption: "Final antar-kelas.", category: "Video", imageUrl: "https://picsum.photos/seed/sbc-vid3/900/500", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
@@ -154,16 +156,16 @@ export const PROGRAMS = [
 ];
 
 export const ALUMNI = [
-  { id: "a-01", name: "Ahmad Fadillah", graduationYear: 2018, university: "Universitas Indonesia", major: "Kedokteran", quote: "Fondasi karakter & semangat belajar dari SBC jadi bekal terbaik.", currentStatus: "Dokter Spesialis RSCM", photoUrl: "https://i.pravatar.cc/300?img=22" },
-  { id: "a-02", name: "Siti Nurhaliza", graduationYear: 2017, university: "ITB", major: "Teknik Informatika", quote: "Guru SBC menginspirasi kecintaan pada sains sejak dini.", currentStatus: "Senior Engineer di Google", photoUrl: "https://i.pravatar.cc/300?img=32" },
-  { id: "a-03", name: "Rizky Pratama", graduationYear: 2019, university: "UGM", major: "Ekonomi", quote: "Olimpiade & OSIS membentuk kepemimpinan & mental.", currentStatus: "Financial Analyst Mandiri", photoUrl: "https://i.pravatar.cc/300?img=11" },
-  { id: "a-04", name: "Dewi Anggraini", graduationYear: 2020, university: "Unair", major: "Hukum", quote: "Debat bahasa Inggris SBC buka pintu nasional.", currentStatus: "Pengacara Jakarta", photoUrl: "https://i.pravatar.cc/300?img=9" },
-  { id: "a-05", name: "Andi Prasetyo", graduationYear: 2016, university: "Stanford", major: "Computer Science", quote: "Lab robotik SBC awal petualangan teknologi saya.", currentStatus: "Tech Lead di Meta", photoUrl: "https://i.pravatar.cc/300?img=19" },
-  { id: "a-06", name: "Maya Sari", graduationYear: 2021, university: "Unpad", major: "Kedokteran Gigi", quote: "Disiplin & peduli SBC siap hadapi profesi.", currentStatus: "Dokter Gigi", photoUrl: "https://i.pravatar.cc/300?img=16" },
+  { id: "a-01", name: "Ahmad Fadillah", graduationYear: 2023, university: "Universitas Lampung", major: "Kedokteran", quote: "Fondasi karakter & semangat belajar dari SMA Darussalam jadi bekal terbaik.", currentStatus: "Mahasiswa Kedokteran", photoUrl: "https://i.pravatar.cc/300?img=22" },
+  { id: "a-02", name: "Siti Nurhaliza", graduationYear: 2023, university: "Universitas Lampung", major: "Teknik Informatika", quote: "Guru SMA Darussalam menginspirasi kecintaan pada sains sejak dini.", currentStatus: "Mahasiswa Informatika", photoUrl: "https://i.pravatar.cc/300?img=32" },
+  { id: "a-03", name: "Rizky Pratama", graduationYear: 2024, university: "UM Metro", major: "Ekonomi", quote: "OSIS & kegiatan sekolah membentuk kepemimpinan & mental.", currentStatus: "Mahasiswa Ekonomi", photoUrl: "https://i.pravatar.cc/300?img=11" },
+  { id: "a-04", name: "Dewi Anggraini", graduationYear: 2024, university: "Universitas Malahayati", major: "Hukum", quote: "Lingkungan belajar yang mendukung buka pintu prestasi.", currentStatus: "Mahasiswa Hukum", photoUrl: "https://i.pravatar.cc/300?img=9" },
+  { id: "a-05", name: "Andi Prasetyo", graduationYear: 2022, university: "Politeknik Negeri Lampung", major: "Teknik Mesin", quote: "Lab komputer SMA Darussalam awal petualangan teknologi saya.", currentStatus: "Mahasiswa Polinela", photoUrl: "https://i.pravatar.cc/300?img=19" },
+  { id: "a-06", name: "Maya Sari", graduationYear: 2025, university: "Universitas Lampung", major: "Keguruan & Ilmu Pendidikan", quote: "Disiplin & kepedulian di SMA Darussalam siap hadapi dunia kerja.", currentStatus: "Mahasiswa KIP", photoUrl: "https://i.pravatar.cc/300?img=16" },
 ];
 
 export const OSIS_DATA = {
-  title: "OSIS SMA Biru Ceria",
+  title: "OSIS SMA Darussalam",
   description: "Organisasi Siswa Intra Sekolah — wadah kepemimpinan, kreativitas & pengabdian.",
   vision: "Menjadikan OSIS yang aktif, kreatif, berkarakter & inspiratif bagi seluruh warga sekolah.",
   mission: ["Meningkatkan keimanan & ketakwaan", "Menumbuhkan jiwa kepemimpinan & tanggung jawab", "Mengembangkan minat bakat via kegiatan positif", "Mempererat persaudaraan & kepedulian sosial"],
@@ -183,7 +185,7 @@ export const OSIS_DATA = {
     { title: "LDKS", description: "Latihan Dasar Kepemimpinan Siswa", date: "Sep 2025" },
     { title: "HUT Sekolah", description: "Perayaan HUT ke-20", date: "Okt 2025" },
   ],
-  contactEmail: "osis@smadarussalam.sch.id",
+  contactEmail: "osis@smadarussalamsimpangmesir.sch.id",
 };
 
 export const TATA_TERTIB = {
@@ -221,40 +223,22 @@ export const JURUSAN = [
     subjects: ["Ekonomi", "Sosiologi", "Geografi", "Sejarah", "Bahasa Indonesia", "Bahasa Inggris"],
     careers: ["Hukum", "Ekonomi & Manajemen", "Hubungan Internasional", "Administrasi Negara"],
   },
-  {
-    slug: "bahasa",
-    name: "BAHASA",
-    full: "Ilmu Bahasa dan Budaya",
-    desc: "Pendalaman bahasa Indonesia, Inggris & asing plus sastra budaya — cocok untuk karier global & kreatif.",
-    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=800&auto=format&fit=crop",
-    subjects: ["Bahasa Indonesia", "Bahasa Inggris", "Bahasa Asing", "Sastra", "Antropologi", "Seni Budaya"],
-    careers: ["Penerjemah", "Diplomasi", "Content Creator", "Pariwisata"],
-  },
-  {
-    slug: "mipa-tahfidz",
-    name: "MIPA TAHFIDZ",
-    full: "MIPA plus Program Tahfidz Al-Quran",
-    desc: "Kombinasi unggulan sains MIPA dengan program tahfidz Al-Quran terstruktur — cerdas & Qur'ani.",
-    image: "https://images.unsplash.com/photo-1542816417-0983c9c9ad53?q=80&w=800&auto=format&fit=crop",
-    subjects: ["Matematika", "Fisika", "Kimia", "Biologi", "Tahfidz Al-Quran", "Pendidikan Agama"],
-    careers: ["Kedokteran", "Teknik", "Ustadz/Dai", "Beasiswa Timur Tengah"],
-  },
 ];
 
 export const TESTIMONI = [
-  { name: "Nabila Yesy Puspitasari", year: "Alumni 2025", kelas: "XII MIPA 1", text: "SMA Biru Ceria memberikan pengalaman belajar yang luar biasa. Guru-gurunya ramah, profesional, dan selalu membimbing siswa untuk terus berkembang. Lingkungan sekolah yang nyaman membuat proses belajar menyenangkan." },
+  { name: "Nabila Yesy Puspitasari", year: "Alumni 2025", kelas: "XII MIPA 1", text: "SMA Darussalam memberikan pengalaman belajar yang luar biasa. Guru-gurunya ramah, profesional, dan selalu membimbing siswa untuk terus berkembang. Lingkungan sekolah yang nyaman membuat proses belajar menyenangkan." },
   { name: "Alya Putri Safa Azzahra", year: "Alumni 2025", kelas: "XII MIPA 2", text: "Sekolah ini memiliki banyak kegiatan akademik maupun non-akademik yang membantu siswa mengembangkan potensi dan bakatnya. Dukungan dari para guru membuat saya lebih percaya diri meraih prestasi." },
   { name: "Melani Selviana Putri", year: "Alumni 2025", kelas: "XII IPS 1", text: "Lingkungan bersih, nyaman, dan penuh semangat belajar. Berbagai kegiatan akademik, organisasi, dan ekstrakurikuler membuat siswa dapat mengembangkan kemampuan sesuai minat bakatnya." },
-  { name: "Wahyu Agung Nugroho", year: "Alumni 2025", kelas: "XII IPS 2", text: "Saya bangga menjadi bagian dari SMA Biru Ceria. Selain ilmu pengetahuan, saya belajar kedisiplinan, tanggung jawab, dan nilai karakter yang menjadi bekal penting masa depan." },
+  { name: "Wahyu Agung Nugroho", year: "Alumni 2025", kelas: "XII IPS 2", text: "Saya bangga menjadi bagian dari SMA Darussalam. Selain ilmu pengetahuan, saya belajar kedisiplinan, tanggung jawab, dan nilai karakter yang menjadi bekal penting masa depan." },
 ];
 
 export const VISITOR_STATS = { online: 3, today: 82, total: "11.044" };
 
 export const HERO_STATS = [
-  { value: "246+", label: "Siswa Aktif" },
-  { value: "11", label: "Guru & Tenaga Pendidik" },
-  { value: "120+", label: "Prestasi Diraih" },
-  { value: "98%", label: "Lulusan Kuliah / Bekerja" },
+  { value: "246", label: "Peserta Didik" },
+  { value: "11", label: "Guru & Tenaga Kependidikan" },
+  { value: "7", label: "Rombongan Belajar" },
+  { value: "2019", label: "Tahun Berdiri" },
 ];
 
 /* ══════════ UPGRADE: gambar prestasi + slogan hero ══════════ */
@@ -268,4 +252,4 @@ export const ACHIEVEMENT_IMAGES: Record<string, string> = {
   "ach-06": "https://picsum.photos/seed/paskibraka/640/420",
 };
 
-export const HERO_SLOGANS = ["Berprestasi", "Berkarakter", "Berwawasan Global", "Kreatif & Inovatif", "Cerdas & Qur'ani"];
+export const HERO_SLOGANS = ["Berkarakter", "Berprestasi", "Kreatif & Inovatif", "Mandiri", "Berwawasan Global"];

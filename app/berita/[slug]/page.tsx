@@ -14,8 +14,8 @@ export default function BeritaDetail({ params }: { params: { slug: string } }) {
   return (
     <div>
       <PageHeader badge={item.category.toUpperCase()} title={item.title} desc={`${formatDateId(item.createdAt)} • ${item.authorName}`} img={item.coverUrl || "https://images.unsplash.com/photo-1494172961521-33799ddd43a5?q=80&w=800&auto=format&fit=crop"} breadcrumb={`Berita / ${item.title.slice(0,30)}...`} />
-      <section className="max-w-[800px] mx-auto px-6 -mt-2">
-        <div className="bg-white rounded-[32px] p-8 md:p-10 shadow-card border border-slate-100">
+      <section className="max-w-[800px] mx-auto px-6">
+        <div className="bg-white rounded-[32px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
           <div className="flex flex-wrap gap-2 items-center text-xs">
             <span className="bg-primary-600 text-white px-3 py-1.5 rounded-full font-bold tracking-widest">{item.category}</span>
             <span className="flex gap-1 items-center text-slate-500"><Calendar className="w-3.5 h-3.5" /> {formatDateId(item.createdAt)}</span>

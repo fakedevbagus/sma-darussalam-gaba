@@ -29,7 +29,7 @@ export default function EkskulPage() {
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((e, i) => (
-            <div key={e.id} className={`group bg-white rounded-[26px] overflow-hidden shadow-card border border-slate-100 hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 2 ? "lg:rotate-[0.5deg]" : "lg:-rotate-[0.5deg]"} hover:rotate-0`}>
+            <div key={e.id} className={`group bg-white rounded-[26px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 2 ? "lg:rotate-[0.5deg]" : "lg:-rotate-[0.5deg]"} hover:rotate-0`}>
               <div className="relative h-40 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={e.image} alt={e.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />

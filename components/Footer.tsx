@@ -18,7 +18,7 @@ export default function Footer() {
           <div>
             <Logo dark size={48} />
             <p className="mt-5 text-sm leading-6 text-white/70">Membentuk generasi yang cerdas, kreatif, berkarakter dan siap menghadapi masa depan.</p>
-            <div className="mt-5"><SocialLinks variant="solid" size={36} /></div>
+            <div className="mt-5"><SocialLinks variant="solid" size={36} whatsapp={false} /></div>
           </div>
 
           {/* Tautan Cepat */}
@@ -28,6 +28,12 @@ export default function Footer() {
               {FOOTER_QUICK.map(l => (
                 <li key={l.href}><Link href={l.href} className="hover:text-white transition inline-flex gap-2 items-center"><span className="w-1.5 h-1.5 rounded-full bg-accent" /> {l.label}</Link></li>
               ))}
+              <li className="pt-2 mt-2 border-t border-white/10">
+                <a href="https://kemendikdasmen.go.id" target="_blank" rel="noopener noreferrer" className="hover:text-white transition inline-flex gap-2 items-center"><span className="w-1.5 h-1.5 rounded-full bg-sun" /> Kemendikdasmen ↗</a>
+              </li>
+              <li>
+                <a href="https://dapo.kemendikdasmen.go.id/sekolah?npsn=70000262" target="_blank" rel="noopener noreferrer" className="hover:text-white transition inline-flex gap-2 items-center"><span className="w-1.5 h-1.5 rounded-full bg-sun" /> Dapodik — NPSN 70000262 ↗</a>
+              </li>
             </ul>
           </div>
 
@@ -46,7 +52,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-white/50">
-          <div>© 2026 SMA Biru Ceria. All Rights Reserved. • Data demo production — siap disesuaikan</div>
+          <div>{SCHOOL.copyright} • Data terverifikasi Dapodik NPSN {SCHOOL.npsn}</div>
           <div className="flex gap-4">
             {FOOTER_INFO.map(l => (<Link key={l.href} href={l.href} className="hover:text-white">{l.label}</Link>))}
           </div>

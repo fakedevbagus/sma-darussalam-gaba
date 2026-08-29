@@ -17,8 +17,8 @@ export default function JurusanDetail({ params }: { params: { slug: string } }) 
     <div>
       <PageHeader badge={`JURUSAN • ${j.name}`} title={j.name} accent="Jurusan" desc={j.full} img={j.image} breadcrumb={`Program Jurusan / ${j.name}`} />
 
-      <section className="max-w-[1280px] mx-auto px-6 -mt-2 grid lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-8 bg-white rounded-[32px] p-8 shadow-card border border-slate-100">
+      <section className="max-w-[1280px] mx-auto px-6 grid lg:grid-cols-12 gap-6">
+        <div className="lg:col-span-8 bg-white rounded-[32px] p-8 shadow-card border border-[#ece4d4]">
           <p className="text-sm leading-7 text-slate-600">{j.desc} Kurikulum Merdeka berbasis proyek (P5) dengan pembinaan intensif menuju PTN favorit.</p>
 
           <h3 className="mt-8 font-display font-extrabold text-lg text-navy flex gap-2 items-center"><BookOpen className="w-5 h-5 text-primary-600" /> Mata Pelajaran Utama</h3>
@@ -47,7 +47,7 @@ export default function JurusanDetail({ params }: { params: { slug: string } }) 
             </div>
           </div>
 
-          <div className="bg-white rounded-[24px] p-6 shadow-card border border-slate-100">
+          <div className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4]">
             <h4 className="font-bold text-navy text-sm mb-3">Jelajahi Jurusan Lain</h4>
             <div className="space-y-2">
               {others.map(o => (

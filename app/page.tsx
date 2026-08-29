@@ -1,13 +1,17 @@
 import Link from "next/link";
-import { SCHOOL } from "@/config/school";
+import { SCHOOL, DAPODIK, DAPO_URL } from "@/config/school";
 import {
-  ANNOUNCEMENTS, ACHIEVEMENTS, ACHIEVEMENT_IMAGES, JURUSAN, GALLERY, STAFF, TESTIMONI,
+  ANNOUNCEMENTS, ACHIEVEMENTS, ACHIEVEMENT_IMAGES, JURUSAN, GALLERY, STAFF, HERO_STATS,
 } from "@/lib/demo-data";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import PpdbPopup from "@/components/PpdbPopup";
+import CountUp from "@/components/CountUp";
+import TestimoniSlider from "@/components/TestimoniSlider";
+import GaleriSlider from "@/components/GaleriSlider";
 import {
   ArrowRight, Play, Quote, BookOpen, Heart, Building2, Trophy, Users, Eye, CheckCircle2, Sparkles,
+  GraduationCap, UserRound, DoorOpen, MapPin, ExternalLink, Navigation,
 } from "lucide-react";
 
 const KENAPA = [
@@ -37,21 +41,41 @@ const FASILITAS_FOTO = [
 export default function Home() {
   const latestNews = ANNOUNCEMENTS.slice(0, 4);
   const prestasiTop = ACHIEVEMENTS.slice(0, 4);
-  const galeriFoto = GALLERY.filter(g => !g.videoUrl);
 
   return (
     <div className="overflow-x-clip">
       <Hero />
       <PpdbPopup />
 
+      {/* ══════ STATISTIK DAPODIK — strip di bawah hero ══════ */}
+      <section className="relative z-10 -mt-12 pb-4">
+        <div className="max-w-[1100px] mx-auto px-5 md:px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {HERO_STATS.map((s, i) => (
+              <div key={s.label} className={`card-warm px-4 py-6 text-center ${i % 2 ? "lg:translate-y-2" : ""}`}>
+                <div className="flex justify-center mb-2">
+                  <span className="w-10 h-10 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center">
+                    {i === 0 ? <GraduationCap className="w-5 h-5" /> : i === 1 ? <UserRound className="w-5 h-5" /> : i === 2 ? <DoorOpen className="w-5 h-5" /> : <Building2 className="w-5 h-5" />}
+                  </span>
+                </div>
+                <div className="font-display font-semibold text-3xl text-navy">
+                  <CountUp value={s.value} />
+                </div>
+                <div className="mt-1 text-[11px] font-bold tracking-wider uppercase text-slate-500 leading-tight">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══════ SAMBUTAN KEPALA SEKOLAH ══════ */}
       <section className="max-w-[1280px] mx-auto px-5 md:px-6 pt-4 pb-16 md:pb-20">
-        <div className="bg-white rounded-[32px] shadow-card border border-slate-100 p-6 sm:p-8 md:p-10 grid lg:grid-cols-12 gap-8 items-center relative overflow-hidden">
+        <div className="bg-white rounded-[32px] shadow-card border border-[#ece4d4] p-6 sm:p-8 md:p-10 grid lg:grid-cols-12 gap-8 items-center relative overflow-hidden">
           <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full pattern-dots opacity-70" />
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-[24px] overflow-hidden shadow-3d border-4 border-white -rotate-1 tilt">
+            <div className="relative arch overflow-hidden shadow-3d border-4 border-white tilt">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={SCHOOL.principal.imageUrl} alt={SCHOOL.principal.name} className="w-full h-[300px] sm:h-[360px] object-cover object-top" />
+              <img src={SCHOOL.principal.imageUrl} alt={SCHOOL.principal.name} className="w-full aspect-[4/5] sm:aspect-[5/6] object-cover object-top" />
               <div className="absolute bottom-3 left-3 glass rounded-xl px-3 py-2 text-xs font-extrabold text-navy">Kepala Sekolah</div>
             </div>
             <div className="absolute -bottom-5 -right-3 w-20 h-20 rounded-2xl bg-gradient-to-br from-sun to-amber-400 shadow-float hidden lg:flex items-center justify-center rotate-6">
@@ -109,7 +133,7 @@ export default function Home() {
           </div>
           <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {prestasiTop.map(a => (
-              <div key={a.id} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-slate-100 hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
+              <div key={a.id} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
                 <div className="relative h-40 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={ACHIEVEMENT_IMAGES[a.id] ?? a.description} alt={a.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
@@ -139,7 +163,7 @@ export default function Home() {
         </div>
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {KENAPA.map(k => (
-            <div key={k.title} className="group bg-white rounded-[24px] p-6 shadow-card border border-slate-100 card-3d relative overflow-hidden">
+            <div key={k.title} className="group bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4] card-3d relative overflow-hidden">
               <div className="absolute -right-8 -bottom-8 w-28 h-28 rounded-full bg-primary-50 opacity-70 group-hover:opacity-100 group-hover:scale-125 transition duration-500" />
               <div className={`relative w-12 h-12 rounded-2xl bg-gradient-to-br ${k.color} text-white flex items-center justify-center shadow-md group-hover:rotate-6 group-hover:scale-110 transition`}><k.icon className="w-6 h-6" /></div>
               <h3 className="relative mt-4 font-display font-bold text-navy text-lg leading-tight">{k.title}<br />{k.accent}</h3>
@@ -149,12 +173,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════ VIDEO PROFIL ══════ */}
-      <section id="video-profil" className="max-w-[1280px] mx-auto px-5 md:px-6 pb-16 md:pb-20">
-        <div className="relative rounded-[32px] overflow-hidden shadow-3d border-[6px] border-white group bg-navy">
-          <iframe src={SCHOOL.profileVideoUrl} title="Video Profil Sekolah" allowFullScreen className="w-full aspect-video" loading="lazy" />
+      {/* ══════ VIDEO PROFIL — full-bleed besar ══════ */}
+      <section id="video-profil" className="w-full pb-20 md:pb-24">
+        <div className="max-w-[1600px] mx-auto md:px-4">
+          <div className="relative rounded-none md:rounded-[36px] overflow-hidden shadow-[0_30px_80px_-20px_rgba(20,26,94,0.45)] border-y-[8px] md:border-[8px] border-white group bg-navy">
+          {SCHOOL.profileVideoUrl ? (
+            <iframe src={SCHOOL.profileVideoUrl} title="Video Profil Sekolah" allowFullScreen className="w-full aspect-video" loading="lazy" />
+          ) : (
+            <div className="relative w-full aspect-video">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={SCHOOL.heroImageUrl} alt={`Suasana ${SCHOOL.name}`} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+                <span className="w-16 h-16 rounded-full bg-white text-primary-600 flex items-center justify-center shadow-float mb-4 group-hover:scale-110 transition"><Play className="w-7 h-7 ml-0.5" /></span>
+                <h3 className="font-display font-bold text-white text-xl md:text-2xl">Video Profil {SCHOOL.name}</h3>
+                <p className="mt-2 text-white/80 text-sm max-w-md">Dokumentasi video suasana sekolah akan segera hadir. Untuk sementara, jelajahi galeri foto kegiatan kami.</p>
+                <Link href="/galeri" className="mt-4 inline-flex items-center gap-2 bg-white text-primary-700 px-5 py-2.5 rounded-full text-sm font-extrabold hover:scale-[1.03] transition">Lihat Galeri <ArrowRight className="w-4 h-4" /></Link>
+              </div>
+            </div>
+          )}
           <div className="absolute top-4 left-4 glass-dark rounded-full px-4 py-2 text-white text-[11px] font-extrabold tracking-widest uppercase flex gap-2 items-center">
             <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" /> Video Profil {SCHOOL.name}
+          </div>
           </div>
         </div>
       </section>
@@ -167,7 +207,7 @@ export default function Home() {
         </div>
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {latestNews.map(b => (
-            <Link key={b.id} href={`/berita/${b.slug}`} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-slate-100 hover:shadow-3d hover:-translate-y-1 transition flex flex-col">
+            <Link key={b.id} href={`/berita/${b.slug}`} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition flex flex-col">
               <div className="h-40 overflow-hidden relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={b.coverUrl} alt={b.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
@@ -184,7 +224,7 @@ export default function Home() {
       </section>
 
       {/* ══════ GALERI — SLIDE OTOMATIS ══════ */}
-      <section className="py-16 md:py-20 bg-white border-y border-slate-100 overflow-hidden">
+      <section className="py-16 md:py-20 bg-white border-y border-[#ece4d4] overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-5 md:px-6 flex flex-wrap items-end justify-between gap-3 mb-8">
           <div>
             <div className="text-[11px] font-extrabold tracking-[0.22em] text-primary-600 uppercase">Dokumentasi</div>
@@ -192,18 +232,7 @@ export default function Home() {
           </div>
           <Link href="/galeri" className="text-sm font-extrabold text-primary-600 inline-flex gap-1 items-center hover:gap-2 transition-all">Lihat Semua <ArrowRight className="w-4 h-4" /></Link>
         </div>
-        <Marquee duration={75} bg="#ffffff" className="pb-2">
-          {galeriFoto.slice(0, 8).map(g => (
-            <Link key={g.id} href="/galeri" className="group relative shrink-0 w-[260px] sm:w-[300px] rounded-[24px] overflow-hidden shadow-card border-4 border-white hover:shadow-3d transition block">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={g.imageUrl} alt={g.title} loading="lazy" className="w-full h-[190px] object-cover group-hover:scale-110 transition duration-700" />
-              <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-navy/85 to-transparent">
-                <div className="text-white font-bold text-sm leading-snug">{g.title}</div>
-                <div className="text-white/60 text-[10px] font-extrabold tracking-widest uppercase">{g.category}</div>
-              </div>
-            </Link>
-          ))}
-        </Marquee>
+        <GaleriSlider />
       </section>
 
       {/* ══════ FASILITAS ══════ */}
@@ -212,7 +241,7 @@ export default function Home() {
           <h2 className="font-display font-bold text-2xl md:text-3xl text-navy leading-tight">Fasilitas Lengkap<br />untuk Menunjang<br /><span className="gradient-text">Potensi Siswa!</span></h2>
           <ul className="mt-6 space-y-3">
             {FASILITAS_HOME.map(f => (
-              <li key={f} className="flex gap-3 items-center text-sm font-bold text-navy bg-white rounded-2xl px-4 py-3 shadow-soft border border-slate-100"><CheckCircle2 className="w-5 h-5 text-mint shrink-0" /> {f}</li>
+              <li key={f} className="flex gap-3 items-center text-sm font-bold text-navy bg-white rounded-2xl px-4 py-3 shadow-soft border border-[#ece4d4]"><CheckCircle2 className="w-5 h-5 text-mint shrink-0" /> {f}</li>
             ))}
           </ul>
           <Link href="/fasilitas" className="mt-6 inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-pop hover:bg-primary-600 hover:-translate-y-0.5 transition">Lihat Semua Fasilitas <ArrowRight className="w-4 h-4" /></Link>
@@ -239,7 +268,7 @@ export default function Home() {
         </div>
         <Marquee duration={80} bg="transparent" className="pb-2">
           {STAFF.map(s => (
-            <div key={s.id} className="group shrink-0 w-[170px] sm:w-[190px] bg-white rounded-[20px] overflow-hidden border border-slate-100 shadow-card hover:shadow-3d hover:-translate-y-1 transition">
+            <div key={s.id} className="group shrink-0 w-[170px] sm:w-[190px] bg-white rounded-[20px] overflow-hidden border border-[#ece4d4] shadow-card hover:shadow-3d hover:-translate-y-1 transition">
               <div className="aspect-square overflow-hidden bg-primary-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={s.photoUrl} alt={s.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
@@ -260,22 +289,9 @@ export default function Home() {
           <h2 className="font-display font-bold text-2xl md:text-3xl text-navy">Testimoni Alumni</h2>
           <Link href="/alumni" className="text-sm font-extrabold text-primary-600 inline-flex gap-1 items-center">Semua Alumni <ArrowRight className="w-4 h-4" /></Link>
         </div>
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-          {TESTIMONI.slice(0, 6).map((t, i) => (
-            <div key={t.name} className={`bg-white rounded-[24px] p-6 shadow-card border border-slate-100 hover:shadow-3d hover:-translate-y-1 transition flex flex-col ${i % 2 ? "lg:rotate-1" : "lg:-rotate-1"} hover:rotate-0`}>
-              <Quote className="w-7 h-7 text-primary-200" />
-              <p className="mt-3 text-sm leading-6 text-slate-600 italic flex-1">“{t.text}”</p>
-              <div className="mt-5 flex items-center gap-3 border-t border-dashed border-slate-200 pt-4">
-                <div className="w-11 h-11 rounded-full bg-gradient-to-br from-primary-500 to-accent text-white flex items-center justify-center font-extrabold text-sm shrink-0 shadow-md">
-                  {t.name.split(" ").slice(0, 2).map(w => w[0]).join("")}
-                </div>
-                <div>
-                  <div className="font-bold text-navy text-sm">{t.name}</div>
-                  <div className="text-[11px] text-slate-500">{t.year} • {t.kelas}</div>
-                </div>
-              </div>
-            </div>
-          ))}
+        {/* Slide testimoni — otomatis */}
+        <div className="mt-8">
+          <TestimoniSlider />
         </div>
       </section>
 
@@ -293,6 +309,29 @@ export default function Home() {
             <div className="lg:col-span-4 flex flex-col gap-3">
               <Link href="/ppdb" className="bg-white text-primary-700 px-6 py-4 rounded-full font-extrabold text-center shadow-float hover:scale-[1.02] transition">DAFTAR SEKARANG →</Link>
               <a href={SCHOOL.social.whatsapp} target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-6 py-4 rounded-full font-extrabold text-center shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:scale-[1.02] transition">Hubungi CS PSPDB</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════ LOKASI KAMI — peta di atas footer ══════ */}
+      <section className="max-w-[1280px] mx-auto px-5 md:px-6 pb-20">
+        <div className="relative bg-white rounded-[32px] overflow-hidden shadow-3d border border-[#ece4d4]">
+          <div className="grid lg:grid-cols-12 items-stretch">
+            <div className="lg:col-span-5 relative p-8 md:p-10 flex flex-col justify-center overflow-hidden">
+              <div className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 rounded-full px-4 py-2 text-[11px] font-extrabold tracking-widest uppercase w-fit">
+                <MapPin className="w-3.5 h-3.5" /> Lokasi Kami
+              </div>
+              <h2 className="mt-4 font-display font-semibold text-2xl md:text-3xl text-navy leading-tight">Temukan Kami di<br /><span className="gradient-text">Gedung Aji Baru</span></h2>
+              <p className="mt-4 text-sm md:text-[15px] leading-7 text-slate-600">{SCHOOL.address}</p>
+              <p className="mt-2 text-xs font-bold text-slate-400 tracking-wide">Koordinat: {DAPODIK.koordinat.lat}, {DAPODIK.koordinat.lng}</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a href={SCHOOL.mapOpenUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-navy text-white px-5 py-3 rounded-full text-sm font-extrabold hover:bg-primary-600 hover:-translate-y-0.5 transition">Rute ke Sekolah <Navigation className="w-4 h-4" /></a>
+                <a href={DAPO_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 border border-primary-100 px-5 py-3 rounded-full text-sm font-extrabold hover:bg-softblue transition">Verifikasi Dapodik <ExternalLink className="w-4 h-4" /></a>
+              </div>
+            </div>
+            <div className="lg:col-span-7 relative min-h-[320px] lg:min-h-[420px]">
+              <iframe src={SCHOOL.mapEmbedUrl} width="100%" height="100%" style={{ border: 0 }} loading="lazy" title={`Lokasi ${SCHOOL.name}`} className="w-full h-full absolute inset-0" />
             </div>
           </div>
         </div>

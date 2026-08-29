@@ -8,23 +8,25 @@ Semua identitas sekolah & media **terpusat** agar mudah diganti. Ikuti panduan i
 
 **File:** `config/school.ts`
 
-| Field | Isi Saat Ini (Demo) | Cara Ganti ke Real |
+| Field | Isi Saat Ini | Status |
 |---|---|---|
-| `yayasan` | Yayasan Darussalam Simpang Mesir | Sesuai akta yayasan |
-| `name` | SMA Darussalam | Nama resmi sekolah |
-| `motto` | Berakhlak Mulia • Berprestasi • Berwawasan Global | Moto resmi |
-| `tagline` | Membentuk generasi cerdas... | Tagline resmi |
-| `address` | Simpang Mesir, Sumber Jaya, Gedung Aji Baru, Tulang Bawang | Alamat lengkap + kode pos |
-| `phone` / `whatsapp` / `whatsappDisplay` | Demo | Nomor resmi (WA format `62xxx` tanpa `+`) |
-| `email` | info@smadarussalamsimpangmesir.sch.id | Email resmi domain sekolah |
-| `hours` | Senin–Jumat 07.00–16.00 | Jam operasional |
-| `akreditasi` | Terakreditasi A | Sesuai sertifikat BAN-SM |
-| `founded` / `npsn` | Demo | Data emmis/Dapodik |
-| `mapEmbedUrl` | Google Maps query Gedung Aji Baru | Embed dari Google Maps → Share → Embed iframe → salin nilai `src` |
-| `mapOpenUrl` | Link search | Link "Buka di Maps" resmi |
-| `visi` / `misi[]` | Demo | Dokumen visi-misi resmi |
-| `principal.*` | Nama & foto demo | Nasihatul muballigh/kepsek + foto resmi (rasio 4:5) |
-| `stats` | 720+ siswa, dll. | Data real siswa/guru/prestasi/lulusan |
+| `yayasan` | Yayasan Darussalam Simpang Mesir | ✅ Real (Dapodik: kepemilikan Yayasan) |
+| `name` | SMA Darussalam | ✅ Real |
+| `motto` | Cerdas • Berkarakter • Berdaya Saing | ⚠️ Placeholder — ganti moto resmi |
+| `tagline` | Membentuk generasi cerdas... | ⚠️ Placeholder |
+| `address` | Desa Simpang Mesir, Kec. Gedung Aji Baru, Kab. Tulang Bawang, Lampung | ✅ Real (koordinat Dapodik -4.2199, 105.5949) |
+| `phone` / `whatsapp` / `whatsappDisplay` | Demo `0812-3456-7890` | ❌ Demo — ganti nomor resmi (WA format `62xxx` tanpa `+`) |
+| `email` | info@smadarussalamsimpangmesir.sch.id | ⚠️ Belum terverifikasi |
+| `akreditasi` | "Belum terdata di Dapodik" | ❌ Ganti setelah ada sertifikat BAN-SM |
+| `npsn` | 70000262 | ✅ Real Dapodik |
+| `status` / `bentukPendidikan` | Swasta / SMA | ✅ Real Dapodik |
+| `skPendirian` / tanggal | 118.4/YSDM/SMA-DS/X/2019 — 30 Oktober 2019 | ✅ Real Dapodik |
+| `skIzinOperasional` / tanggal | 463/1370/V.16/2020 — 10 Februari 2020 | ✅ Real Dapodik |
+| `principal.name` | Muzaki Ariffin Affandi | ✅ Real Dapodik (foto masih placeholder) |
+| `stats` / `DAPODIK` | 246 PD (112 L / 134 P), 11 PTK (8 guru, 3 tendik), 7 rombel, sarana & indikator kualitas | ✅ Real Dapodik |
+| `mapEmbedUrl` / `mapOpenUrl` | Koordinat -4.2199, 105.5949 | ✅ Real Dapodik |
+| `visi` / `misi[]` | Placeholder netral | ❌ Ganti dokumen visi-misi resmi |
+| `social.*` | Instagram/TikTok/FB/YouTube = `#` | ❌ Ganti akun resmi |
 
 > ⚠️ `IS_DEMO = true` — set `false` setelah semua data terverifikasi (dipakai penanda di UI bila diperlukan).
 
