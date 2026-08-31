@@ -39,7 +39,7 @@ export default function UnduhanPage() {
 
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {filtered.map(doc=> (
-            <div key={doc.id} className="bg-white rounded-[24px] p-5 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition flex flex-col">
+            <div key={doc.id} className="bg-white rounded-[28px] p-5 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition flex flex-col">
               <div className="flex justify-between items-start">
                 <span className={`w-10 h-10 rounded-xl flex items-center justify-center ${doc.fileType==="PDF"?"bg-red-50 text-red-500":"bg-slate-100 text-slate-500"}`}><FileText className="w-5 h-5" /></span>
                 <span className="bg-primary-50 text-primary-700 px-2 py-1 rounded-full text-[10px] font-bold tracking-widest">{doc.fileType}</span>

@@ -86,7 +86,7 @@ export default function IdentitasPage() {
 
           <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {/* Peserta Didik */}
-            <div className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4]">
+            <div className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
               <div className="flex items-center gap-3">
                 <span className="w-11 h-11 rounded-xl bg-primary-600 text-white flex items-center justify-center shadow-blue-glow"><GraduationCap className="w-5 h-5" /></span>
                 <div><div className="text-2xl font-extrabold text-navy tabular-nums">{pd.total}</div><div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Peserta Didik</div></div>
@@ -103,7 +103,7 @@ export default function IdentitasPage() {
               </div>
             </div>
             {/* Rombel */}
-            <div className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4]">
+            <div className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
               <div className="flex items-center gap-3">
                 <span className="w-11 h-11 rounded-xl bg-mint text-white flex items-center justify-center shadow-[0_0_25px_rgba(16,185,129,0.4)]"><DoorOpen className="w-5 h-5" /></span>
                 <div><div className="text-2xl font-extrabold text-navy tabular-nums">{DAPODIK.rombel}</div><div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Rombongan Belajar</div></div>
@@ -111,7 +111,7 @@ export default function IdentitasPage() {
               <p className="mt-5 text-sm text-slate-600 leading-6">Kelas diorganisasi menjadi {DAPODIK.rombel} rombongan belajar (rombel) lintas tingkat X–XII.</p>
             </div>
             {/* PTK */}
-            <div className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4]">
+            <div className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
               <div className="flex items-center gap-3">
                 <span className="w-11 h-11 rounded-xl bg-sun text-navy flex items-center justify-center shadow-yellow"><Users className="w-5 h-5" /></span>
                 <div><div className="text-2xl font-extrabold text-navy tabular-nums">{DAPODIK.ptk.total}</div><div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Guru &amp; Tendik</div></div>
@@ -130,7 +130,7 @@ export default function IdentitasPage() {
           </div>
 
           {/* Sarana & Prasarana */}
-          <div className="mt-6 max-w-5xl mx-auto bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4]">
+          <div className="mt-6 max-w-5xl mx-auto bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
             <div className="flex items-center gap-2 text-navy font-display font-bold"><Landmark className="w-5 h-5 text-primary-600" /> Sarana &amp; Prasarana</div>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm min-w-[420px]">
@@ -154,7 +154,7 @@ export default function IdentitasPage() {
           </div>
 
           {/* Indikator Kualitas Dapodik */}
-          <div className="mt-6 max-w-5xl mx-auto bg-gradient-to-br from-navy to-primary-800 rounded-[24px] p-6 md:p-8 text-white shadow-3d">
+          <div className="mt-6 max-w-5xl mx-auto bg-gradient-to-br from-navy to-primary-800 rounded-[28px] p-6 md:p-8 text-white shadow-3d">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2 font-display font-bold"><Banknote className="w-5 h-5 text-sun" /> Indikator Kualitas Dapodik</div>
               <div className="glass-dark rounded-full px-4 py-2 border border-white/20 flex items-center gap-2">
@@ -192,10 +192,10 @@ export default function IdentitasPage() {
         <div className="mt-12">
           <SectionHeading eyebrow="Lokasi" title="Peta & Verifikasi" number="04" />
           <div className="mt-6 grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            <div className="rounded-[24px] overflow-hidden border-4 border-white shadow-3d">
+            <div className="rounded-[28px] overflow-hidden border-4 border-white shadow-3d">
               <iframe src={SCHOOL.mapEmbedUrl} width="100%" height="340" style={{ border: 0 }} loading="lazy" title={`Lokasi ${SCHOOL.name}`} />
             </div>
-            <div className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4] flex flex-col">
+            <div className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] flex flex-col">
               <div className="flex items-center gap-3">
                 <span className="w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center"><MapPinned className="w-5 h-5" /></span>
                 <div className="font-bold text-navy">Koordinat &amp; Verifikasi</div>

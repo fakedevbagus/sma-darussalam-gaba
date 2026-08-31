@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import Logo from "@/components/Logo";
 import NewsTicker from "@/components/NewsTicker";
+import { SCHOOL } from "@/config/school";
 import { PUBLIC_NAV, WA_LINK, DAFTAR_LINK } from "@/config/navigation";
 
 export default function Navbar() {
@@ -76,7 +77,7 @@ export default function Navbar() {
           <div className={`${overlay ? "hidden" : "hidden lg:flex"} items-center gap-2`}>
             <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-emerald-600 transition px-3 py-2.5">
               <span className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center"><MessageCircle className="w-4 h-4" /></span>
-              0812-3456-7890
+              {SCHOOL.whatsappDisplay}
             </a>
             <Link href={DAFTAR_LINK} className="relative inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-3 rounded-full text-sm font-bold shadow-float hover:shadow-glow hover:scale-[1.02] transition overflow-hidden group">
               <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/15 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
@@ -93,7 +94,7 @@ export default function Navbar() {
         <AnimatePresence>
           {open && (
             <motion.div initial={{ opacity: 0, y: -10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -10, scale: 0.98 }}
-              className={`${overlay ? "" : "lg:hidden"} mt-3 bg-white rounded-[24px] shadow-[0_20px_50px_rgba(15,23,42,0.18)] border border-[#ece4d4] overflow-hidden max-h-[75vh] overflow-y-auto`}>
+              className={`${overlay ? "" : "lg:hidden"} mt-3 bg-white rounded-[28px] shadow-[0_20px_50px_rgba(15,23,42,0.18)] border border-[#ece4d4] overflow-hidden max-h-[75vh] overflow-y-auto`}>
               <div className="p-2">
                 {PUBLIC_NAV.map((item) =>
                   item.children ? (

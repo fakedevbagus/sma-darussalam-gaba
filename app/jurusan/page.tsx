@@ -18,10 +18,10 @@ export default function JurusanPage() {
       <section className="max-w-[1280px] mx-auto px-6">
         <div className="grid sm:grid-cols-2 gap-6">
           {JURUSAN.map(j => (
-            <Link key={j.slug} href={`/jurusan/${j.slug}`} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d transition flex flex-col">
+            <Link key={j.slug} href={`/jurusan/${j.slug}`} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d transition flex flex-col">
               <div className="h-52 overflow-hidden relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={j.image} alt={j.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                <img loading="lazy" src={j.image} alt={j.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
                 <span className="absolute bottom-3 left-4 font-display font-extrabold text-white text-xl">{j.name}</span>
               </div>

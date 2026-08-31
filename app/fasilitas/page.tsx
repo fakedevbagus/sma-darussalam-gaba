@@ -34,10 +34,10 @@ export default function FasilitasPage() {
           {filtered.map((f, i) => {
             const Icon = iconMap[f.icon] ?? Building2;
             return (
-              <div key={f.id} className={`group bg-white rounded-[26px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
+              <div key={f.id} className={`group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
                 <div className="relative h-44 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={f.image} alt={f.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                  <img loading="lazy" src={f.image} alt={f.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/55 via-transparent to-transparent" />
                   <span className="absolute top-3 left-3 glass rounded-full px-3 py-1.5 text-[10px] font-extrabold tracking-widest text-navy uppercase shadow">{f.category}</span>
                   <span className="absolute bottom-3 right-3 w-11 h-11 rounded-2xl bg-white/95 text-primary-600 flex items-center justify-center shadow-float group-hover:rotate-6 group-hover:scale-110 transition">
@@ -57,7 +57,7 @@ export default function FasilitasPage() {
         </div>
 
         {filtered.length === 0 && (
-          <div className="bg-white rounded-[24px] p-12 text-center border border-dashed border-slate-200 mt-8">
+          <div className="bg-white rounded-[28px] p-12 text-center border border-dashed border-slate-200 mt-8">
             <Search className="w-10 h-10 mx-auto text-slate-300" />
             <p className="text-sm text-slate-500 mt-3">Tidak ada fasilitas yang cocok.</p>
           </div>

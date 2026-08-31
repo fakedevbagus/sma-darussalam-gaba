@@ -31,7 +31,7 @@ export default function ProgramPage() {
             const Icon = iconMap[p.icon] ?? Brain;
             const grad = colorMap[p.category] ?? "from-primary-600 to-accent";
             return (
-              <div key={p.slug} className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition">
+              <div key={p.slug} className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition">
                 <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center text-white`}><Icon className="w-5 h-5" /></div>
                 <div className="flex items-center justify-between mt-3">
                   <h3 className="font-bold text-navy">{p.name}</h3>
@@ -64,7 +64,7 @@ export default function ProgramPage() {
 
         <div className="mt-10 text-center">
           <p className="text-sm text-slate-600">Tertarik? Yuk daftar PPDB Gelombang 1 diskon 30%.</p>
-          <Link href="/ppdb" className="mt-4 inline-flex bg-navy text-white px-6 py-3 rounded-full text-sm font-bold">Daftar Sekarang →</Link>
+          <Link href="/ppdb" className="link-more mt-4">Daftar Sekarang <ArrowRight className="w-4 h-4" /></Link>
         </div>
       </section>
     </div>

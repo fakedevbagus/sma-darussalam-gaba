@@ -8,7 +8,7 @@ export default function OsisPage() {
     <div>
       <PageHeader badge="KESISWAAN • OSIS" title={osis.title} desc={osis.description} img="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" breadcrumb="Kesiswaan / OSIS" />
       <section className="max-w-[1280px] mx-auto px-6 space-y-10">
-        <div className="bg-white rounded-[32px] p-8 shadow-card border border-[#ece4d4]">
+        <div className="bg-white rounded-[36px] p-8 shadow-card border border-[#ece4d4]">
           <div className="flex gap-3 items-center"><span className="w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center"><Target className="w-5 h-5" /></span><h2 className="font-display font-extrabold text-xl text-navy">Visi & Misi</h2></div>
           <div className="mt-6">
             <div className="text-xs font-bold tracking-widest text-primary-700">VISI</div>

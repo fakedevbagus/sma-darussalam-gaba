@@ -21,7 +21,7 @@ export default function PrestasiPage() {
     <div>
       <PageHeader badge="KEBANGGAAN SEKOLAH" title="Prestasi" accent="Juara" desc="Rekam jejak siswa & sekolah di kota, provinsi hingga nasional — demo siap ganti data real." img="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" breadcrumb="Akademik / Prestasi" />
       <section className="max-w-[1280px] mx-auto px-6">
-        <div className="bg-white rounded-[24px] p-4 shadow-card border border-[#ece4d4] flex flex-wrap justify-center gap-6 text-sm font-semibold text-slate-600">
+        <div className="bg-white rounded-[28px] p-4 shadow-card border border-[#ece4d4] flex flex-wrap justify-center gap-6 text-sm font-semibold text-slate-600">
           <span className="flex gap-2 items-center"><Award className="w-4 h-4 text-primary-600" /> {ACHIEVEMENTS.length} Prestasi</span>
           <span className="w-px bg-slate-200 hidden sm:block" />
           <span className="flex gap-2 items-center"><Trophy className="w-4 h-4 text-amber-500" /> {juara1} Juara 1</span>
@@ -52,10 +52,10 @@ export default function PrestasiPage() {
             const Icon = a.rank==="Juara 1"?Trophy:Medal;
             const top = a.rank==="Juara 1";
             return (
-              <div key={a.id} className={`bg-white rounded-[24px] shadow-card border overflow-hidden flex flex-col sm:flex-row hover:shadow-3d hover:-translate-y-0.5 transition ${top?"border-amber-200":"border-[#ece4d4]"}`}>
+              <div key={a.id} className={`bg-white rounded-[28px] shadow-card border overflow-hidden flex flex-col sm:flex-row hover:shadow-3d hover:-translate-y-0.5 transition ${top?"border-amber-200":"border-[#ece4d4]"}`}>
                 <div className="relative sm:w-48 h-40 sm:h-auto shrink-0 overflow-hidden group/img">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={ACHIEVEMENT_IMAGES[a.id] ?? "https://picsum.photos/seed/prestasi/640/420"} alt={a.title} loading="lazy" className="w-full h-full object-cover group-hover/img:scale-110 transition duration-700" />
+                  <img loading="lazy" src={ACHIEVEMENT_IMAGES[a.id] ?? "https://picsum.photos/seed/prestasi/640/420"} alt={a.title} className="w-full h-full object-cover group-hover/img:scale-110 transition duration-700" />
                   <span className={`absolute top-2 left-2 rounded-full px-2.5 py-1 text-[9px] font-extrabold tracking-widest uppercase text-white shadow ${top?"bg-gradient-to-r from-sun to-amber-500":"bg-primary-500"}`}>{a.rank}</span>
                 </div>
                 <div className="flex-1 p-5 flex gap-4 items-center min-w-0">

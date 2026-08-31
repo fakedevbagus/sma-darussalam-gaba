@@ -13,7 +13,7 @@ export default function AgendaDetail({ params }: { params: { slug: string } }) {
     <div>
       <PageHeader badge={item.category.toUpperCase()} title={item.title} desc={`${formatDateId(item.startDate)} • ${item.location}`} img="https://images.unsplash.com/photo-1506784365847-bbad939e9335?q=80&w=800&auto=format&fit=crop" breadcrumb={`Agenda / ${item.title}`} />
       <section className="max-w-[800px] mx-auto px-6">
-        <div className="bg-white rounded-[32px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
+        <div className="bg-white rounded-[36px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
           <div className="inline-flex bg-navy text-white px-3 py-1.5 rounded-full text-xs font-bold">{item.category}</div>
           <h1 className="font-display font-extrabold text-3xl text-navy mt-4 leading-tight">{item.title}</h1>
           <div className="mt-4 flex flex-wrap gap-3 text-sm text-slate-600">

@@ -80,8 +80,8 @@ export default function ERaportPage() {
 
         {/* CTA */}
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href="/kontak" className="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-full text-sm font-bold hover:bg-primary-600 transition">Hubungi Admin <ArrowRight className="w-4 h-4" /></Link>
-          <Link href="/pengumuman" className="inline-flex items-center gap-2 bg-white border border-[#ece4d4] px-6 py-3 rounded-full text-sm font-bold text-navy hover:bg-softblue transition">Lihat Pengumuman</Link>
+          <Link href="/kontak" className="inline-flex items-center gap-2 btn-navy hover:bg-primary-600 transition">Hubungi Admin <ArrowRight className="w-4 h-4" /></Link>
+          <Link href="/pengumuman" className="inline-flex items-center gap-2 btn-outline hover:bg-softblue transition">Lihat Pengumuman</Link>
         </div>
       </section>
     </div>

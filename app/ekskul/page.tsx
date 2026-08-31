@@ -29,10 +29,10 @@ export default function EkskulPage() {
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((e, i) => (
-            <div key={e.id} className={`group bg-white rounded-[26px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 2 ? "lg:rotate-[0.5deg]" : "lg:-rotate-[0.5deg]"} hover:rotate-0`}>
+            <div key={e.id} className={`group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 2 ? "lg:rotate-[0.5deg]" : "lg:-rotate-[0.5deg]"} hover:rotate-0`}>
               <div className="relative h-40 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={e.image} alt={e.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                <img loading="lazy" src={e.image} alt={e.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
                 <span className="absolute top-3 left-3 glass rounded-full px-3 py-1.5 text-[10px] font-extrabold tracking-widest text-navy uppercase shadow">{e.category}</span>
                 <h3 className="absolute bottom-3 left-4 right-4 font-display font-bold text-white text-lg leading-tight drop-shadow">{e.name}</h3>
@@ -49,7 +49,7 @@ export default function EkskulPage() {
         </div>
 
         {filtered.length === 0 && (
-          <div className="bg-white rounded-[24px] p-12 text-center border border-dashed border-slate-200 mt-8">
+          <div className="bg-white rounded-[28px] p-12 text-center border border-dashed border-slate-200 mt-8">
             <Search className="w-10 h-10 mx-auto text-slate-300" />
             <p className="text-sm text-slate-500 mt-3">Tidak ada ekstrakurikuler yang cocok.</p>
           </div>

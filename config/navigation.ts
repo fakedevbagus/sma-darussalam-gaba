@@ -49,7 +49,10 @@ export const PUBLIC_NAV: NavItem[] = [
   },
 ];
 
-export const WA_LINK = "https://wa.me/6281234567890";
+import { SCHOOL } from "@/config/school";
+
+/** Nomor WA dari satu sumber (config/school.ts) */
+export const WA_LINK = SCHOOL.social.whatsapp;
 export const DAFTAR_LINK = "/ppdb";
 
 export const FOOTER_QUICK = [

@@ -4,8 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { SCHOOL } from "@/config/school";
 import SocialLinks from "@/components/SocialLinks";
 import { HERO_SLOGANS } from "@/lib/demo-data";
-import { Play, ArrowRight } from "lucide-react";
+import { Play, ArrowRight, ShieldCheck, Users, FileText, ClipboardCheck, Megaphone, CalendarCheck } from "lucide-react";
 import Link from "next/link";
+import { DAPODIK } from "@/config/school";
 
 function RotatingWord() {
   const [i, setI] = useState(0);
@@ -62,6 +63,18 @@ export default function Hero() {
       <div className="blob w-[380px] h-[380px] bg-accent/25 bottom-0 -right-20" style={{ animationDelay: "3s" }} />
 
       <div className="relative z-10 max-w-[1100px] mx-auto px-5 pt-40 pb-24 sm:pt-52 text-center text-white">
+        {/* Badge mengambang — kiri & kanan (desktop) */}
+        <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.9 }}
+          className="hidden xl:flex flex-col gap-1 absolute left-6 top-[30%] glass-dark rounded-2xl px-4 py-3 border border-white/20 animate-float">
+          <span className="flex items-center gap-2 text-xs font-bold text-white"><ShieldCheck className="w-4 h-4 text-mint" /> Terverifikasi Dapodik</span>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-white/55">NPSN {S.npsn}</span>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.05 }}
+          className="hidden xl:flex flex-col gap-1 absolute right-6 top-[36%] glass-dark rounded-2xl px-4 py-3 border border-white/20 animate-float" style={{ animationDelay: "2.5s" }}>
+          <span className="flex items-center gap-2 text-xs font-bold text-white"><Users className="w-4 h-4 text-sun" /> {DAPODIK.pesertaDidik.total} Siswa • {DAPODIK.ptk.total} PTK</span>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-white/60">{DAPODIK.rombel} Rombongan Belajar</span>
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}
           className="font-display font-semibold leading-[1.08] tracking-tight text-[34px] sm:text-[44px] md:text-[56px] lg:text-[64px] drop-shadow-[0_4px_18px_rgba(0,0,0,0.4)]"
@@ -95,6 +108,9 @@ export default function Hero() {
           <SocialLinks variant="light" whatsapp={false} />
         </motion.div>
       </div>
-    </section>
-  );
+
+      {/* Wave pemisah ke stats strip */}
+      <svg aria-hidden viewBox="0 0 1440 56" preserveAspectRatio="none" className="absolute bottom-0 inset-x-0 w-full h-9 md:h-14 text-[#f6f8fe]" fill="currentColor"><path d="M0 56V30c200 26 420 30 640 14S1080 14 1260 26c70 5 130 12 180 20v10H0Z" /></svg>
+      </section>
+    );
 }

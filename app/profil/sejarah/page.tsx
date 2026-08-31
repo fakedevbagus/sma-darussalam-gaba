@@ -23,9 +23,9 @@ export default function SejarahPage() {
           <div className="space-y-6">
             {MILESTONES.map((m, i) => (
               <div key={m.year} className="relative flex gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white border-2 border-primary-600 flex items-center justify-center shadow-card shrink-0 z-10"><m.icon className="w-5 h-5 text-primary-600" /></div>
+                <div className="w-12 h-12 rounded-xl bg-white border-2 border-sun flex items-center justify-center shadow-card shrink-0 z-10"><m.icon className="w-5 h-5 text-sun" /></div>
                 <div className="flex-1 bg-white rounded-2xl border border-[#ece4d4] p-5 shadow-card hover:shadow-3d transition">
-                  <span className="text-xs font-bold tracking-widest text-accent">{m.year}</span>
+                  <span className="text-xs font-bold tracking-widest text-sun">{m.year}</span>
                   <h3 className="font-bold text-navy mt-1">{m.title}</h3>
                   <p className="text-sm text-slate-600 mt-1 leading-6">{m.desc}</p>
                 </div>

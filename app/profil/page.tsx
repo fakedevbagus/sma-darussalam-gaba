@@ -24,9 +24,9 @@ export default function ProfilPage() {
       />
 
       <section className="max-w-[1280px] mx-auto px-6">
-        <div className="bg-white rounded-[32px] shadow-card border border-[#ece4d4] p-8 md:p-10">
+        <div className="bg-white rounded-[36px] shadow-card border border-[#ece4d4] p-8 md:p-10">
           <SectionHeading eyebrow="Tentang Kami" title={SCHOOL.name} desc={SCHOOL.tagline} number="01" />
-          <div className="mt-8 bg-gradient-to-br from-primary-50 to-cyan-50 border border-primary-100 rounded-[24px] p-8">
+          <div className="mt-8 bg-gradient-to-br from-primary-50 to-cyan-50 border border-primary-100 rounded-[28px] p-8">
             <p className="text-base leading-7 text-navy font-medium">{SCHOOL.motto}. {SCHOOL.visi}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <span className="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-xs font-bold text-navy"><Building2 className="w-3.5 h-3.5" /> {SCHOOL.akreditasi}</span>
@@ -41,7 +41,7 @@ export default function ProfilPage() {
         <SectionHeading eyebrow="Jelajahi" title="Bagian Profil" desc="Pilih bagian untuk detail lebih lengkap" number="02" />
         <div className="mt-8 grid sm:grid-cols-2 gap-5">
           {SECTIONS.map((s) => (
-            <Link key={s.href} href={s.href} className="group bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition flex gap-4 items-start">
+            <Link key={s.href} href={s.href} className="group bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition flex gap-4 items-start">
               <span className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary-600 to-accent flex items-center justify-center text-white shrink-0 shadow-md group-hover:scale-110 transition"><s.icon className="w-5 h-5" /></span>
               <div className="flex-1"><div className="font-bold text-navy">{s.title}</div><div className="text-xs text-slate-500 mt-1">{s.desc}</div></div>
               <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-primary-600 group-hover:translate-x-1 transition" />

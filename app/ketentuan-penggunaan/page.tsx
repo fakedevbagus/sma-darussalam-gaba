@@ -6,7 +6,7 @@ export default function TermsPage() {
     <div>
       <PageHeader badge="LEGAL • KETENTUAN" title="Ketentuan Penggunaan" desc={`Aturan penggunaan website ${SCHOOL.name} — versi demo production.`} img="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=800&auto=format&fit=crop" breadcrumb="Legal / Ketentuan" />
       <section className="max-w-[800px] mx-auto px-6">
-        <div className="bg-white rounded-[32px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
+        <div className="bg-white rounded-[36px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
           <p className="text-sm text-slate-500">Berlaku sejak 26 Aug 2026 • Demo</p>
           <h3 className="font-bold text-navy mt-6">Penggunaan Konten</h3>
           <p className="text-sm text-slate-600 leading-7">Konten (foto demo Unsplash, teks) untuk showcase. Ganti dengan aset resmi sekolah sebelum launch.</p>

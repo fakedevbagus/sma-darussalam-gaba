@@ -18,7 +18,7 @@ export default function PengumumanPage() {
         </div>
         <div className="mt-8 grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {list.map(a=> (
-            <Link key={a.id} href={`/pengumuman/${a.slug}`} className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d transition group">
+            <Link key={a.id} href={`/pengumuman/${a.slug}`} className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d transition group">
               <div className="flex gap-2 items-center text-xs"><span className="bg-amber-400 text-navy px-2.5 py-1 rounded-full font-bold tracking-widest flex gap-1 items-center"><Pin className="w-3 h-3" /> PENGUMUMAN</span><span className="text-slate-500">{formatDateId(a.createdAt)}</span></div>
               <h3 className="font-bold text-navy mt-3 group-hover:text-primary-700 transition">{a.title}</h3>
               <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-6">{a.content}</p>

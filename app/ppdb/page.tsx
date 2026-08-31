@@ -43,12 +43,16 @@ export default function PPDBPage() {
   const [jalur, setJalur] = useState<string>("zonasi");
   const [sent, setSent] = useState(false);
   const [regNumber, setRegNumber] = useState("");
+  const [nama, setNama] = useState("");
   const [openFaq, setOpenFaq] = useState<number|null>(0);
   const [statusNo, setStatusNo] = useState("");
   const [statusResult, setStatusResult] = useState<null | { found: boolean; name?: string; jalurLabel?: string; statusLabel?: string }>(null);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    if (f.get("website")) { setSent(true); return; } // honeypot anti-spam
+    setNama(String(f.get("nama") || "Calon Siswa"));
     const num = `PPDB-2026-${String(Math.floor(Math.random()*900)+100).padStart(4,"0")}`;
     setRegNumber(num);
     setSent(true);
@@ -80,7 +84,7 @@ export default function PPDBPage() {
         {/* Langkah */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {STEPS.map((s,i)=> (
-            <div key={s.title} className="bg-white rounded-[24px] p-5 shadow-card border border-[#ece4d4] hover:-translate-y-1 transition">
+            <div key={s.title} className="bg-white rounded-[28px] p-5 shadow-card border border-[#ece4d4] hover:-translate-y-1 transition">
               <div className="text-[10px] font-bold tracking-[0.25em] text-accent">LANGKAH 0{i+1}</div>
               <span className="mt-3 w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center"><s.icon className="w-5 h-5" /></span>
               <h3 className="font-bold text-navy mt-3">{s.title}</h3>
@@ -104,7 +108,7 @@ export default function PPDBPage() {
 
         {/* Persyaratan + Biaya */}
         <div className="mt-8 grid lg:grid-cols-12 gap-6">
-          <div id="persyaratan" className="lg:col-span-7 bg-white rounded-[32px] p-8 shadow-card border border-[#ece4d4]">
+          <div id="persyaratan" className="lg:col-span-7 bg-white rounded-[36px] p-8 shadow-card border border-[#ece4d4]">
             <h3 className="font-extrabold text-xl text-navy flex gap-2 items-center"><FileText className="w-5 h-5 text-primary-600" /> Persyaratan Berkas</h3>
             <ul className="mt-5 space-y-2.5">
               {REQUIREMENTS.map(r=> (<li key={r} className="flex gap-3 text-sm text-navy"><CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-primary-600" />{r}</li>))}
@@ -117,7 +121,7 @@ export default function PPDBPage() {
           </div>
 
           <div id="biaya" className="lg:col-span-5 space-y-4">
-            <div className="bg-gradient-to-br from-navy to-primary-800 text-white rounded-[32px] p-8 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-navy to-primary-800 text-white rounded-[36px] p-8 relative overflow-hidden">
               <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl" />
               <div className="relative">
                 <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-white/70"><Wallet className="w-4 h-4" /> BIAYA PENDIDIKAN</div>
@@ -132,7 +136,7 @@ export default function PPDBPage() {
                 </div>
               </div>
             </div>
-            <div id="beasiswa" className="bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4]">
+            <div id="beasiswa" className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
               <h4 className="font-bold text-navy flex items-center gap-2"><Gift className="w-4 h-4 text-amber-600" /> Beasiswa Hingga 100%</h4>
               <ul className="mt-3 space-y-2 text-sm text-slate-600">
                 <li>• Akademik (rank 1–3 SMP)</li>
@@ -149,7 +153,7 @@ export default function PPDBPage() {
         <div className="mt-4 grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
           {JALUR.map((j,i)=> (
             <button key={j.value} type="button" onClick={()=>setJalur(j.value)}
-              className={`relative text-left rounded-[24px] p-5 border-2 transition bg-white ${jalur===j.value?"border-primary-600 shadow-float":"border-slate-200 hover:border-primary-300"}`}>
+              className={`relative text-left rounded-[28px] p-5 border-2 transition bg-white ${jalur===j.value?"border-primary-600 shadow-float":"border-slate-200 hover:border-primary-300"}`}>
               <div className="flex items-center gap-3">
                 <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${jalur===j.value?"bg-primary-600 text-white":"bg-slate-100 text-slate-500"}`}>{i+1}</span>
                 <div className="font-bold text-navy">{j.label}</div>
@@ -162,7 +166,7 @@ export default function PPDBPage() {
 
         {/* Formulir */}
         <section id="form" className="mt-10">
-          <div className="bg-white rounded-[32px] shadow-3d border-2 border-primary-200 overflow-hidden">
+          <div className="bg-white rounded-[36px] shadow-3d border-2 border-primary-200 overflow-hidden">
             <div className="grid lg:grid-cols-12">
               <div className="lg:col-span-5 bg-gradient-to-br from-primary-600 to-primary-800 text-white p-8 relative overflow-hidden">
                 <div className="absolute -top-16 -right-16 w-56 h-56 bg-white/10 rounded-full blur-3xl" />
@@ -187,23 +191,26 @@ export default function PPDBPage() {
                     <p className="text-sm text-slate-600 mt-2 max-w-md mx-auto">Simpan nomor pendaftaran untuk cek status selanjutnya.</p>
                     <div className="mt-5 inline-flex bg-navy text-white px-5 py-3 rounded-2xl font-mono font-bold tracking-widest rotate-[-1deg]">{regNumber}</div>
                     <div className="mt-7 flex flex-wrap justify-center gap-3">
-                      <Link href="/" className="bg-navy text-white px-6 py-3 rounded-full text-sm font-bold">Kembali ke Beranda</Link>
-                      <button onClick={()=>{setStatusNo(regNumber); checkStatus();}} className="bg-white border border-slate-200 px-6 py-3 rounded-full text-sm font-bold text-navy">Cek Status Sekarang</button>
+                      <a href={`https://wa.me/${SCHOOL.whatsapp}?text=${encodeURIComponent(`Halo panitia PPDB SMA Darussalam 👋\n\nSaya ${nama}, baru saja mendaftar online dengan nomor ${regNumber}.\nMohon informasi langkah selanjutnya untuk verifikasi berkas.\n\nTerima kasih.`)}`} target="_blank" rel="noopener noreferrer" className="btn-gold">Konfirmasi via WhatsApp</a>
+                      <Link href="/" className="btn-navy">Kembali ke Beranda</Link>
+                      <button onClick={()=>{setStatusNo(regNumber); checkStatus();}} className="btn-outline">Cek Status Sekarang</button>
                     </div>
                   </div>
                 ) : (
                   <form onSubmit={submit} className="grid sm:grid-cols-2 gap-4">
-                    <input required minLength={3} placeholder="Nama Lengkap Calon Siswa *" className="sm:col-span-2 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                    <input required placeholder="Tempat Lahir *" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+                    {/* Honeypot anti-spam — tersembunyi dari manusia */}
+                    <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden sm:col-span-2" />
+                    <input required minLength={3} name="nama" placeholder="Nama Lengkap Calon Siswa *" className="sm:col-span-2 input" />
+                    <input required placeholder="Tempat Lahir *" className="input" />
                     <input required type="date" className="border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                    <input required inputMode="numeric" maxLength={10} placeholder="NISN (10 digit) *" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                    <input required placeholder="Asal SMP *" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                    <select value={jalur} onChange={e=>setJalur(e.target.value)} className="sm:col-span-2 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    <input required inputMode="numeric" maxLength={10} placeholder="NISN (10 digit) *" className="input" />
+                    <input required placeholder="Asal SMP *" className="input" />
+                    <select value={jalur} onChange={e=>setJalur(e.target.value)} className="sm:col-span-2 input">
                       {JALUR.map(j=> (<option key={j.value} value={j.value}>Jalur {j.label} — {j.desc}</option>))}
                     </select>
-                    <input required placeholder="Nama Orang Tua/Wali *" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                    <input required placeholder="No. HP Orang Tua *" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                    <textarea required rows={3} placeholder="Alamat Lengkap *" className="sm:col-span-2 resize-none border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
+                    <input required placeholder="Nama Orang Tua/Wali *" className="input" />
+                    <input required placeholder="No. HP Orang Tua *" className="input" />
+                    <textarea required rows={3} placeholder="Alamat Lengkap *" className="sm:col-span-2 resize-none input" />
                     <button className="sm:col-span-2 inline-flex justify-center items-center gap-2 bg-navy text-white py-4 rounded-xl font-bold hover:bg-primary-800 transition"><Send2 /> Kirim Pendaftaran</button>
                     <p className="sm:col-span-2 text-xs text-slate-500 text-center flex gap-2 justify-center items-start"><CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" /> Data demo — tidak dikirim ke server. Dengan mendaftar, Anda menyetujui syarat & ketentuan PPDB.</p>
                   </form>

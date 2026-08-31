@@ -31,11 +31,11 @@ export default function GuruPage() {
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((s, i) => (
-            <article key={s.id} className="group relative bg-white rounded-[26px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
+            <article key={s.id} className="group relative bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
               {/* Foto + overlay premium */}
               <div className="relative aspect-[4/5] overflow-hidden bg-primary-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.photoUrl} alt={s.name} loading="lazy" className="w-full h-full object-cover object-top group-hover:scale-105 transition duration-700" />
+                <img loading="lazy" src={s.photoUrl} alt={s.name} className="w-full h-full object-cover object-top group-hover:scale-105 transition duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/5 to-transparent" />
                 {/* Badge posisi */}
                 <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 glass rounded-full px-3 py-1.5 text-[10px] font-extrabold tracking-widest text-navy uppercase shadow">
@@ -61,7 +61,7 @@ export default function GuruPage() {
         </div>
 
         {filtered.length === 0 && (
-          <div className="bg-white rounded-[24px] p-12 text-center border border-dashed border-slate-200 mt-8">
+          <div className="bg-white rounded-[28px] p-12 text-center border border-dashed border-slate-200 mt-8">
             <Search className="w-10 h-10 mx-auto text-slate-300" />
             <p className="text-sm text-slate-500 mt-3">Tidak ada staf yang cocok.</p>
           </div>

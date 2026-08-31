@@ -9,7 +9,7 @@ export default function VisiMisiPage() {
       <PageHeader badge="PROFIL • VISI & MISI" title="Visi & Misi" accent={SCHOOL.shortName} desc="Arah & tujuan jangka panjang yang menggerakkan seluruh warga sekolah." img="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" breadcrumb="Profil / Visi & Misi" />
 
       <section className="max-w-[1280px] mx-auto px-6 space-y-8">
-        <div className="bg-gradient-to-br from-navy to-primary-900 text-white rounded-[32px] p-8 md:p-10 relative overflow-hidden">
+        <div className="bg-gradient-to-br from-navy to-primary-900 text-white rounded-[36px] p-8 md:p-10 relative overflow-hidden">
           <div className="absolute -top-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
           <div className="relative">
             <div className="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center"><Eye className="w-6 h-6" /></div>
@@ -19,7 +19,7 @@ export default function VisiMisiPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-[32px] p-8 shadow-card border border-[#ece4d4]">
+        <div className="bg-white rounded-[36px] p-8 shadow-card border border-[#ece4d4]">
           <SectionHeading eyebrow="Misi" title="Misi Sekolah" desc="Langkah strategis untuk mewujudkan visi" number="02" />
           <div className="mt-6 grid sm:grid-cols-2 gap-4">
             {SCHOOL.misi.map((m, i) => (
@@ -31,7 +31,7 @@ export default function VisiMisiPage() {
           </div>
         </div>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-[24px] p-6 flex gap-3 items-start">
+        <div className="bg-amber-50 border border-amber-200 rounded-[28px] p-6 flex gap-3 items-start">
           <CheckCircle2 className="w-5 h-5 text-amber-600 mt-0.5" />
           <p className="text-sm leading-6 text-amber-900">Nilai inti: <b>Disiplin • Jujur • Peduli • Kreatif • Religius</b> — diinternalisasi via pembiasaan harian & proyek P5.</p>
         </div>

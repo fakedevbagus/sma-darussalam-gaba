@@ -16,7 +16,7 @@ function MemoryCard({ item, caption, tilt }: { item: (typeof GALLERY)[number]; c
   const next = () => setI(v => (v + 1) % photos.length);
 
   return (
-    <div className={`group relative rounded-[24px] overflow-hidden border-4 border-white shadow-card hover:shadow-3d transition ${tilt}`}>
+    <div className={`group relative rounded-[28px] overflow-hidden border-4 border-white shadow-card hover:shadow-3d transition ${tilt}`}>
       <div className="relative h-[250px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img key={photos[i]} src={photos[i]} alt={caption} loading="lazy" className="absolute inset-0 w-full h-full object-cover animate-[popIn_.45s_ease_both]" />

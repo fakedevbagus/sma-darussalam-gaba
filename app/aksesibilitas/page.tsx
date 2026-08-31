@@ -5,7 +5,7 @@ export default function AksesibilitasPage() {
     <div>
       <PageHeader badge="AKSESIBILITAS" title="Aksesibilitas" desc="Komitmen kami agar website dapat diakses semua — keyboard, screen reader & kontras." img="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" breadcrumb="Legal / Aksesibilitas" />
       <section className="max-w-[800px] mx-auto px-6">
-        <div className="bg-white rounded-[32px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
+        <div className="bg-white rounded-[36px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
           <h3 className="font-bold text-navy">Standar</h3>
           <p className="text-sm text-slate-600 leading-7 mt-2">Mengacu WCAG 2.1 AA — navigasi keyboard, alt teks, fokus terlihat, kontras 4.5:1.</p>
           <h3 className="font-bold text-navy mt-6">Fitur</h3>

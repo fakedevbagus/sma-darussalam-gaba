@@ -7,11 +7,14 @@ import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import PpdbPopup from "@/components/PpdbPopup";
 import CountUp from "@/components/CountUp";
+import { SectionHeading } from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
 import TestimoniSlider from "@/components/TestimoniSlider";
 import GaleriSlider from "@/components/GaleriSlider";
 import {
   ArrowRight, Play, Quote, BookOpen, Heart, Building2, Trophy, Users, Eye, CheckCircle2, Sparkles,
-  GraduationCap, UserRound, DoorOpen, MapPin, ExternalLink, Navigation,
+  GraduationCap, UserRound, DoorOpen, MapPin, ExternalLink, Navigation, ShieldCheck,
+  FileText, ClipboardCheck, Megaphone, CalendarCheck,
 } from "lucide-react";
 
 const KENAPA = [
@@ -70,12 +73,12 @@ export default function Home() {
 
       {/* ══════ SAMBUTAN KEPALA SEKOLAH ══════ */}
       <section className="max-w-[1280px] mx-auto px-5 md:px-6 pt-4 pb-16 md:pb-20">
-        <div className="bg-white rounded-[32px] shadow-card border border-[#ece4d4] p-6 sm:p-8 md:p-10 grid lg:grid-cols-12 gap-8 items-center relative overflow-hidden">
+        <Reveal className="bg-white rounded-[36px] shadow-card border border-[#ece4d4] p-6 sm:p-8 md:p-10 grid lg:grid-cols-12 gap-8 items-center relative overflow-hidden">
           <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full pattern-dots opacity-70" />
           <div className="lg:col-span-5 relative">
             <div className="relative arch overflow-hidden shadow-3d border-4 border-white tilt">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={SCHOOL.principal.imageUrl} alt={SCHOOL.principal.name} className="w-full aspect-[4/5] sm:aspect-[5/6] object-cover object-top" />
+              <img loading="lazy" src={SCHOOL.principal.imageUrl} alt={SCHOOL.principal.name} className="w-full aspect-[4/5] sm:aspect-[5/6] object-cover object-top" />
               <div className="absolute bottom-3 left-3 glass rounded-xl px-3 py-2 text-xs font-extrabold text-navy">Kepala Sekolah</div>
             </div>
             <div className="absolute -bottom-5 -right-3 w-20 h-20 rounded-2xl bg-gradient-to-br from-sun to-amber-400 shadow-float hidden lg:flex items-center justify-center rotate-6">
@@ -90,9 +93,9 @@ export default function Home() {
               <div className="font-display font-bold text-navy">{SCHOOL.principal.name}</div>
               <div className="text-xs font-bold text-primary-500">{SCHOOL.principal.title}</div>
             </div>
-            <Link href="/profil/kepala-sekolah" className="mt-5 inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-pop hover:bg-primary-600 hover:-translate-y-0.5 transition">Baca Selengkapnya <ArrowRight className="w-4 h-4" /></Link>
+            <Link href="/profil/kepala-sekolah" className="link-more mt-5">Baca Selengkapnya <ArrowRight className="w-4 h-4" /></Link>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* ══════ PILIHAN JURUSAN ══════ */}
@@ -104,11 +107,11 @@ export default function Home() {
           </div>
           <Link href="/jurusan" className="text-sm font-extrabold text-primary-600 inline-flex gap-1 items-center hover:gap-2 transition-all">Lihat Semua <ArrowRight className="w-4 h-4" /></Link>
         </div>
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <Reveal className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {JURUSAN.map((j, i) => (
-            <Link key={j.slug} href={`/jurusan/${j.slug}`} className={`group relative rounded-[24px] overflow-hidden shadow-card hover:shadow-3d transition border-4 border-white block ${i % 2 ? "lg:-rotate-1" : "lg:rotate-1"} hover:rotate-0`}>
+            <Link key={j.slug} href={`/jurusan/${j.slug}`} className={`group relative rounded-[28px] overflow-hidden shadow-card hover:shadow-3d transition border-4 border-white block ${i % 2 ? "lg:-rotate-1" : "lg:rotate-1"} hover:rotate-0`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={j.image} alt={j.name} className="w-full h-[240px] sm:h-[260px] object-cover group-hover:scale-110 transition duration-700" />
+              <img loading="lazy" src={j.image} alt={j.name} className="w-full h-[240px] sm:h-[260px] object-cover group-hover:scale-110 transition duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
               <div className="absolute bottom-0 p-5 text-white">
                 <div className="font-display font-bold text-lg leading-tight group-hover:text-cyan-300 transition">{j.name}</div>
@@ -117,7 +120,7 @@ export default function Home() {
               <span className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 text-primary-600 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition"><ArrowRight className="w-4 h-4" /></span>
             </Link>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* ══════ PRESTASI TERKINI — kartu dengan GAMBAR ══════ */}
@@ -131,12 +134,12 @@ export default function Home() {
             </div>
             <Link href="/prestasi" className="text-sm font-extrabold text-primary-600 inline-flex gap-1 items-center hover:gap-2 transition-all">Lihat Semua <ArrowRight className="w-4 h-4" /></Link>
           </div>
-          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <Reveal className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {prestasiTop.map(a => (
-              <div key={a.id} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
+              <div key={a.id} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
                 <div className="relative h-40 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={ACHIEVEMENT_IMAGES[a.id] ?? a.description} alt={a.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                  <img loading="lazy" src={ACHIEVEMENT_IMAGES[a.id] ?? "https://picsum.photos/seed/prestasi-fallback/640/420"} alt={a.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/55 to-transparent" />
                   <span className={`absolute top-3 left-3 rounded-full px-3 py-1 text-[10px] font-extrabold tracking-widest uppercase text-white shadow ${a.rank === "Juara 1" ? "bg-gradient-to-r from-sun to-amber-500" : "bg-primary-500"}`}>
                     {a.rank} • {a.year}
@@ -150,7 +153,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -159,30 +162,29 @@ export default function Home() {
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="font-display font-bold text-3xl md:text-4xl text-navy leading-tight">Kenapa Harus<br /><span className="gradient-text">SMA Darussalam?</span></h2>
           <p className="mt-3 text-slate-600 text-sm md:text-base leading-6">Tempat terbaik untuk tumbuh, belajar dan meraih cita-citamu.</p>
-          <Link href="/profil" className="mt-5 inline-flex bg-navy text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-pop hover:bg-primary-600 hover:-translate-y-0.5 transition">Lihat Profil Sekolah</Link>
+          <Link href="/profil" className="link-more mt-5">Lihat Profil Sekolah <ArrowRight className="w-4 h-4" /></Link>
         </div>
-        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <Reveal className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {KENAPA.map(k => (
-            <div key={k.title} className="group bg-white rounded-[24px] p-6 shadow-card border border-[#ece4d4] card-3d relative overflow-hidden">
+            <div key={k.title} className="group bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] card-3d relative overflow-hidden">
               <div className="absolute -right-8 -bottom-8 w-28 h-28 rounded-full bg-primary-50 opacity-70 group-hover:opacity-100 group-hover:scale-125 transition duration-500" />
               <div className={`relative w-12 h-12 rounded-2xl bg-gradient-to-br ${k.color} text-white flex items-center justify-center shadow-md group-hover:rotate-6 group-hover:scale-110 transition`}><k.icon className="w-6 h-6" /></div>
               <h3 className="relative mt-4 font-display font-bold text-navy text-lg leading-tight">{k.title}<br />{k.accent}</h3>
               <p className="relative mt-2 text-sm leading-6 text-slate-600">{k.desc}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </section>
 
-      {/* ══════ VIDEO PROFIL — full-bleed besar ══════ */}
-      <section id="video-profil" className="w-full pb-20 md:pb-24">
-        <div className="max-w-[1600px] mx-auto md:px-4">
-          <div className="relative rounded-none md:rounded-[36px] overflow-hidden shadow-[0_30px_80px_-20px_rgba(20,26,94,0.45)] border-y-[8px] md:border-[8px] border-white group bg-navy">
+      {/* ══════ VIDEO PROFIL — kartu ══════ */}
+      <section id="video-profil" className="max-w-[1280px] mx-auto px-5 md:px-6 pb-20 md:pb-24">
+        <div className="relative rounded-[36px] overflow-hidden shadow-[0_30px_80px_-20px_rgba(20,26,94,0.45)] border-[8px] border-white group bg-navy">
           {SCHOOL.profileVideoUrl ? (
             <iframe src={SCHOOL.profileVideoUrl} title="Video Profil Sekolah" allowFullScreen className="w-full aspect-video" loading="lazy" />
           ) : (
             <div className="relative w-full aspect-video">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={SCHOOL.heroImageUrl} alt={`Suasana ${SCHOOL.name}`} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              <img loading="lazy" src={SCHOOL.heroImageUrl} alt={`Suasana ${SCHOOL.name}`} className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent" />
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
                 <span className="w-16 h-16 rounded-full bg-white text-primary-600 flex items-center justify-center shadow-float mb-4 group-hover:scale-110 transition"><Play className="w-7 h-7 ml-0.5" /></span>
@@ -195,7 +197,6 @@ export default function Home() {
           <div className="absolute top-4 left-4 glass-dark rounded-full px-4 py-2 text-white text-[11px] font-extrabold tracking-widest uppercase flex gap-2 items-center">
             <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" /> Video Profil {SCHOOL.name}
           </div>
-          </div>
         </div>
       </section>
 
@@ -205,13 +206,13 @@ export default function Home() {
           <h2 className="font-display font-bold text-2xl md:text-3xl text-navy">Berita Terbaru</h2>
           <Link href="/berita" className="text-sm font-extrabold text-primary-600 inline-flex gap-1 items-center hover:gap-2 transition-all">Lihat Semua <ArrowRight className="w-4 h-4" /></Link>
         </div>
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <Reveal className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {latestNews.map(b => (
-            <Link key={b.id} href={`/berita/${b.slug}`} className="group bg-white rounded-[24px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition flex flex-col">
+            <Link key={b.id} href={`/berita/${b.slug}`} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition flex flex-col">
               <div className="h-40 overflow-hidden relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={b.coverUrl} alt={b.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
-                <span className="absolute top-3 left-3 bg-white/95 text-primary-700 rounded-full px-2.5 py-1 text-[9px] font-extrabold tracking-widest uppercase shadow">{b.category}</span>
+                <img loading="lazy" src={b.coverUrl} alt={b.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                <span className={`absolute top-3 left-3 rounded-full px-2.5 py-1 text-[9px] font-extrabold tracking-widest uppercase shadow ${b.category === "pengumuman" ? "bg-sun text-navy" : "bg-primary-600 text-white"}`}>{b.category}</span>
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <div className="text-[11px] font-bold text-slate-400">{new Date(b.createdAt).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })}</div>
@@ -220,7 +221,7 @@ export default function Home() {
               </div>
             </Link>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* ══════ GALERI — SLIDE OTOMATIS ══════ */}
@@ -244,13 +245,13 @@ export default function Home() {
               <li key={f} className="flex gap-3 items-center text-sm font-bold text-navy bg-white rounded-2xl px-4 py-3 shadow-soft border border-[#ece4d4]"><CheckCircle2 className="w-5 h-5 text-mint shrink-0" /> {f}</li>
             ))}
           </ul>
-          <Link href="/fasilitas" className="mt-6 inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-full text-sm font-extrabold shadow-pop hover:bg-primary-600 hover:-translate-y-0.5 transition">Lihat Semua Fasilitas <ArrowRight className="w-4 h-4" /></Link>
+          <Link href="/fasilitas" className="link-more mt-6">Lihat Semua Fasilitas <ArrowRight className="w-4 h-4" /></Link>
         </div>
         <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4">
           {FASILITAS_FOTO.map((f, i) => (
             <div key={f.name} className={`rounded-[20px] overflow-hidden shadow-card border-4 border-white relative group ${i === 0 ? "col-span-2 sm:col-span-1" : ""} ${i % 2 ? "rotate-1" : "-rotate-1"} hover:rotate-0 hover:shadow-3d transition`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={f.img} alt={f.name} loading="lazy" className={`w-full object-cover group-hover:scale-110 transition duration-700 ${i === 0 ? "h-[180px] sm:h-[160px]" : "h-[130px] sm:h-[150px]"}`} />
+              <img loading="lazy" src={f.img} alt={f.name} className={`w-full object-cover group-hover:scale-110 transition duration-700 ${i === 0 ? "h-[180px] sm:h-[160px]" : "h-[130px] sm:h-[150px]"}`} />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/80 to-transparent p-3"><span className="text-white text-xs font-extrabold">{f.name}</span></div>
             </div>
           ))}
@@ -271,7 +272,7 @@ export default function Home() {
             <div key={s.id} className="group shrink-0 w-[170px] sm:w-[190px] bg-white rounded-[20px] overflow-hidden border border-[#ece4d4] shadow-card hover:shadow-3d hover:-translate-y-1 transition">
               <div className="aspect-square overflow-hidden bg-primary-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.photoUrl} alt={s.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+                <img loading="lazy" src={s.photoUrl} alt={s.name} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
               </div>
               <div className="p-3.5">
                 <h3 className="font-display font-bold text-navy text-[13px] uppercase leading-snug truncate">{s.name}</h3>
@@ -295,9 +296,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ══════ ALUR PPDB ══════ */}
+      <section className="max-w-[1280px] mx-auto px-5 md:px-6 pb-16 md:pb-20">
+        <SectionHeading eyebrow="PPDB 2026/2027" title="Alur Pendaftaran" desc="Empat langkah mudah untuk bergabung dengan keluarga besar SMA Darussalam." />
+        <Reveal className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {[
+            { icon: FileText, title: "Daftar Online", desc: "Isi formulir dari HP — 5 menit selesai." },
+            { icon: ClipboardCheck, title: "Verifikasi Berkas", desc: "Panitia memverifikasi dokumen Anda." },
+            { icon: Megaphone, title: "Pengumuman", desc: "Hasil seleksi diumumkan 3 hari setelah tes." },
+            { icon: CalendarCheck, title: "Daftar Ulang", desc: "Lengkapi administrasi & siap masuk sekolah." },
+          ].map((s, i) => (
+            <div key={i} className="relative card-warm p-6">
+              <span className="w-10 h-10 rounded-2xl bg-gradient-to-br from-sun to-amber-500 text-navy font-display font-semibold text-lg flex items-center justify-center shadow-yellow">{i + 1}</span>
+              <div className="mt-4 font-bold text-navy text-sm flex items-center gap-2"><s.icon className="w-4 h-4 text-primary-600" /> {s.title}</div>
+              <p className="text-xs text-slate-500 mt-1.5 leading-5">{s.desc}</p>
+            </div>
+          ))}
+        </Reveal>
+        <div className="mt-7 text-center">
+          <Link href="/ppdb" className="btn-navy">Mulai Pendaftaran <ArrowRight className="w-4 h-4" /></Link>
+        </div>
+      </section>
+
       {/* ══════ CTA PPDB ══════ */}
       <section className="max-w-[1280px] mx-auto px-5 md:px-6 pb-16 md:pb-20">
-        <div className="relative rounded-[32px] overflow-hidden bg-gradient-to-br from-primary-500 via-primary-600 to-accent p-8 md:p-12 text-white shadow-3d">
+        <div className="relative rounded-[36px] overflow-hidden bg-gradient-to-br from-primary-500 via-primary-600 to-accent p-8 md:p-12 text-white shadow-3d">
           <div className="absolute inset-0 pattern-stripes opacity-70" />
           <div className="absolute -top-20 -right-20 w-[380px] h-[380px] bg-white/10 rounded-full blur-3xl" />
           <div className="relative grid lg:grid-cols-12 gap-8 items-center">
@@ -316,7 +339,7 @@ export default function Home() {
 
       {/* ══════ LOKASI KAMI — peta di atas footer ══════ */}
       <section className="max-w-[1280px] mx-auto px-5 md:px-6 pb-20">
-        <div className="relative bg-white rounded-[32px] overflow-hidden shadow-3d border border-[#ece4d4]">
+        <div className="relative bg-white rounded-[36px] overflow-hidden shadow-3d border border-[#ece4d4]">
           <div className="grid lg:grid-cols-12 items-stretch">
             <div className="lg:col-span-5 relative p-8 md:p-10 flex flex-col justify-center overflow-hidden">
               <div className="inline-flex items-center gap-2 bg-primary-50 text-primary-700 rounded-full px-4 py-2 text-[11px] font-extrabold tracking-widest uppercase w-fit">
@@ -335,6 +358,18 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ══════ BANNER VERIFIKASI DAPODIK ══════ */}
+      <section className="max-w-[1280px] mx-auto px-5 md:px-6 pb-16">
+        <Reveal>
+          <a href={DAPO_URL} target="_blank" rel="noopener noreferrer"
+            className="group flex flex-wrap items-center justify-center gap-x-3 gap-y-2 bg-gradient-to-r from-navy via-primary-800 to-primary-700 text-white rounded-[28px] px-6 py-5 shadow-3d hover:shadow-glow transition text-center">
+            <ShieldCheck className="w-5 h-5 text-mint shrink-0" />
+            <span className="text-sm font-semibold">Data sekolah terverifikasi <b>Dapodik Kemendikdasmen</b> — NPSN {SCHOOL.npsn}</span>
+            <span className="chip bg-sun text-navy group-hover:scale-105 transition">Verifikasi ↗</span>
+          </a>
+        </Reveal>
       </section>
     </div>
   );

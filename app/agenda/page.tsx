@@ -25,7 +25,7 @@ function MiniCalendar({ events }: { events: typeof EVENTS }) {
   const daysInMonth = new Date(year, month+1,0).getDate();
   const eventDays = new Set(events.filter(e=> new Date(e.startDate).getMonth()===month).map(e=> new Date(e.startDate).getDate()));
   return (
-    <div className="bg-white rounded-[24px] border border-[#ece4d4] p-5 shadow-card">
+    <div className="bg-white rounded-[28px] border border-[#ece4d4] p-5 shadow-card">
       <div className="flex justify-between items-center">
         <button onClick={()=>setMonth(m=> m===0?11:m-1)} className="p-1.5 rounded-lg hover:bg-slate-100"><ChevronLeft className="w-4 h-4" /></button>
         <div className="font-bold text-navy">{MONTHS[month]} {year}</div>
@@ -59,7 +59,7 @@ export default function AgendaPage() {
         <div className="grid lg:grid-cols-[300px_1fr] gap-8">
           <div className="space-y-5">
             <MiniCalendar events={EVENTS} />
-            <div className="bg-white rounded-[24px] border border-[#ece4d4] p-5 shadow-card">
+            <div className="bg-white rounded-[28px] border border-[#ece4d4] p-5 shadow-card">
               <div className="text-[10px] font-bold tracking-widest text-slate-500">FILTER KATEGORI</div>
               <div className="mt-3 space-y-2">
                 <button onClick={()=>setCat(null)} className={`w-full text-left px-3 py-2 rounded-xl text-sm font-semibold ${cat===null?"bg-primary-50 text-primary-700":"text-slate-600 hover:bg-slate-50"}`}>Semua Kategori</button>

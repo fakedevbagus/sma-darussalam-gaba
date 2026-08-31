@@ -48,33 +48,35 @@ export default function KontakPage() {
         </div>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="bg-white rounded-[32px] p-8 shadow-card border border-[#ece4d4]">
+          <div className="bg-white rounded-[36px] p-8 shadow-card border border-[#ece4d4]">
             {sent ? (
               <div className="py-16 text-center">
                 <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-2xl">✓</div>
                 <h3 className="font-display font-extrabold text-xl text-navy mt-4">Pesan Terkirim! 🎉</h3>
                 <p className="text-sm text-slate-600 mt-2">(Simulasi demo) Kami akan merespons maksimal 1×24 jam kerja.</p>
-                <button onClick={()=>setSent(false)} className="mt-6 bg-navy text-white px-6 py-3 rounded-full text-sm font-bold">Kirim Pesan Lain</button>
+                <button onClick={()=>setSent(false)} className="mt-6 btn-navy">Kirim Pesan Lain</button>
               </div>
             ) : (
               <>
                 <h3 className="font-extrabold text-xl text-navy flex gap-2 items-center"><Send className="w-5 h-5 text-primary-600" /> Kirim Pesan</h3>
                 <p className="text-sm text-slate-600 mt-2">Isi form berikut — kami balas via email/WA maksimal 1 hari kerja.</p>
-                <form onSubmit={e=>{e.preventDefault(); setSent(true);}} className="mt-6 grid sm:grid-cols-2 gap-4">
-                  <input required placeholder="Nama Lengkap" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                  <input required type="email" placeholder="Email" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                  <input placeholder="No. WhatsApp (opsional)" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                  <input required placeholder="Subjek" className="border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                  <textarea required rows={5} placeholder="Tulis pesan Anda..." className="sm:col-span-2 resize-none border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                  <button className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-navy text-white py-4 rounded-xl font-bold hover:bg-primary-800 transition"><Send className="w-4 h-4" /> Kirim Pesan</button>
+                <form onSubmit={e=>{e.preventDefault(); const f=new FormData(e.currentTarget); if (f.get("website")) { setSent(true); return; } const msg=`Halo Admin SMA Darussalam 👋\n\nNama: ${f.get("nama")}\nEmail: ${f.get("email")}\nWA: ${f.get("wa") || "-"}\nSubjek: ${f.get("subjek")}\n\nPesan:\n${f.get("pesan")}`; window.open(`https://wa.me/${SCHOOL.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank"); setSent(true);}} className="mt-6 grid sm:grid-cols-2 gap-4">
+                  {/* Honeypot anti-spam — tersembunyi dari manusia */}
+                  <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+                  <input required name="nama" placeholder="Nama Lengkap" className="input" />
+                  <input required name="email" type="email" placeholder="Email" className="input" />
+                  <input name="wa" placeholder="No. WhatsApp (opsional)" className="input" />
+                  <input required name="subjek" placeholder="Subjek" className="input" />
+                  <textarea required rows={5} name="pesan" placeholder="Tulis pesan Anda..." className="sm:col-span-2 resize-none input" />
+                  <button className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-[#25D366] text-white py-4 rounded-xl font-bold hover:brightness-105 hover:scale-[1.02] transition shadow-[0_10px_30px_rgba(37,211,102,0.35)]"><Send className="w-4 h-4" /> Kirim via WhatsApp</button>
                 </form>
               </>
             )}
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-[24px] overflow-hidden shadow-card border border-[#ece4d4] bg-white p-2">
-              <iframe title="Peta lokasi sekolah" src={SCHOOL.mapEmbedUrl} className="w-full h-[220px] rounded-[18px] border-0" loading="lazy" />
+            <div className="rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] bg-white p-2">
+              <iframe title="Peta lokasi sekolah" src={SCHOOL.mapEmbedUrl} className="w-full h-[220px] rounded-[20px] border-0" loading="lazy" />
               <div className="p-4">
                 <div className="text-xs font-bold text-navy">{SCHOOL.name}</div>
                 <div className="text-xs text-slate-500 mt-1">{SCHOOL.address}</div>

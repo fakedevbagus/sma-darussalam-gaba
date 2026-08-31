@@ -28,9 +28,9 @@ export default function AlumniPage() {
 
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {ALUMNI.map(a=> (
-            <div key={a.id} className="bg-white rounded-[24px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d transition">
+            <div key={a.id} className="bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d transition">
               <div className="h-[220px] relative overflow-hidden">
-                <img src={a.photoUrl} alt={a.name} className="w-full h-full object-cover" />
+                <img loading="lazy" src={a.photoUrl} alt={a.name} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent" />
               </div>
               <div className="p-5">

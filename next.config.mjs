@@ -6,6 +6,23 @@ const nextConfig = {
       { protocol: 'https', hostname: 'picsum.photos' }
     ]
   },
+  // Keamanan: headers dasar (CSP disusun selektif agar embed YouTube/Maps tetap jalan)
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          {
+            key: "Content-Security-Policy",
+            value: "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'",
+          },
+        ],
+      },
+    ];
+  },
   // Backward-compatible aliases dari struktur menu Darussalam Mimo
   async redirects() {
     return [

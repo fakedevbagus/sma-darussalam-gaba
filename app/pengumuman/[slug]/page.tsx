@@ -14,9 +14,9 @@ export default function PengumumanDetail({ params }: { params: { slug: string } 
     <div>
       <PageHeader badge="PENGUMUMAN" title={item.title} desc={`${formatDateId(item.createdAt)} • ${item.authorName}`} img={item.coverUrl || "https://images.unsplash.com/photo-1494172961521-33799ddd43a5?q=80&w=800&auto=format&fit=crop"} breadcrumb={`Pengumuman / Detail`} />
       <section className="max-w-[800px] mx-auto px-6">
-        <div className="bg-white rounded-[32px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
+        <div className="bg-white rounded-[36px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
           <h1 className="font-display font-extrabold text-3xl text-navy leading-tight">{item.title}</h1>
-          {item.coverUrl && <img src={item.coverUrl} alt={item.title} className="w-full h-[380px] object-cover rounded-2xl mt-6" />}
+          {item.coverUrl && <img loading="lazy" src={item.coverUrl} alt={item.title} className="w-full h-[380px] object-cover rounded-2xl mt-6" />}
           <div className="mt-6 whitespace-pre-line text-sm leading-7 text-slate-700">{item.content}</div>
           <div className="mt-8 flex gap-3">
             <Link href="/pengumuman" className="bg-white border border-slate-200 px-5 py-2.5 rounded-full text-sm font-bold text-navy">← Semua Pengumuman</Link>

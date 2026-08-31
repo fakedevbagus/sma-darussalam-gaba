@@ -14,7 +14,7 @@ export default function ProgramDetail({ params }: { params: { slug: string } }) 
     <div>
       <PageHeader badge={`${program.category.toUpperCase()} • PROGRAM`} title={program.name} desc={program.description} img="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" breadcrumb={`Program / ${program.name}`} />
       <section className="max-w-[1280px] mx-auto px-6">
-        <div className="bg-white rounded-[32px] p-8 shadow-card border border-[#ece4d4]">
+        <div className="bg-white rounded-[36px] p-8 shadow-card border border-[#ece4d4]">
           <div className="inline-flex bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-xs font-bold">{program.category}</div>
           <h2 className="font-bold text-navy mt-3 text-lg">Mata Pelajaran Terkait</h2>
           <ul className="mt-3 grid sm:grid-cols-2 gap-2">{program.subjects.map(s=> (<li key={s} className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-navy">{s}</li>))}</ul>
