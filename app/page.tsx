@@ -13,7 +13,7 @@ import TestimoniSlider from "@/components/TestimoniSlider";
 import GaleriSlider from "@/components/GaleriSlider";
 import {
   ArrowRight, Play, Quote, BookOpen, Heart, Building2, Trophy, Users, Eye, CheckCircle2, Sparkles,
-  GraduationCap, UserRound, DoorOpen, MapPin, ExternalLink, Navigation, ShieldCheck,
+  GraduationCap, UserRound, DoorOpen, MapPin, ExternalLink, Navigation,
   FileText, ClipboardCheck, Megaphone, CalendarCheck,
 } from "lucide-react";
 
@@ -325,13 +325,13 @@ export default function Home() {
           <div className="absolute -top-20 -right-20 w-[380px] h-[380px] bg-white/10 rounded-full blur-3xl" />
           <div className="relative grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8">
-              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-[11px] font-extrabold tracking-widest border border-white/25"><Sparkles className="w-3.5 h-3.5" /> PSPDB 2027 GELOMBANG 1</div>
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-[11px] font-extrabold tracking-widest border border-white/25"><Sparkles className="w-3.5 h-3.5" /> PPDB 2026/2027 GELOMBANG 1</div>
               <h3 className="mt-4 font-display font-bold text-2xl md:text-3xl leading-tight">Siap Jadi Bagian dari<br />Keluarga Besar Darussalam?</h3>
               <p className="mt-3 text-white/85 max-w-xl text-sm md:text-base leading-6">Daftar sekarang — proses mudah, bisa dari HP. Konsultasi gratis via WhatsApp.</p>
             </div>
             <div className="lg:col-span-4 flex flex-col gap-3">
               <Link href="/ppdb" className="bg-white text-primary-700 px-6 py-4 rounded-full font-extrabold text-center shadow-float hover:scale-[1.02] transition">DAFTAR SEKARANG →</Link>
-              <a href={SCHOOL.social.whatsapp} target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-6 py-4 rounded-full font-extrabold text-center shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:scale-[1.02] transition">Hubungi CS PSPDB</a>
+              <a href={SCHOOL.social.whatsapp} target="_blank" rel="noopener noreferrer" className="bg-[#25D366] text-white px-6 py-4 rounded-full font-extrabold text-center shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:scale-[1.02] transition">Hubungi CS PPDB</a>
             </div>
           </div>
         </div>
@@ -358,18 +358,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* ══════ BANNER VERIFIKASI DAPODIK ══════ */}
-      <section className="max-w-[1280px] mx-auto px-5 md:px-6 pb-16">
-        <Reveal>
-          <a href={DAPO_URL} target="_blank" rel="noopener noreferrer"
-            className="group flex flex-wrap items-center justify-center gap-x-3 gap-y-2 bg-gradient-to-r from-navy via-primary-800 to-primary-700 text-white rounded-[28px] px-6 py-5 shadow-3d hover:shadow-glow transition text-center">
-            <ShieldCheck className="w-5 h-5 text-mint shrink-0" />
-            <span className="text-sm font-semibold">Data sekolah terverifikasi <b>Dapodik Kemendikdasmen</b> — NPSN {SCHOOL.npsn}</span>
-            <span className="chip bg-sun text-navy group-hover:scale-105 transition">Verifikasi ↗</span>
-          </a>
-        </Reveal>
       </section>
     </div>
   );

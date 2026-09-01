@@ -8,6 +8,7 @@ import { Construction, Clock, GraduationCap, UserRound, Users, ArrowRight, Shiel
 export const metadata: Metadata = {
   title: "Portal Akademik — Dalam Pengembangan",
   description: `Portal akademik ${SCHOOL.name} (e-raport, jadwal, pengumuman kelas) sedang dalam tahap pengembangan.`,
+  robots: { index: false, follow: true },
 };
 
 const ROLES = [

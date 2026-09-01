@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/ekskul", "/osis", "/prestasi", "/alumni", "/kenangan", "/galeri",
     "/berita", "/pengumuman", "/agenda", "/unduhan", "/ppdb", "/faq",
     "/kontak", "/cari", "/kebijakan-privasi", "/ketentuan-penggunaan",
-    "/aksesibilitas", "/e-raport",
+    "/aksesibilitas",
   ].map((r) => ({
     url: `${BASE}${r}`,
     lastModified: new Date(),

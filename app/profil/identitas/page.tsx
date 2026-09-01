@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import { SectionHeading } from "@/components/SectionHeading";
-import { SCHOOL, DAPODIK, DAPO_URL } from "@/config/school";
+import { SCHOOL, DAPODIK, DAPO_URL, WHATSAPP_READY } from "@/config/school";
 import {
   Building2, Hash, Award, Globe, MapPin, Phone, Mail, User, FileText,
   BadgeCheck, Users, GraduationCap, DoorOpen, Landmark, ExternalLink,
@@ -37,7 +37,7 @@ export default function IdentitasPage() {
     { icon: User, label: "Kepala Sekolah", value: SCHOOL.principal.name },
     { icon: Globe, label: "Tahun Berdiri", value: String(SCHOOL.founded) },
     { icon: MapPin, label: "Alamat", value: SCHOOL.address },
-    { icon: Phone, label: "Telepon", value: SCHOOL.phone },
+    ...(WHATSAPP_READY ? [{ icon: Phone, label: "Telepon", value: SCHOOL.phone }] : []),
     { icon: Mail, label: "Email", value: SCHOOL.email },
     { icon: Award, label: "Akreditasi", value: SCHOOL.akreditasi },
   ];

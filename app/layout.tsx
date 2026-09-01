@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ScrollToTop, WhatsAppFloat } from "@/components/Floats";
 import { SCHOOL, DAPODIK } from "@/config/school";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SCHOOL.url),
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <ScrollToTop />
         <WhatsAppFloat />
+        <Analytics />
       </body>
     </html>
   );

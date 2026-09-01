@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail } from "lucide-react";
 import Logo from "@/components/Logo";
 import SocialLinks from "@/components/SocialLinks";
 import { FOOTER_QUICK, FOOTER_INFO } from "@/config/navigation";
-import { SCHOOL } from "@/config/school";
+import { SCHOOL, WHATSAPP_READY } from "@/config/school";
 import VisitorStats from "@/components/VisitorStats";
 
 export default function Footer() {
@@ -46,7 +46,9 @@ export default function Footer() {
             <h3 className="font-bold text-sm mb-4">Hubungi Kami</h3>
             <div className="space-y-3 text-sm text-white/70">
               <p className="flex gap-3"><MapPin className="w-4 h-4 mt-0.5 text-accent shrink-0" /> {SCHOOL.address}</p>
-              <a href={SCHOOL.social.whatsapp} target="_blank" rel="noopener noreferrer" className="flex gap-3 hover:text-white transition"><Phone className="w-4 h-4 text-accent shrink-0" /> {SCHOOL.whatsapp}</a>
+              {WHATSAPP_READY && (
+                <a href={SCHOOL.social.whatsapp} target="_blank" rel="noopener noreferrer" className="flex gap-3 hover:text-white transition"><Phone className="w-4 h-4 text-accent shrink-0" /> {SCHOOL.whatsappDisplay}</a>
+              )}
               <a href={`mailto:${SCHOOL.email}`} className="flex gap-3 hover:text-white transition"><Mail className="w-4 h-4 text-accent shrink-0" /> {SCHOOL.email}</a>
             </div>
           </div>

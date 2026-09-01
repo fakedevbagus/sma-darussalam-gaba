@@ -2,7 +2,7 @@
 import PageHeader from "@/components/PageHeader";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useState } from "react";
-import { SCHOOL } from "@/config/school";
+import { SCHOOL, WHATSAPP_READY } from "@/config/school";
 
 const FAQ = [
   { q: "Bagaimana mendaftarkan anak?", a: "Via halaman PPDB Online atau hubungi admin pada jam kerja." },
@@ -31,7 +31,7 @@ export default function KontakPage() {
           <div className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
             {[
               { icon: MapPin, label: "Alamat", value: SCHOOL.address, href: SCHOOL.mapOpenUrl, cta: "Lihat di Maps" },
-              { icon: Phone, label: "Telepon / WhatsApp", value: `${SCHOOL.phone} • WA ${SCHOOL.whatsappDisplay}`, href: SCHOOL.social.whatsapp, cta: "Chat WhatsApp" },
+              { icon: Phone, label: "Telepon / WhatsApp", value: WHATSAPP_READY ? `${SCHOOL.phone} • WA ${SCHOOL.whatsappDisplay}` : `WA ${SCHOOL.whatsappDisplay}`, href: SCHOOL.social.whatsapp, cta: "Chat WhatsApp" },
               { icon: Mail, label: "Email", value: SCHOOL.email, href: `mailto:${SCHOOL.email}`, cta: "Kirim Email" },
               { icon: Clock, label: "Jam Kerja", value: `${SCHOOL.hours} • Sabtu 08.00–12.00` },
             ].map((c, i) => (

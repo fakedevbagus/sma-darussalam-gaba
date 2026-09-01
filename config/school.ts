@@ -126,7 +126,8 @@ export const SCHOOL: SchoolIdentity = {
     youtube: "#",
     youtubeHandle: "@smadarussalam",
   },
-  url: "https://www.smadarussalamsimpangmesir.sch.id",
+  /* Ganti ke domain .sch.id resmi begitu domain sudah aktif. */
+  url: "https://sma-darussalam-glm53.vercel.app",
 
   principal: {
     name: "Muzaki Ariffin Affandi",
@@ -217,5 +218,23 @@ export const DAPODIK = {
 };
 
 export const IS_DEMO = false;
+
+/* ═══════════════════════════════════════════════════════════════
+   PENJAGA DATA PLACEHOLDER
+   Selama nilai kontak masih contoh, elemen terkait disembunyikan.
+   Begitu diisi data asli, elemen muncul kembali otomatis.
+   ═══════════════════════════════════════════════════════════════ */
+
+/** Nomor WhatsApp contoh yang masih terpasang di config. */
+export const PLACEHOLDER_WHATSAPP = "6281234567890";
+
+/** true = nomor WhatsApp sudah diganti data asli. */
+export const WHATSAPP_READY = SCHOOL.whatsapp !== PLACEHOLDER_WHATSAPP;
+
+/** true = tautan sosial media sudah diisi (bukan "#" atau kosong). */
+export function isLiveLink(href?: string) {
+  const s = (href ?? "").trim();
+  return s !== "" && s !== "#";
+}
 
 

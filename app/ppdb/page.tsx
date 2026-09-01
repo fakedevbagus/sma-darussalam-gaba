@@ -201,16 +201,16 @@ export default function PPDBPage() {
                     {/* Honeypot anti-spam — tersembunyi dari manusia */}
                     <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden sm:col-span-2" />
                     <input required minLength={3} name="nama" placeholder="Nama Lengkap Calon Siswa *" className="sm:col-span-2 input" />
-                    <input required placeholder="Tempat Lahir *" className="input" />
-                    <input required type="date" className="border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-500" />
-                    <input required inputMode="numeric" maxLength={10} placeholder="NISN (10 digit) *" className="input" />
-                    <input required placeholder="Asal SMP *" className="input" />
-                    <select value={jalur} onChange={e=>setJalur(e.target.value)} className="sm:col-span-2 input">
+                    <input required name="tempat_lahir" placeholder="Tempat Lahir *" className="input" />
+                    <input required type="date" name="tanggal_lahir" className="border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-primary-500" />
+                    <input required inputMode="numeric" maxLength={10} name="nisn" placeholder="NISN (10 digit) *" className="input" />
+                    <input required name="asal_smp" placeholder="Asal SMP *" className="input" />
+                    <select name="jalur" value={jalur} onChange={e=>setJalur(e.target.value)} className="sm:col-span-2 input">
                       {JALUR.map(j=> (<option key={j.value} value={j.value}>Jalur {j.label} — {j.desc}</option>))}
                     </select>
-                    <input required placeholder="Nama Orang Tua/Wali *" className="input" />
-                    <input required placeholder="No. HP Orang Tua *" className="input" />
-                    <textarea required rows={3} placeholder="Alamat Lengkap *" className="sm:col-span-2 resize-none input" />
+                    <input required name="nama_orangtua" placeholder="Nama Orang Tua/Wali *" className="input" />
+                    <input required name="hp_orangtua" placeholder="No. HP Orang Tua *" className="input" />
+                    <textarea required rows={3} name="alamat" placeholder="Alamat Lengkap *" className="sm:col-span-2 resize-none input" />
                     <button className="sm:col-span-2 inline-flex justify-center items-center gap-2 bg-navy text-white py-4 rounded-xl font-bold hover:bg-primary-800 transition"><Send2 /> Kirim Pendaftaran</button>
                     <p className="sm:col-span-2 text-xs text-slate-500 text-center flex gap-2 justify-center items-start"><CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" /> Data demo — tidak dikirim ke server. Dengan mendaftar, Anda menyetujui syarat & ketentuan PPDB.</p>
                   </form>

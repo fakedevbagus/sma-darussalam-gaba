@@ -1,5 +1,5 @@
 "use client";
-import { SCHOOL } from "@/config/school";
+import { SCHOOL, isLiveLink } from "@/config/school";
 import { FacebookIcon, InstagramIcon, TiktokIcon, YoutubeIcon, WhatsappIcon } from "@/components/BrandIcons";
 
 /** Ikon sosmed dengan warna asli brand (SVG resmi) */
@@ -20,13 +20,15 @@ const ITEMS = [
 ];
 
 export default function SocialLinks({ variant = "solid", size = 38, whatsapp = true }: { variant?: "solid" | "light"; size?: number; whatsapp?: boolean }) {
-  const list = whatsapp ? ITEMS : ITEMS.filter(i => i.key !== "whatsapp");
+  const base = whatsapp ? ITEMS : ITEMS.filter(i => i.key !== "whatsapp");
+  const list = base.filter(i => isLiveLink(i.href));
+  if (list.length === 0) return null;
   return (
     <div className="flex items-center gap-2.5">
       {list.map(({ key, href, Icon, label }) => (
         <a
           key={key}
-          href={href || "#"}
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={label}

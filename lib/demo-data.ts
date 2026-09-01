@@ -232,8 +232,6 @@ export const TESTIMONI = [
   { name: "Wahyu Agung Nugroho", year: "Alumni 2025", kelas: "XII IPS 2", text: "Saya bangga menjadi bagian dari SMA Darussalam. Selain ilmu pengetahuan, saya belajar kedisiplinan, tanggung jawab, dan nilai karakter yang menjadi bekal penting masa depan." },
 ];
 
-export const VISITOR_STATS = { online: 3, today: 82, total: "11.044" };
-
 export const HERO_STATS = [
   { value: "246", label: "Peserta Didik" },
   { value: "11", label: "Guru & Tenaga Kependidikan" },

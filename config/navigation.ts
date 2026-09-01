@@ -20,7 +20,7 @@ export const PUBLIC_NAV: NavItem[] = [
       { label: "Profil Sekolah", href: "/profil", desc: "Tentang sekolah" },
       { label: "Visi dan Misi", href: "/profil/visi-misi", desc: "Arah & tujuan" },
       { label: "Identitas Sekolah", href: "/profil/identitas", desc: "Data resmi & NPSN" },
-      { label: "Sejarah Singkat", href: "/profil/sejarah", desc: "Perjalanan sejak 2005" },
+      { label: "Sejarah Singkat", href: "/profil/sejarah", desc: "Perjalanan sejak 2019" },
       { label: "Fasilitas", href: "/fasilitas", desc: "Sarana & prasarana" },
       { label: "Guru dan Tenaga Kependidikan", href: "/guru", desc: "Pendidik & staf" },
     ],

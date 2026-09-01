@@ -92,7 +92,7 @@ export default function Hero() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24 }}
           className="mt-8 flex flex-wrap justify-center gap-3">
           <Link href="/ppdb" className="group inline-flex items-center gap-3 bg-white text-primary-700 px-7 py-4 rounded-full font-extrabold shadow-3d hover:scale-[1.03] transition">
-            Daftar PSPDB 2027
+            Daftar PPDB 2026/2027
             <span className="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center group-hover:rotate-45 transition"><ArrowRight className="w-4 h-4" /></span>
           </Link>
           <a href="#video-profil" className="inline-flex items-center gap-3 bg-primary-600 px-6 py-4 rounded-full font-bold text-white shadow-float hover:bg-primary-500 hover:scale-[1.03] transition border border-primary-400/50">
