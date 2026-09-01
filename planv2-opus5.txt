@@ -1,0 +1,44 @@
+A1. a
+A2. a
+A3. a
+A4. b
+B1. b
+B2. hero beserta logo,ticker, tombol menu, dan isinya. kepsek, guru dan staff dihalaman utama, testimoni alumni, lokasi kami dihalaman utama, dan dimenu jangan ada yang terlalu diubah signifikan.
+B3. a
+B4. c
+C1. b
+C2. b
+C3. tidak ada
+D1. M1, M4, M5, M6, M7, M8, M9, M10, M11, M12, K1, K2, K3, K4, K5, K6, K7, K8, P1, P2, P3, P4, P5, L1D, L2, L3, L4, L5, L6, L7, L8, L9 
+D2. d
+D3. a
+E1. aku campur di D1 yang kupilih
+E2. aku campur di D1 yang kupilih
+E3. dihalaman profil/identitas seperti terlalu banyak kartu terutama poin 1,2,3, rapikan ini. profil/sejarah juga. 
+E4. a
+E5. a
+F1. d
+F2. b
+F3. c
+F4. c
+F5. c
+F6. b
+F7. b
+G1. c
+G2. d
+G3. a
+G4. b
+G5. a
+H1. a, b, c, d, e, f, g, h, 
+H2. b
+H3. b
+I1. c
+I2. c
+I3. b
+I4. b
+I5. c
+J1. hapus kartu verifikasi dapodik dibawah peta diberanda sisanya tidak ada lagi
+J2. https://smadarussalam.sch.id ini adalah web pertama dan satu satunya yan menjadi referensi awal namun pada webku ini ada sedikit perubahan yang disesuaikan berserta update/upgrade dari web referensi yang tidak ada diwebku.
+J3. jangan merubah yang sudah stabil misalnya style,gaya, atau yang terlalu berlebihan.
+
+ini adalah pilihan yang siap kamu rakit menjadi plan final, karena akan digunakan secepat mungkin aku harap pada plan ini tanpa ada gangguan apapun sehingga nanti setelah data sekolah asli siap diisi baru kita rencakan tahap selanjutnya yang lebih berat misalnya cms. aku ingin pada plan ini nanti hanya mengubah yang tidak sesuai serta membersihkan hal yang tidak perlu kemudian sedikit update dan upgrade sebelum diiisi data asli setelah itu kita stop menunggu semuanya berjalan lancar selama beberapa waktu lalu kita rencanakan plan cms berikutnya.

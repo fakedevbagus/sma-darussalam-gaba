@@ -50,3 +50,10 @@ tmp
 
 # Keep example, ignore real
 !.env.example
+
+# Wave 0 safety net additions
+*.pem
+.env*.local
+next-env.d.ts
+*.tsbuildinfo
+backup-*.zip
