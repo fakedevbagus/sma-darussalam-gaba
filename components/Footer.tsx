@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail } from "lucide-react";
 import Logo from "@/components/Logo";
 import SocialLinks from "@/components/SocialLinks";
@@ -13,8 +14,7 @@ export default function Footer() {
       {/* Wave pemisah dari body */}
       <svg aria-hidden viewBox="0 0 1440 48" preserveAspectRatio="none" className="absolute top-0 inset-x-0 w-full h-8 md:h-12 text-[#f6f8fe]" fill="currentColor"><path d="M0 0h1440v10c-220 30-460 38-720 22C480 16 220 8 0 26V0Z" /></svg>
       {/* Watermark logo */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/logo.png" alt="" aria-hidden className="absolute -bottom-10 -right-8 w-56 md:w-72 opacity-[0.05] pointer-events-none select-none" />
+      <Image src="/logo.png" alt="" aria-hidden width={288} height={288} className="absolute -bottom-10 -right-8 w-56 md:w-72 h-auto opacity-[0.05] pointer-events-none select-none" />
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-primary-600/20 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="relative max-w-[1280px] mx-auto px-6 pt-14 pb-10">

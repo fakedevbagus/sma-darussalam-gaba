@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SCHOOL } from "@/config/school";
 
 export default function Logo({ dark = false, white = false, size = 44 }: { dark?: boolean; white?: boolean; size?: number }) {
@@ -5,8 +6,7 @@ export default function Logo({ dark = false, white = false, size = 44 }: { dark?
     <span className="flex items-center gap-2.5 group">
       <span className="relative inline-flex">
         {!white && <span className="absolute inset-0 rounded-2xl bg-primary-400/40 blur-lg opacity-50 group-hover:opacity-80 transition" />}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={SCHOOL.logoUrl}
           alt={`Logo ${SCHOOL.name}`}
           width={size}
