@@ -1,6 +1,7 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { SCHOOL } from "@/config/school";
 import {
@@ -45,6 +46,7 @@ export default function PPDBPage() {
   const [pending, setPending] = useState(false);
   const [nama, setNama] = useState("");
   const [openFaq, setOpenFaq] = useState<number|null>(0);
+  const reduceMotion = useReducedMotion();
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -86,7 +88,7 @@ export default function PPDBPage() {
         title="PPDB" accent="Online"
         desc="Pendaftaran Peserta Didik Baru sepenuhnya daring. Isi formulir — panitia verifikasi & umumkan hasil via portal ini."
         img="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop"
-        breadcrumb="Layanan / PPDB Online"
+        breadcrumb={[{ label: "Layanan" }, { label: "PPDB Online" }]}
       />
 
       <section className="max-w-[1280px] mx-auto px-6">
@@ -223,11 +225,31 @@ export default function PPDBPage() {
           <div className="mt-6 max-w-2xl mx-auto space-y-3">
             {FAQS.map((f,i)=> (
               <div key={i} className="bg-white rounded-2xl border border-[#ece4d4] overflow-hidden">
-                <button onClick={()=>setOpenFaq(openFaq===i?null:i)} className="w-full flex items-center justify-between gap-3 p-5 text-left">
+                <button
+                  onClick={()=>setOpenFaq(openFaq===i?null:i)}
+                  aria-expanded={openFaq===i}
+                  aria-controls={`faq-panel-${i}`}
+                  className="w-full flex items-center justify-between gap-3 p-5 text-left"
+                >
                   <span className="font-bold text-navy text-sm">{f.q}</span>
                   <ChevronDown className={`w-4 h-4 text-slate-500 transition shrink-0 ${openFaq===i?"rotate-180":""}`} />
                 </button>
-                {openFaq===i && <div className="px-5 pb-5 text-sm leading-6 text-slate-600">{f.a}</div>}
+                <AnimatePresence initial={false}>
+                  {openFaq===i && (
+                    <motion.div
+                      key="panel"
+                      id={`faq-panel-${i}`}
+                      role="region"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-5 text-sm leading-6 text-slate-600">{f.a}</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </div>

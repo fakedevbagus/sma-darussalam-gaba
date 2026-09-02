@@ -2,6 +2,7 @@
 import PageHeader from "@/components/PageHeader";
 import { FAQS } from "@/lib/demo-data";
 import { useState, useMemo } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Search, HelpCircle, ChevronDown, GraduationCap, BookOpen, Users, Shield, Phone } from "lucide-react";
 
 const icons: Record<string, any> = { PPDB: GraduationCap, Akademik: BookOpen, Kegiatan: Users, Umum: Shield, Kontak: Phone, Portal: HelpCircle };
@@ -10,6 +11,7 @@ export default function FaqPage() {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string|null>(null);
   const [open, setOpen] = useState<string|null>(FAQS[0]?.id ?? null);
+  const reduceMotion = useReducedMotion();
   const cats = useMemo(()=> [...new Set(FAQS.map(f=>f.category))].sort(), []);
   const filtered = FAQS.filter(f=>{
     const mCat = cat===null||f.category===cat;
@@ -36,12 +38,32 @@ export default function FaqPage() {
         <div className="mt-6 space-y-3">
           {filtered.map((faq,i)=> (
             <div key={faq.id} className="bg-white rounded-2xl border border-[#ece4d4] shadow-sm overflow-hidden">
-              <button onClick={()=> setOpen(open===faq.id?null:faq.id)} className="w-full flex gap-3 p-5 text-left items-center">
+              <button
+                onClick={()=> setOpen(open===faq.id?null:faq.id)}
+                aria-expanded={open===faq.id}
+                aria-controls={`faq-panel-${faq.id}`}
+                className="w-full flex gap-3 p-5 text-left items-center"
+              >
                 <span className="w-7 h-7 rounded-lg bg-primary-50 text-primary-700 flex items-center justify-center text-[10px] font-bold shrink-0">{String(i+1).padStart(2,"0")}</span>
                 <span className="flex-1 font-bold text-navy text-sm">{faq.question}</span>
                 <ChevronDown className={`w-4 h-4 text-slate-500 transition ${open===faq.id?"rotate-180":""}`} />
               </button>
-              {open===faq.id && <div className="px-5 pb-5"><div className="ml-10 border-l-2 border-primary-100 pl-4 text-sm leading-6 text-slate-600">{faq.answer}</div></div>}
+              <AnimatePresence initial={false}>
+                {open===faq.id && (
+                  <motion.div
+                    key="panel"
+                    id={`faq-panel-${faq.id}`}
+                    role="region"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-5 pb-5"><div className="ml-10 border-l-2 border-primary-100 pl-4 text-sm leading-6 text-slate-600">{faq.answer}</div></div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
           {filtered.length===0 && <div className="bg-white rounded-2xl p-12 text-center border border-dashed border-slate-200"><HelpCircle className="w-10 h-10 mx-auto text-slate-300" /><p className="text-sm text-slate-500 mt-3">Tidak ada pertanyaan cocok.</p></div>}

@@ -1,4 +1,5 @@
 import PageHeader from "@/components/PageHeader";
+import GlowCard from "@/components/GlowCard";
 import Link from "next/link";
 import { PROGRAMS } from "@/lib/demo-data";
 import { Brain, Cpu, Heart, Trophy, Lightbulb, Globe, ArrowRight } from "lucide-react";
@@ -31,7 +32,8 @@ export default function ProgramPage() {
             const Icon = iconMap[p.icon] ?? Brain;
             const grad = colorMap[p.category] ?? "from-primary-600 to-accent";
             return (
-              <div key={p.slug} className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition">
+              <GlowCard key={p.slug} tilt className="h-full rounded-[28px]">
+              <div className="card-3d h-full bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition">
                 <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center text-white`}><Icon className="w-5 h-5" /></div>
                 <div className="flex items-center justify-between mt-3">
                   <h3 className="font-bold text-navy">{p.name}</h3>
@@ -45,6 +47,7 @@ export default function ProgramPage() {
                 {p.activities.length>0 && <div className="mt-3 flex flex-wrap gap-1.5">{p.activities.map(a=> (<span key={a} className="bg-slate-100 border border-slate-200 px-2 py-1 rounded-full text-[10px] font-bold text-slate-600">{a}</span>))}</div>}
                 <Link href={`/program/${p.slug}`} className="mt-4 inline-flex gap-1 text-xs font-bold text-primary-600">Lihat Detail <ArrowRight className="w-3 h-3 mt-0.5" /></Link>
               </div>
+              </GlowCard>
             );
           })}
         </div>

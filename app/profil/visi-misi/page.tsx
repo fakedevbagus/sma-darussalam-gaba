@@ -6,7 +6,7 @@ import { Eye, ListChecks, CheckCircle2 } from "lucide-react";
 export default function VisiMisiPage() {
   return (
     <div>
-      <PageHeader badge="PROFIL • VISI & MISI" title="Visi & Misi" accent={SCHOOL.shortName} desc="Arah & tujuan jangka panjang yang menggerakkan seluruh warga sekolah." img="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" breadcrumb="Profil / Visi & Misi" />
+      <PageHeader badge="PROFIL • VISI & MISI" title="Visi & Misi" accent={SCHOOL.shortName} desc="Arah & tujuan jangka panjang yang menggerakkan seluruh warga sekolah." img="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" breadcrumb={[{ label: "Profil", href: "/profil" }, { label: "Visi & Misi" }]} />
 
       <section className="max-w-[1280px] mx-auto px-6 space-y-8">
         <div className="bg-gradient-to-br from-navy to-primary-900 text-white rounded-[36px] p-8 md:p-10 relative overflow-hidden">

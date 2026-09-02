@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { DOWNLOADS } from "@/lib/demo-data";
 import { useState, useMemo } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Search, Filter, FileText, Download, HardDrive, Calendar } from "lucide-react";
 
 export default function UnduhanPage() {
@@ -15,6 +16,7 @@ export default function UnduhanPage() {
     return mCat&&mQ;
   });
   const lastUpdated = DOWNLOADS.length>0 ? new Date(Math.max(...DOWNLOADS.map(d=> new Date(d.updatedAt).getTime()))).toLocaleDateString("id-ID",{month:"long",year:"numeric"}) : null;
+  const reduceMotion = useReducedMotion();
   return (
     <div>
       <PageHeader badge="PUSAT DOKUMEN" title="Unduhan" accent="Dokumen" desc="Formulir & dokumen resmi sekolah — gratis diunduh" img="https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=800&auto=format&fit=crop" breadcrumb="Informasi / Unduhan" />
@@ -26,18 +28,34 @@ export default function UnduhanPage() {
           {lastUpdated && <><span className="w-px bg-slate-200 hidden sm:block" /><span className="flex gap-2 items-center"><Calendar className="w-4 h-4 text-emerald-500" /> Update: {lastUpdated}</span></>}
         </div>
 
-        <div className="mt-6 max-w-lg mx-auto relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Cari dokumen..." className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-semibold shadow-card focus:outline-none focus:ring-2 focus:ring-primary-500" />
-        </div>
+        <div className="sticky top-0 z-20 -mx-6 px-6 py-3 bg-pale/85 backdrop-blur supports-[backdrop-filter]:bg-pale/70 sticky-filter">
+          <div className="max-w-lg mx-auto relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Cari dokumen..." className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-semibold shadow-card focus:outline-none focus:ring-2 focus:ring-primary-500" />
+          </div>
 
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button onClick={()=>setCat(null)} className={`px-4 py-2 rounded-full text-xs font-bold border ${cat===null?"bg-navy text-white border-navy":"bg-white border-slate-200 text-slate-600"}`}><Filter className="w-3.5 h-3.5 inline mr-1"/> Semua</button>
-          {cats.map(c=> (<button key={c} onClick={()=>setCat(c)} className={`px-4 py-2 rounded-full text-xs font-bold border ${cat===c?"bg-primary-600 text-white border-primary-600":"bg-white border-slate-200 text-slate-600"}`}>{c}</button>))}
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <button onClick={()=>setCat(null)} className={`relative px-4 py-2 rounded-full text-xs font-bold border ${cat===null?"text-white border-navy":"bg-white border-slate-200 text-slate-600"}`}>
+              {cat===null && <motion.span layoutId="filter-pill-unduhan" className="absolute inset-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+              <span className="relative z-10"><Filter className="w-3.5 h-3.5 inline mr-1"/> Semua</span>
+            </button>
+            {cats.map(c=> (<button key={c} onClick={()=>setCat(c)} className={`relative px-4 py-2 rounded-full text-xs font-bold border ${cat===c?"text-white border-primary-600":"bg-white border-slate-200 text-slate-600"}`}>
+              {cat===c && <motion.span layoutId="filter-pill-unduhan" className="absolute inset-0 rounded-full bg-primary-600" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+              <span className="relative z-10">{c}</span>
+            </button>))}
+          </div>
         </div>
 
         <div className="text-center text-xs font-bold tracking-widest text-slate-500 mt-6">{filtered.length} dokumen ditemukan</div>
 
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={`${q}-${cat}`}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+          >
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {filtered.map((doc, i)=> (
             <Reveal key={doc.id} delay={Math.min(i * 0.06, 0.4)}>
@@ -54,6 +72,8 @@ export default function UnduhanPage() {
             </Reveal>
           ))}
         </div>
+          </motion.div>
+        </AnimatePresence>
 
         <p className="text-center text-xs text-slate-500 mt-8">Butuh dokumen tertentu? Hubungi admin via <a href="/kontak" className="text-primary-600 font-bold underline">Kontak</a>.</p>
       </section>

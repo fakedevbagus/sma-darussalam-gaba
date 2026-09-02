@@ -14,7 +14,7 @@ const MILESTONES = [
 export default function SejarahPage() {
   return (
     <div>
-      <PageHeader badge="PROFIL • SEJARAH" title="Sejarah" accent="Perjalanan Kami" desc={`Tonggak penting ${SCHOOL.name} Simpang Mesir sejak SK pendirian 2019 hingga transformasi digital.`} img="https://images.unsplash.com/photo-1461360228754-6e81c478b882?q=80&w=800&auto=format&fit=crop" breadcrumb="Profil / Sejarah" />
+      <PageHeader badge="PROFIL • SEJARAH" title="Sejarah" accent="Perjalanan Kami" desc={`Tonggak penting ${SCHOOL.name} Simpang Mesir sejak SK pendirian 2019 hingga transformasi digital.`} img="https://images.unsplash.com/photo-1461360228754-6e81c478b882?q=80&w=800&auto=format&fit=crop" breadcrumb={[{ label: "Profil", href: "/profil" }, { label: "Sejarah" }]} />
 
       <section className="max-w-[1280px] mx-auto px-6">
         <SectionHeading eyebrow="Timeline" title="Tonggak Sejarah" desc="Perjalanan bertumbuh bersama siswa & orang tua" number="01" />

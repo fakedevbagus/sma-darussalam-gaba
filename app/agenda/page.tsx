@@ -4,6 +4,7 @@ import { EVENTS, formatDateId } from "@/lib/demo-data";
 import { useState } from "react";
 import Link from "next/link";
 import { CalendarDays, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const MONTHS = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
 const MONTHS_SHORT = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
@@ -59,11 +60,17 @@ export default function AgendaPage() {
         <div className="grid lg:grid-cols-[300px_1fr] gap-8">
           <div className="space-y-5">
             <MiniCalendar events={EVENTS} />
-            <div className="bg-white rounded-[28px] border border-[#ece4d4] p-5 shadow-card">
+            <div className="bg-white rounded-[28px] border border-[#ece4d4] p-5 shadow-card lg:sticky lg:top-6 lg:z-20">
               <div className="text-[10px] font-bold tracking-widest text-slate-500">FILTER KATEGORI</div>
               <div className="mt-3 space-y-2">
-                <button onClick={()=>setCat(null)} className={`w-full text-left px-3 py-2 rounded-xl text-sm font-semibold ${cat===null?"bg-primary-50 text-primary-700":"text-slate-600 hover:bg-slate-50"}`}>Semua Kategori</button>
-                {cats.map(c=> (<button key={c} onClick={()=>setCat(c)} className={`w-full text-left px-3 py-2 rounded-xl text-sm font-semibold ${cat===c?"bg-primary-50 text-primary-700":"text-slate-600 hover:bg-slate-50"}`}>{c}</button>))}
+                <button onClick={()=>setCat(null)} className={`relative w-full text-left px-3 py-2 rounded-xl text-sm font-semibold ${cat===null?"text-primary-700":"text-slate-600 hover:bg-slate-50"}`}>
+                  {cat===null && <motion.span layoutId="filter-pill-agenda" className="absolute inset-0 rounded-xl bg-primary-50" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+                  <span className="relative z-10">Semua Kategori</span>
+                </button>
+                {cats.map(c=> (<button key={c} onClick={()=>setCat(c)} className={`relative w-full text-left px-3 py-2 rounded-xl text-sm font-semibold ${cat===c?"text-primary-700":"text-slate-600 hover:bg-slate-50"}`}>
+                  {cat===c && <motion.span layoutId="filter-pill-agenda" className="absolute inset-0 rounded-xl bg-primary-50" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+                  <span className="relative z-10">{c}</span>
+                </button>))}
               </div>
             </div>
           </div>

@@ -50,7 +50,7 @@ export default function IdentitasPage() {
 
     return (
     <div>
-      <PageHeader badge="PROFIL • IDENTITAS" title="Identitas" accent="Sekolah" desc="Data resmi & identitas lembaga — tersinkron dengan Data Pokok Pendidikan (Dapodik)." img="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" breadcrumb="Profil / Identitas" />
+      <PageHeader badge="PROFIL • IDENTITAS" title="Identitas" accent="Sekolah" desc="Data resmi & identitas lembaga — tersinkron dengan Data Pokok Pendidikan (Dapodik)." img="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" breadcrumb={[{ label: "Profil", href: "/profil" }, { label: "Identitas" }]} />
 
       <section className="max-w-[1280px] mx-auto px-6 pb-16">
         {/* ── 01. Identitas Lembaga ── */}
