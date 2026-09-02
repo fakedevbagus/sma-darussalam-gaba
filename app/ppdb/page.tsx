@@ -36,7 +36,7 @@ const FAQS = [
   { q: "Bagaimana cara mendaftar?", a: "Isi formulir online di bawah, unggah berkas yang diperlukan, dan tunggu verifikasi panitia — seluruh proses daring." },
   { q: "Apa saja jalur pendaftaran?", a: "Empat jalur: Zonasi, Afirmasi, Prestasi, dan Perpindahan Tugas Orang Tua — masing-masing punya kuota sendiri." },
   { q: "Bagaimana cek status?", a: "Gunakan kolom Cek Status di bagian bawah halaman ini, masukkan nomor registrasi Anda." },
-  { q: "Apakah ada beasiswa?", a: "Ya! Beasiswa prestasi akademik, tahfidz & ekonomi hingga 100% uang pangkal + SPP." },
+  { q: "Apakah ada beasiswa?", a: "Sekolah menyediakan jalur bantuan biaya pendidikan. Kategori dan besarannya ditetapkan setiap tahun ajaran — silakan tanyakan ke panitia PPDB." },
 ];
 
 export default function PPDBPage() {
@@ -114,9 +114,9 @@ export default function PPDBPage() {
               {REQUIREMENTS.map(r=> (<li key={r} className="flex gap-3 text-sm text-navy"><CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-primary-600" />{r}</li>))}
             </ul>
             <div className="mt-6 grid sm:grid-cols-3 gap-4 text-sm">
-              <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex gap-3"><Check className="w-5 h-5 text-emerald-600 shrink-0" /> <span><b>Gratis</b> trial class 1 minggu</span></div>
+              <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex gap-3"><Check className="w-5 h-5 text-emerald-600 shrink-0" /> <span><b>Konsultasi</b> gratis dengan panitia</span></div>
               <div className="bg-primary-50 border border-primary-100 rounded-2xl p-4 flex gap-3"><Clock className="w-5 h-5 text-primary-600 shrink-0" /> <span>Pengumuman <b>3 hari</b> setelah tes</span></div>
-              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 flex gap-3"><Gift className="w-5 h-5 text-amber-600 shrink-0" /> <span><b>Cashback</b> 500rb ajak teman</span></div>
+              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 flex gap-3"><Gift className="w-5 h-5 text-amber-600 shrink-0" /> <span>Informasi <b>keringanan biaya</b> via panitia</span></div>
             </div>
           </div>
 
@@ -126,24 +126,15 @@ export default function PPDBPage() {
               <div className="relative">
                 <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-white/70"><Wallet className="w-4 h-4" /> BIAYA PENDIDIKAN</div>
                 <div className="mt-3">
-                  <div className="text-sm text-white/70 line-through">Uang pangkal Rp12.000.000</div>
-                  <div className="text-3xl font-extrabold">Rp8,4 Jt<span className="text-sm font-semibold text-white/70"> / diskon 30%</span></div>
-                  <div className="text-xs bg-white text-navy inline-block px-2 py-1 rounded-full font-bold mt-2">HEMAT 3,6 JT • G1</div>
+                  <div className="text-2xl font-extrabold leading-tight">Informasi biaya menyusul</div>
+                  <p className="text-sm text-white/70 mt-2 leading-6">Rincian biaya pendidikan tahun ajaran 2026/2027 sedang difinalisasi. Hubungi panitia PPDB untuk keterangan resmi.</p>
                 </div>
-                <div className="mt-5 bg-white/10 backdrop-blur rounded-2xl p-4 border border-white/15 text-sm">
-                  <div className="flex justify-between"><span>SPP / bulan</span><b>Rp1,2 Jt</b></div>
-                  <div className="flex justify-between mt-2"><span>Seragam 3 stel</span><b>Rp1,1 Jt</b></div>
-                </div>
+                <a href={SCHOOL.social.whatsapp} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 bg-white text-navy px-5 py-3 rounded-full text-sm font-extrabold hover:scale-[1.02] transition">Tanya Panitia PPDB</a>
               </div>
             </div>
             <div id="beasiswa" className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
-              <h4 className="font-bold text-navy flex items-center gap-2"><Gift className="w-4 h-4 text-amber-600" /> Beasiswa Hingga 100%</h4>
-              <ul className="mt-3 space-y-2 text-sm text-slate-600">
-                <li>• Akademik (rank 1–3 SMP)</li>
-                <li>• Tahfidz 5+ juz</li>
-                <li>• Prestasi olahraga/seni nasional</li>
-                <li>• Ekonomi (KIP/SKTM)</li>
-              </ul>
+              <h4 className="font-bold text-navy flex items-center gap-2"><Gift className="w-4 h-4 text-amber-600" /> Program Beasiswa</h4>
+              <p className="mt-3 text-sm text-slate-600 leading-6">Sekolah menyediakan jalur bantuan biaya pendidikan. Kategori dan besaran ditetapkan setiap tahun ajaran — tanyakan ke panitia PPDB.</p>
             </div>
           </div>
         </div>
@@ -173,13 +164,12 @@ export default function PPDBPage() {
                 <h3 className="font-display font-extrabold text-2xl relative">Form Pendaftaran Online</h3>
                 <p className="text-white/80 mt-3 text-sm leading-6 relative">Isi data lengkap — admin hubungi via WA dalam 1×24 jam untuk jadwal verifikasi.</p>
                 <div className="mt-6 space-y-3 text-sm relative">
-                  <div className="flex gap-3"><Phone className="w-4 h-4 mt-0.5" /> 0812-3456-7890 (Bu Sari)</div>
+                  <div className="flex gap-3"><Phone className="w-4 h-4 mt-0.5" /> Kontak panitia via WhatsApp</div>
                   <div className="flex gap-3"><Clock className="w-4 h-4 mt-0.5" /> Senin–Sabtu 08.00–16.00</div>
                 </div>
                 <div className="mt-6 bg-white/15 backdrop-blur rounded-2xl p-4 border border-white/20 relative">
-                  <div className="text-xs font-bold">SISA KUOTA GELOMBANG 1</div>
-                  <div className="text-2xl font-extrabold mt-1">37 / 180</div>
-                  <div className="h-2 bg-white/20 rounded-full mt-3 overflow-hidden"><div className="h-full w-[21%] bg-amber-400" /></div>
+                  <div className="text-xs font-bold">DAYA TAMPUNG</div>
+                  <div className="text-sm mt-2 leading-6 text-white/85">Kuota per jalur tercantum di bagian atas halaman. Ketersediaan terkini dikonfirmasi oleh panitia.</div>
                 </div>
               </div>
 

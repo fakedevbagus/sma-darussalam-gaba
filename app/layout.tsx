@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ScrollToTop, WhatsAppFloat } from "@/components/Floats";
+import Script from "next/script";
 import { SCHOOL, DAPODIK } from "@/config/school";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -66,6 +67,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollToTop />
         <WhatsAppFloat />
         <Analytics />
+        <Script
+          data-goatcounter="https://smadarussalam.goatcounter.com/count"
+          src="https://gc.zgo.at/count.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
