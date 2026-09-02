@@ -86,7 +86,7 @@ export default function GaleriPage() {
           <div className="mt-6 grid md:grid-cols-3 gap-6">
             {GALLERY.filter(g=>g.videoUrl).slice(0,3).map(v=> (
               <button key={v.id} onClick={()=> setIdx(GALLERY.findIndex(x=>x.id===v.id))} className="rounded-[28px] overflow-hidden bg-navy text-white relative aspect-video flex items-center justify-center group">
-                <img loading="lazy" src={v.imageUrl} alt={v.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-700" />
+                <Image src={v.imageUrl} alt={v.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-60 group-hover:scale-105 transition duration-700" />
                 <div className="relative w-12 h-12 bg-white text-navy rounded-full flex items-center justify-center shadow-float">▶</div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-left">
                   <div className="font-bold text-sm">{v.title}</div>
