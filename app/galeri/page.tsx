@@ -39,17 +39,27 @@ export default function GaleriPage() {
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
           >
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="mt-8 columns-2 md:columns-3 gap-4">
           {items.map((item,i)=> (
-            <Reveal key={item.id} delay={Math.min(i * 0.06, 0.4)}>
+            <Reveal key={item.id} delay={Math.min(i * 0.06, 0.4)} className="mb-4 break-inside-avoid">
             <button onClick={()=>setIdx(i)} className={`group relative text-left bg-white rounded-[28px] p-3 pb-5 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition overflow-hidden ${i%4===0?"rotate-[0.5deg]": i%4===1?"-rotate-[0.5deg]": i%4===2?"rotate-[0.3deg]":"-rotate-[0.3deg]"}`}>
-              <div className="aspect-[4/3] overflow-hidden rounded-xl bg-slate-100 relative">
-                <Image src={item.imageUrl} alt={item.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw" className="object-cover group-hover:scale-110 transition duration-700" />
-                <span className="absolute right-2 top-2 w-7 h-7 bg-white/90 rounded-lg flex items-center justify-center shadow-card opacity-0 group-hover:opacity-100 transition">
-                  {item.videoUrl? <Film className="w-3.5 h-3.5" />: <Expand className="w-3.5 h-3.5" />}
-                </span>
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy/30 to-transparent opacity-0 group-hover:opacity-100 transition" />
-              </div>
+              {/* Video embed: kunci 16:9 agar tidak terdistorsi oleh alur masonry.
+                  Foto: rasio asli (picsum 900×650) — tanpa crop/letterbox. */}
+              {item.videoUrl ? (
+                <div className="aspect-video overflow-hidden rounded-xl bg-slate-100 relative">
+                  <Image src={item.imageUrl} alt={item.title} fill sizes="(max-width: 768px) 50vw, 33vw" className="object-cover group-hover:scale-110 transition duration-700" />
+                  <span className="absolute right-2 top-2 w-7 h-7 bg-white/90 rounded-lg flex items-center justify-center shadow-card"><Film className="w-3.5 h-3.5" /></span>
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy/30 to-transparent opacity-0 group-hover:opacity-100 transition" />
+                </div>
+              ) : (
+                <div className="overflow-hidden rounded-xl bg-slate-100 relative">
+                  <Image src={item.imageUrl} alt={item.title} width={900} height={650} sizes="(max-width: 768px) 50vw, 33vw" className="w-full h-auto group-hover:scale-110 transition duration-700" />
+                  <span className="absolute right-2 top-2 w-7 h-7 bg-white/90 rounded-lg flex items-center justify-center shadow-card opacity-0 group-hover:opacity-100 transition">
+                    <Expand className="w-3.5 h-3.5" />
+                  </span>
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy/30 to-transparent opacity-0 group-hover:opacity-100 transition" />
+                </div>
+              )}
               <div className="font-bold text-navy text-sm mt-3 truncate">{item.title}</div>
               <div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">{item.category}</div>
               <div className="text-xs text-slate-600 mt-1 line-clamp-1">{item.caption}</div>
