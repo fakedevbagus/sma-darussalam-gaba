@@ -1,5 +1,6 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
+import Reveal from "@/components/Reveal";
 import { useState } from "react";
 import Link from "next/link";
 import { ANNOUNCEMENTS, formatDateId } from "@/lib/demo-data";
@@ -24,7 +25,7 @@ export default function BeritaPage() {
 
   return (
     <div>
-      <PageHeader badge="INFORMASI • BERITA & PENGUMUMAN" title="Kabar Terbaru" accent={SCHOOL.shortName} desc="Ikuti kabar terkini — prestasi, kegiatan & info resmi sekolah. Semua data demo siap diganti." img="https://images.unsplash.com/photo-1494172961521-33799ddd43a5?q=80&w=800&auto=format&fit=crop" breadcrumb="Informasi / Berita" />
+      <PageHeader badge="INFORMASI • BERITA & PENGUMUMAN" title="Kabar Terbaru" accent={SCHOOL.shortName} desc="Ikuti kabar terkini — prestasi, kegiatan & info resmi sekolah." img="https://images.unsplash.com/photo-1494172961521-33799ddd43a5?q=80&w=800&auto=format&fit=crop" breadcrumb="Informasi / Berita" />
 
       <section className="max-w-[1280px] mx-auto px-6">
         <div className="max-w-md mx-auto relative">
@@ -39,7 +40,7 @@ export default function BeritaPage() {
         </div>
 
         {filter==="all" && pinned && !q && (
-          <Link href={`/berita/${pinned.slug}`} className="mt-8 block bg-gradient-to-br from-primary-600 to-primary-800 text-white rounded-[28px] p-6 md:p-8 shadow-3d hover:shadow-glow transition">
+          <Link href={`/berita/${pinned.slug}`} className="mt-8 block bg-gradient-to-br from-primary-600 to-primary-800 text-white rounded-[28px] p-6 md:p-8 shadow-3d hover:-translate-y-0.5 transition">
             <div className="flex gap-4">
               <span className="w-14 h-14 rounded-xl bg-white text-primary-700 flex items-center justify-center shrink-0"><Pin className="w-6 h-6" /></span>
               <div>
@@ -53,8 +54,9 @@ export default function BeritaPage() {
         )}
 
         <div className="mt-8 grid md:grid-cols-3 gap-6">
-          {filtered.map(a=> (
-            <Link key={a.id} href={`/berita/${a.slug}`} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d transition">
+          {filtered.map((a, i)=> (
+            <Reveal key={a.id} delay={Math.min(i * 0.06, 0.4)}>
+            <Link href={`/berita/${a.slug}`} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition">
               {a.coverUrl && <div className="h-48 overflow-hidden"><img loading="lazy" src={a.coverUrl} alt={a.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" /></div>}
               <div className="p-6">
                 <div className="flex gap-2 items-center text-xs"><span className="bg-primary-600 text-white px-2.5 py-1 rounded-full text-[10px] font-bold tracking-widest">{a.category}</span><span className="text-slate-500 flex gap-1 items-center"><Calendar className="w-3.5 h-3.5" /> {formatDateId(a.createdAt)}</span></div>
@@ -63,6 +65,7 @@ export default function BeritaPage() {
                 <div className="mt-4 text-xs font-bold text-primary-600 flex gap-1 items-center">Baca <ArrowRight className="w-3 h-3" /></div>
               </div>
             </Link>
+            </Reveal>
           ))}
         </div>
 

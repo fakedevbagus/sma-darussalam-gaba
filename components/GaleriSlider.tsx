@@ -19,7 +19,7 @@ export default function GaleriSlider() {
     >
       {items.map(g => (
         <SwiperSlide key={g.id} className="h-auto">
-          <Link href="/galeri" className="group relative block rounded-[28px] overflow-hidden shadow-card border-4 border-white hover:shadow-3d transition h-full">
+          <Link href="/galeri" className="group relative block rounded-[28px] overflow-hidden shadow-card border-4 border-white hover:shadow-3d hover:-translate-y-0.5 transition h-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={g.imageUrl} alt={g.title} loading="lazy" className="w-full h-[190px] sm:h-[210px] object-cover group-hover:scale-110 transition duration-700" />
             <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-navy/85 to-transparent">

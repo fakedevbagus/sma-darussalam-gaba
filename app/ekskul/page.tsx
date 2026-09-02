@@ -1,5 +1,6 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
+import Reveal from "@/components/Reveal";
 import { useState, useMemo } from "react";
 import { EXTRACURRICULARS } from "@/lib/demo-data";
 import { Search, Filter, Clock, UserRound } from "lucide-react";
@@ -29,7 +30,8 @@ export default function EkskulPage() {
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((e, i) => (
-            <div key={e.id} className={`group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 2 ? "lg:rotate-[0.5deg]" : "lg:-rotate-[0.5deg]"} hover:rotate-0`}>
+            <Reveal key={e.id} delay={Math.min(i * 0.06, 0.4)}>
+            <div className={`group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col ${i % 2 ? "lg:rotate-[0.5deg]" : "lg:-rotate-[0.5deg]"} hover:rotate-0`}>
               <div className="relative h-40 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img loading="lazy" src={e.image} alt={e.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
@@ -45,6 +47,7 @@ export default function EkskulPage() {
                 </div>
               </div>
             </div>
+            </Reveal>
           ))}
         </div>
 

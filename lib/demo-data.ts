@@ -134,7 +134,7 @@ export const FAQS = [
   { id: "faq-02", question: "Jalur apa saja tersedia?", answer: "Zonasi, Afirmasi, Prestasi, Perpindahan Tugas Orang Tua — masing-masing ada kuota.", category: "PPDB" },
   { id: "faq-03", question: "Cara cek status pendaftaran?", answer: "Panitia menghubungi pendaftar via WhatsApp. Balas pesan pendaftaranmu untuk menanyakan perkembangan.", category: "PPDB" },
   { id: "faq-04", question: "Apakah menerima luar kota?", answer: "Ya, via jalur Prestasi & Perpindahan Tugas Orang Tua.", category: "Umum" },
-  { id: "faq-05", question: "Bagaimana akses portal siswa?", answer: "Portal akademik (E-Raport) akan diaktifkan setelah daftar ulang — saat ini showroom / demo mode.", category: "Portal" },
+  { id: "faq-05", question: "Bagaimana akses portal siswa?", answer: "Portal akademik (E-Raport) akan diaktifkan setelah daftar ulang.", category: "Portal" },
   { id: "faq-06", question: "Apakah ada beasiswa?", answer: "Ada beasiswa prestasi & ekonomi — info di Profil & PPDB.", category: "Akademik" },
   { id: "faq-07", question: "Jam sekolah?", answer: "07.00–16.00 WIB, ekstrakurikuler sampai 17.30 WIB.", category: "Umum" },
 ];

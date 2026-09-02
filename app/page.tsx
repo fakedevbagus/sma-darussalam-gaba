@@ -109,7 +109,7 @@ export default function Home() {
         </div>
         <Reveal className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {JURUSAN.map((j, i) => (
-            <Link key={j.slug} href={`/jurusan/${j.slug}`} className={`group relative rounded-[28px] overflow-hidden shadow-card hover:shadow-3d transition border-4 border-white block ${i % 2 ? "lg:-rotate-1" : "lg:rotate-1"} hover:rotate-0`}>
+            <Link key={j.slug} href={`/jurusan/${j.slug}`} className={`group relative rounded-[28px] overflow-hidden shadow-card hover:shadow-3d hover:-translate-y-0.5 transition border-4 border-white block ${i % 2 ? "lg:-rotate-1" : "lg:rotate-1"} hover:rotate-0`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img loading="lazy" src={j.image} alt={j.name} className="w-full h-[240px] sm:h-[260px] object-cover group-hover:scale-110 transition duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
@@ -136,7 +136,7 @@ export default function Home() {
           </div>
           <Reveal className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {prestasiTop.map(a => (
-              <div key={a.id} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
+              <div key={a.id} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col">
                 <div className="relative h-40 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img loading="lazy" src={ACHIEVEMENT_IMAGES[a.id] ?? "https://picsum.photos/seed/prestasi-fallback/640/420"} alt={a.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
@@ -208,7 +208,7 @@ export default function Home() {
         </div>
         <Reveal className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {latestNews.map(b => (
-            <Link key={b.id} href={`/berita/${b.slug}`} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition flex flex-col">
+            <Link key={b.id} href={`/berita/${b.slug}`} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col">
               <div className="h-40 overflow-hidden relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img loading="lazy" src={b.coverUrl} alt={b.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
@@ -249,7 +249,7 @@ export default function Home() {
         </div>
         <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4">
           {FASILITAS_FOTO.map((f, i) => (
-            <div key={f.name} className={`rounded-[20px] overflow-hidden shadow-card border-4 border-white relative group ${i === 0 ? "col-span-2 sm:col-span-1" : ""} ${i % 2 ? "rotate-1" : "-rotate-1"} hover:rotate-0 hover:shadow-3d transition`}>
+            <div key={f.name} className={`rounded-[20px] overflow-hidden shadow-card border-4 border-white relative group ${i === 0 ? "col-span-2 sm:col-span-1" : ""} ${i % 2 ? "rotate-1" : "-rotate-1"} hover:rotate-0 hover:shadow-3d hover:-translate-y-0.5 transition`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img loading="lazy" src={f.img} alt={f.name} className={`w-full object-cover group-hover:scale-110 transition duration-700 ${i === 0 ? "h-[180px] sm:h-[160px]" : "h-[130px] sm:h-[150px]"}`} />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/80 to-transparent p-3"><span className="text-white text-xs font-extrabold">{f.name}</span></div>

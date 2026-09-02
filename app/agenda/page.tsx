@@ -54,7 +54,7 @@ export default function AgendaPage() {
 
   return (
     <div>
-      <PageHeader badge="KALENDER SEKOLAH" title="Agenda &" accent="Kegiatan" desc="Jadwal akademik & non-akademik — demo, ganti mudah via lib/demo-data.ts" img="https://images.unsplash.com/photo-1506784365847-bbad939e9335?q=80&w=800&auto=format&fit=crop" breadcrumb="Informasi / Agenda" />
+      <PageHeader badge="KALENDER SEKOLAH" title="Agenda &" accent="Kegiatan" desc="Jadwal akademik & non-akademik sekolah" img="https://images.unsplash.com/photo-1506784365847-bbad939e9335?q=80&w=800&auto=format&fit=crop" breadcrumb="Informasi / Agenda" />
       <section className="max-w-[1280px] mx-auto px-6">
         <div className="grid lg:grid-cols-[300px_1fr] gap-8">
           <div className="space-y-5">

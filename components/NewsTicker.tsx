@@ -14,7 +14,7 @@ export default function NewsTicker() {
           <Megaphone className="w-3 h-3" /> Info
         </span>
         <div className="relative flex-1 overflow-hidden">
-          <div className="flex whitespace-nowrap gap-10 text-xs font-bold animate-ticker">
+          <div className="flex whitespace-nowrap gap-10 text-xs font-bold animate-ticker ticker-track">
             {doubled.map((t, i) => (
               <Link key={i} href="/berita" className="hover:underline opacity-95">📢 {t}</Link>
             ))}

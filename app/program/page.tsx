@@ -31,7 +31,7 @@ export default function ProgramPage() {
             const Icon = iconMap[p.icon] ?? Brain;
             const grad = colorMap[p.category] ?? "from-primary-600 to-accent";
             return (
-              <div key={p.slug} className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition">
+              <div key={p.slug} className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition">
                 <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${grad} flex items-center justify-center text-white`}><Icon className="w-5 h-5" /></div>
                 <div className="flex items-center justify-between mt-3">
                   <h3 className="font-bold text-navy">{p.name}</h3>

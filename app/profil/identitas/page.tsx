@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
+import CountUp from "@/components/CountUp";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SCHOOL, DAPODIK, DAPO_URL, WHATSAPP_READY } from "@/config/school";
 import {
@@ -89,7 +90,7 @@ export default function IdentitasPage() {
             <div className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
               <div className="flex items-center gap-3">
                 <span className="w-11 h-11 rounded-xl bg-primary-600 text-white flex items-center justify-center shadow-blue-glow"><GraduationCap className="w-5 h-5" /></span>
-                <div><div className="text-2xl font-extrabold text-navy tabular-nums">{pd.total}</div><div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Peserta Didik</div></div>
+                <div><div className="text-2xl font-extrabold text-navy tabular-nums"><CountUp value={String(pd.total)} /></div><div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Peserta Didik</div></div>
               </div>
               <div className="mt-5 space-y-3">
                 <div>
@@ -106,7 +107,7 @@ export default function IdentitasPage() {
             <div className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
               <div className="flex items-center gap-3">
                 <span className="w-11 h-11 rounded-xl bg-mint text-white flex items-center justify-center shadow-[0_0_25px_rgba(16,185,129,0.4)]"><DoorOpen className="w-5 h-5" /></span>
-                <div><div className="text-2xl font-extrabold text-navy tabular-nums">{DAPODIK.rombel}</div><div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Rombongan Belajar</div></div>
+                <div><div className="text-2xl font-extrabold text-navy tabular-nums"><CountUp value={String(DAPODIK.rombel)} /></div><div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Rombongan Belajar</div></div>
               </div>
               <p className="mt-5 text-sm text-slate-600 leading-6">Kelas diorganisasi menjadi {DAPODIK.rombel} rombongan belajar (rombel) lintas tingkat X–XII.</p>
             </div>
@@ -114,7 +115,7 @@ export default function IdentitasPage() {
             <div className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
               <div className="flex items-center gap-3">
                 <span className="w-11 h-11 rounded-xl bg-sun text-navy flex items-center justify-center shadow-yellow"><Users className="w-5 h-5" /></span>
-                <div><div className="text-2xl font-extrabold text-navy tabular-nums">{DAPODIK.ptk.total}</div><div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Guru &amp; Tendik</div></div>
+                <div><div className="text-2xl font-extrabold text-navy tabular-nums"><CountUp value={String(DAPODIK.ptk.total)} /></div><div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Guru &amp; Tendik</div></div>
               </div>
               <div className="mt-5 space-y-3">
                 <div>

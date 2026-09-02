@@ -1,8 +1,9 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { SCHOOL, WHATSAPP_READY } from "@/config/school";
+import CopyButton from "@/components/CopyButton";
 
 const FAQ = [
   { q: "Bagaimana mendaftarkan anak?", a: "Via halaman PPDB Online atau hubungi admin pada jam kerja." },
@@ -13,6 +14,18 @@ const FAQ = [
 export default function KontakPage() {
   const [open, setOpen] = useState<number|null>(null);
   const [sent, setSent] = useState(false);
+  const [pending, setPending] = useState(false);
+
+  function submit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setPending(true);
+    const f = new FormData(e.currentTarget);
+    if (f.get("website")) { setSent(true); return; } // honeypot anti-spam
+    const msg = `Halo Admin SMA Darussalam 👋\n\nNama: ${f.get("nama")}\nEmail: ${f.get("email")}\nWA: ${f.get("wa") || "-"}\nSubjek: ${f.get("subjek")}\n\nPesan:\n${f.get("pesan")}`;
+    window.open(`https://wa.me/${SCHOOL.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
+    setSent(true);
+    setPending(false);
+  }
 
   return (
     <div>
@@ -30,16 +43,19 @@ export default function KontakPage() {
           </div>
           <div className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
             {[
-              { icon: MapPin, label: "Alamat", value: SCHOOL.address, href: SCHOOL.mapOpenUrl, cta: "Lihat di Maps" },
-              { icon: Phone, label: "Telepon / WhatsApp", value: WHATSAPP_READY ? `${SCHOOL.phone} • WA ${SCHOOL.whatsappDisplay}` : `WA ${SCHOOL.whatsappDisplay}`, href: SCHOOL.social.whatsapp, cta: "Chat WhatsApp" },
-              { icon: Mail, label: "Email", value: SCHOOL.email, href: `mailto:${SCHOOL.email}`, cta: "Kirim Email" },
-              { icon: Clock, label: "Jam Kerja", value: `${SCHOOL.hours} • Sabtu 08.00–12.00` },
+              { icon: MapPin, label: "Alamat", value: SCHOOL.address, href: SCHOOL.mapOpenUrl, cta: "Lihat di Maps", copy: undefined },
+              { icon: Phone, label: "Telepon / WhatsApp", value: WHATSAPP_READY ? `${SCHOOL.phone} • WA ${SCHOOL.whatsappDisplay}` : `WA ${SCHOOL.whatsappDisplay}`, href: SCHOOL.social.whatsapp, cta: "Chat WhatsApp", copy: WHATSAPP_READY ? SCHOOL.phone : undefined },
+              { icon: Mail, label: "Email", value: SCHOOL.email, href: `mailto:${SCHOOL.email}`, cta: "Kirim Email", copy: SCHOOL.email },
+              { icon: Clock, label: "Jam Kerja", value: `${SCHOOL.hours} • Sabtu 08.00–12.00`, copy: undefined },
             ].map((c, i) => (
               <div key={i} className="flex gap-4 min-w-0">
                 <span className="w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center shrink-0"><c.icon className="w-5 h-5" /></span>
                 <div className="min-w-0 flex-1">
                   <div className="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase">{c.label}</div>
-                  <p className="text-sm font-semibold text-slate-700 mt-1 leading-6 [overflow-wrap:anywhere]">{c.value}</p>
+                  <div className="flex flex-wrap items-center gap-x-1 gap-y-0.5 mt-1 min-w-0">
+                    <p className="text-sm font-semibold text-slate-700 leading-6 [overflow-wrap:anywhere]">{c.value}</p>
+                    {c.copy && <CopyButton value={c.copy} label="Salin" />}
+                  </div>
                   {c.href && <a href={c.href} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex text-xs font-bold text-primary-600 hover:underline">{c.cta} →</a>}
                 </div>
               </div>
@@ -53,14 +69,14 @@ export default function KontakPage() {
               <div className="py-16 text-center">
                 <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-2xl">✓</div>
                 <h3 className="font-display font-extrabold text-xl text-navy mt-4">Pesan Terkirim! 🎉</h3>
-                <p className="text-sm text-slate-600 mt-2">(Simulasi demo) Kami akan merespons maksimal 1×24 jam kerja.</p>
+                <p className="text-sm text-slate-600 mt-2">Kami akan merespons maksimal 1×24 jam kerja.</p>
                 <button onClick={()=>setSent(false)} className="mt-6 btn-navy">Kirim Pesan Lain</button>
               </div>
             ) : (
               <>
                 <h3 className="font-extrabold text-xl text-navy flex gap-2 items-center"><Send className="w-5 h-5 text-primary-600" /> Kirim Pesan</h3>
                 <p className="text-sm text-slate-600 mt-2">Isi form berikut — kami balas via email/WA maksimal 1 hari kerja.</p>
-                <form onSubmit={e=>{e.preventDefault(); const f=new FormData(e.currentTarget); if (f.get("website")) { setSent(true); return; } const msg=`Halo Admin SMA Darussalam 👋\n\nNama: ${f.get("nama")}\nEmail: ${f.get("email")}\nWA: ${f.get("wa") || "-"}\nSubjek: ${f.get("subjek")}\n\nPesan:\n${f.get("pesan")}`; window.open(`https://wa.me/${SCHOOL.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank"); setSent(true);}} className="mt-6 grid sm:grid-cols-2 gap-4">
+                <form onSubmit={submit} className="mt-6 grid sm:grid-cols-2 gap-4">
                   {/* Honeypot anti-spam — tersembunyi dari manusia */}
                   <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                   <input required name="nama" placeholder="Nama Lengkap" className="input" />
@@ -68,7 +84,7 @@ export default function KontakPage() {
                   <input name="wa" placeholder="No. WhatsApp (opsional)" className="input" />
                   <input required name="subjek" placeholder="Subjek" className="input" />
                   <textarea required rows={5} name="pesan" placeholder="Tulis pesan Anda..." className="sm:col-span-2 resize-none input" />
-                  <button className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-[#25D366] text-white py-4 rounded-xl font-bold hover:brightness-105 hover:scale-[1.02] transition shadow-[0_10px_30px_rgba(37,211,102,0.35)]"><Send className="w-4 h-4" /> Kirim via WhatsApp</button>
+                  <button disabled={pending} className="sm:col-span-2 inline-flex items-center justify-center gap-2 bg-[#25D366] text-white py-4 rounded-xl font-bold hover:brightness-105 hover:scale-[1.02] transition shadow-[0_10px_30px_rgba(37,211,102,0.35)] disabled:opacity-60 disabled:cursor-not-allowed">{pending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />} Kirim via WhatsApp</button>
                 </form>
               </>
             )}

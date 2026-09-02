@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SCHOOL } from "@/config/school";
 import {
   Check, Clock, Wallet, Gift, HelpCircle, ChevronDown, Phone, FileText, ArrowRight,
-  Users, ClipboardCheck, BadgeCheck, CalendarCheck, PartyPopper, CheckCircle2,
+  Users, ClipboardCheck, BadgeCheck, CalendarCheck, PartyPopper, CheckCircle2, Loader2,
 } from "lucide-react";
 
 const JALUR = [
@@ -42,11 +42,13 @@ const FAQS = [
 export default function PPDBPage() {
   const [jalur, setJalur] = useState<string>("zonasi");
   const [sent, setSent] = useState(false);
+  const [pending, setPending] = useState(false);
   const [nama, setNama] = useState("");
   const [openFaq, setOpenFaq] = useState<number|null>(0);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setPending(true);
     const f = new FormData(e.currentTarget);
     if (f.get("website")) { setSent(true); return; } // honeypot anti-spam
 
@@ -74,6 +76,7 @@ export default function PPDBPage() {
     const url = `https://wa.me/${SCHOOL.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`;
     window.open(url, "_blank", "noopener,noreferrer");
     setSent(true);
+    setPending(false);
   }
 
   return (
@@ -205,7 +208,7 @@ export default function PPDBPage() {
                     <input required name="nama_orangtua" placeholder="Nama Orang Tua/Wali *" className="input" />
                     <input required name="hp_orangtua" placeholder="No. HP Orang Tua *" className="input" />
                     <textarea required rows={3} name="alamat" placeholder="Alamat Lengkap *" className="sm:col-span-2 resize-none input" />
-                    <button className="sm:col-span-2 inline-flex justify-center items-center gap-2 bg-navy text-white py-4 rounded-xl font-bold hover:bg-primary-800 transition"><Send2 /> Kirim Pendaftaran</button>
+                    <button disabled={pending} className="sm:col-span-2 inline-flex justify-center items-center gap-2 bg-navy text-white py-4 rounded-xl font-bold hover:bg-primary-800 transition disabled:opacity-60 disabled:cursor-not-allowed">{pending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send2 />} Kirim Pendaftaran</button>
                     <p className="sm:col-span-2 text-xs text-slate-500 text-center flex gap-2 justify-center items-start"><CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" /> Setelah dikirim, data akan diteruskan ke WhatsApp panitia PPDB untuk diverifikasi. Dengan mendaftar, Anda menyetujui syarat & ketentuan PPDB.</p>
                   </form>
                 )}

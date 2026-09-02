@@ -13,7 +13,7 @@ export default function TataTertibPage() {
       <section className="max-w-[1280px] mx-auto px-6 space-y-6">
         <div className="bg-white rounded-[36px] p-8 shadow-card border border-[#ece4d4] flex gap-4 items-center">
           <span className="w-12 h-12 rounded-2xl bg-primary-50 text-primary-700 flex items-center justify-center"><Shield className="w-6 h-6" /></span>
-          <div><h2 className="font-bold text-navy text-lg">{TATA_TERTIB.title}</h2><p className="text-sm text-slate-600">Berlaku untuk seluruh siswa — demo, mudah disesuaikan.</p></div>
+          <div><h2 className="font-bold text-navy text-lg">{TATA_TERTIB.title}</h2><p className="text-sm text-slate-600">Berlaku untuk seluruh siswa.</p></div>
         </div>
 
         <div className="space-y-4">

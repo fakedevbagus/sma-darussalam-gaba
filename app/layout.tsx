@@ -59,10 +59,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="antialiased selection:bg-primary-200 selection:text-primary-900">
+        <a href="#konten-utama" className="skip-link">Lewati ke konten utama</a>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <div aria-hidden className="global-deco" />
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main id="konten-utama" className="min-h-screen">{children}</main>
         <Footer />
         <ScrollToTop />
         <WhatsAppFloat />

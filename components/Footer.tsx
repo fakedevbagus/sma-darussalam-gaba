@@ -5,6 +5,7 @@ import SocialLinks from "@/components/SocialLinks";
 import { FOOTER_QUICK, FOOTER_INFO } from "@/config/navigation";
 import { SCHOOL, WHATSAPP_READY } from "@/config/school";
 import VisitorStats from "@/components/VisitorStats";
+import CopyButton from "@/components/CopyButton";
 
 export default function Footer() {
   return (
@@ -49,7 +50,10 @@ export default function Footer() {
               {WHATSAPP_READY && (
                 <a href={SCHOOL.social.whatsapp} target="_blank" rel="noopener noreferrer" className="flex gap-3 hover:text-white transition"><Phone className="w-4 h-4 text-accent shrink-0" /> {SCHOOL.whatsappDisplay}</a>
               )}
-              <a href={`mailto:${SCHOOL.email}`} className="flex gap-3 hover:text-white transition"><Mail className="w-4 h-4 text-accent shrink-0" /> {SCHOOL.email}</a>
+              <div className="flex items-center gap-1 min-w-0">
+                <a href={`mailto:${SCHOOL.email}`} className="flex gap-3 hover:text-white transition min-w-0"><Mail className="w-4 h-4 text-accent shrink-0" /> {SCHOOL.email}</a>
+                <CopyButton value={SCHOOL.email} label="Email" className="text-white/50 hover:text-sun hover:bg-white/10" />
+              </div>
             </div>
           </div>
 

@@ -1,5 +1,6 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
+import Reveal from "@/components/Reveal";
 import { GALLERY } from "@/lib/demo-data";
 import { SCHOOL } from "@/config/school";
 import { useState } from "react";
@@ -13,7 +14,7 @@ export default function GaleriPage() {
 
   return (
     <div>
-      <PageHeader badge="DOKUMENTASI • FOTO & VIDEO" title="Momen Ceria" accent="Tak Terlupakan" desc="Kegiatan, prestasi & keseharian — foto pilihan + video YouTube. Data demo siap ganti." img="https://images.unsplash.com/photo-1516450360452-9312abbf6f7e?q=80&w=800&auto=format&fit=crop" breadcrumb="Kesiswaan / Galeri" />
+      <PageHeader badge="DOKUMENTASI • FOTO & VIDEO" title="Momen Ceria" accent="Tak Terlupakan" desc="Kegiatan, prestasi & keseharian — foto pilihan + video YouTube" img="https://images.unsplash.com/photo-1516450360452-9312abbf6f7e?q=80&w=800&auto=format&fit=crop" breadcrumb="Kesiswaan / Galeri" />
 
       <section className="max-w-[1280px] mx-auto px-6">
         <div className="flex flex-wrap justify-center gap-2">
@@ -26,7 +27,8 @@ export default function GaleriPage() {
 
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {items.map((item,i)=> (
-            <button key={item.id} onClick={()=>setIdx(i)} className={`group relative text-left bg-white rounded-[28px] p-3 pb-5 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1 transition overflow-hidden ${i%4===0?"rotate-[0.5deg]": i%4===1?"-rotate-[0.5deg]": i%4===2?"rotate-[0.3deg]":"-rotate-[0.3deg]"}`}>
+            <Reveal key={item.id} delay={Math.min(i * 0.06, 0.4)}>
+            <button onClick={()=>setIdx(i)} className={`group relative text-left bg-white rounded-[28px] p-3 pb-5 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition overflow-hidden ${i%4===0?"rotate-[0.5deg]": i%4===1?"-rotate-[0.5deg]": i%4===2?"rotate-[0.3deg]":"-rotate-[0.3deg]"}`}>
               <div className="aspect-[4/3] overflow-hidden rounded-xl bg-slate-100 relative">
                 <img loading="lazy" src={item.imageUrl} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
                 <span className="absolute right-2 top-2 w-7 h-7 bg-white/90 rounded-lg flex items-center justify-center shadow-card opacity-0 group-hover:opacity-100 transition">
@@ -38,6 +40,7 @@ export default function GaleriPage() {
               <div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">{item.category}</div>
               <div className="text-xs text-slate-600 mt-1 line-clamp-1">{item.caption}</div>
             </button>
+            </Reveal>
           ))}
         </div>
 

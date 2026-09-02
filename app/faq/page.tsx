@@ -18,7 +18,7 @@ export default function FaqPage() {
   });
   return (
     <div>
-      <PageHeader badge="BANTUAN • FAQ" title="Pertanyaan" accent="Umum" desc="Jawaban cepat seputar PPDB, akademik & layanan — data demo via lib/demo-data.ts" img="https://images.unsplash.com/photo-1521791136064-7986c86c6438?q=80&w=800&auto=format&fit=crop" breadcrumb="Layanan / FAQ" />
+      <PageHeader badge="BANTUAN • FAQ" title="Pertanyaan" accent="Umum" desc="Jawaban cepat seputar PPDB, akademik & layanan sekolah" img="https://images.unsplash.com/photo-1521791136064-7986c86c6438?q=80&w=800&auto=format&fit=crop" breadcrumb="Layanan / FAQ" />
       <section className="max-w-[800px] mx-auto px-6">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />

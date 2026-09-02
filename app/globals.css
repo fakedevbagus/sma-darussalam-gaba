@@ -10,6 +10,12 @@
   --royal: #0033a0;
   --bright: #2735F5;
   --sun: #f5a623;
+
+  /* ===== P4 — skala kecepatan animasi (satu sumber kebenaran) ===== */
+  --dur-fast: 150ms;   /* tekan tombol, hover kecil */
+  --dur-base: 250ms;   /* hover kartu, buka tutup */
+  --dur-slow: 600ms;   /* muncul saat scroll */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * { scroll-behavior: smooth; }
@@ -35,7 +41,7 @@ body {
   z-index: 9999;
   font-weight: 700;
   border-radius: 0 0 12px 0;
-  transition: top 0.3s;
+  transition: top var(--dur-base) var(--ease-out);
 }
 .skip-link:focus { top: 0; outline: 3px solid #f5a623; }
 
@@ -103,7 +109,7 @@ body {
   background: white;
   border: 1px solid #f1f5f9;
   border-radius: 28px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all var(--dur-base) var(--ease-out);
 }
 .bento-card:hover {
   box-shadow: 0 20px 40px -12px rgba(20,26,94,0.15);
@@ -115,7 +121,7 @@ body {
   border-radius: 32px;
   box-shadow: 0 8px 30px rgb(0,0,0,0.04);
   border: 1px solid white;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all var(--dur-base) var(--ease-out);
 }
 .bento-card-3d:hover {
   box-shadow: 0 20px 50px -12px rgba(20,26,94,0.18);
@@ -198,7 +204,7 @@ body {
   color: #141a5e;
   font-weight: 900;
   box-shadow: 0 4px 15px rgba(245,166,35,0.4);
-  transition: all 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 .cta-yellow:hover {
   background: #fde047;
@@ -211,7 +217,18 @@ body {
 ::-webkit-scrollbar-track { background: #e9edfd; }
 ::-webkit-scrollbar-thumb { background: linear-gradient(#2735F5,#22c8e6); border-radius: 10px; border: 2px solid #e9edfd; }
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(#1e27d4,#2735F5); }
-::selection { background: #dfe3fd; color: #141a5e; }
+/* ===== P5 — warna sorot teks mengikuti warna sekolah ===== */
+::selection {
+  background: #c7d2fe;
+  color: #141a5e;
+}
+/* Di area gelap, gunakan sorot terang agar teks tetap terbaca. */
+.bg-navy ::selection,
+.bg-deepsea ::selection,
+footer ::selection {
+  background: #f5a623;
+  color: #141a5e;
+}
 
 /* ===== AOS-like fade ===== */
 @media (prefers-reduced-motion: reduce) {
@@ -259,7 +276,7 @@ body {
   height: 3px;
   background: linear-gradient(90deg, #2735F5, #f5a623);
   z-index: 9998;
-  transition: width 0.1s;
+  transition: width var(--dur-fast) var(--ease-out);
 }
 
 /* ===== Article prose tweaks ===== */
@@ -294,7 +311,7 @@ body {
   font-weight: 700;
   color: #141a5e;
   border-radius: 9999px;
-  transition: all 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
@@ -329,7 +346,7 @@ body {
   font-weight: 700;
   border-radius: 1rem;
   color: #334155;
-  transition: all 0.3s;
+  transition: all var(--dur-base) var(--ease-out);
 }
 .dropdown-link:hover { color: #2735F5; background: #eef1fe; }
 .dropdown-link::before {
@@ -339,14 +356,14 @@ body {
   border-radius: 9999px;
   background: #2735F5;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity var(--dur-base) var(--ease-out);
 }
 .dropdown-link:hover::before { opacity: 1; }
 
 /* ===== 3D card hover ===== */
 .card-3d {
   transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
 }
 .card-3d:hover {
   transform: translateY(-6px) rotateX(1deg) rotateY(-1deg);
@@ -354,7 +371,7 @@ body {
 }
 
 /* ===== Tilt ===== */
-.tilt { transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s; }
+.tilt { transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
 .tilt:hover { transform: perspective(900px) rotateX(3deg) rotateY(-3deg) translateY(-6px); }
 
 /* ===== Stat counter ===== */
@@ -398,7 +415,11 @@ body {
   gap: 2.5rem;
   align-items: center;
 }
-.ticker-track:hover { animation-play-state: paused; }
+/* ===== M10 — ticker berhenti saat disentuh agar bisa dibaca & diklik ===== */
+.ticker-track:hover,
+.ticker-track:focus-within {
+  animation-play-state: paused;
+}
 @keyframes ticker {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -436,7 +457,7 @@ body {
   border: 1.5px solid #ece4d4;
   border-radius: 24px;
   box-shadow: 0 2px 6px rgba(64,54,20,.05), 0 14px 34px -18px rgba(20,26,94,.16);
-  transition: transform .35s cubic-bezier(.2,.8,.3,1.2), box-shadow .35s, border-color .35s;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
 }
 .card-warm:hover {
   transform: translateY(-5px);
@@ -596,10 +617,10 @@ body {
   background: linear-gradient(90deg, #2735F5, #22c8e6);
   transform: scaleX(.3);
   transform-origin: left;
-  transition: transform .35s ease;
+  transition: transform var(--dur-base) var(--ease-out);
 }
 .link-more:hover::after { transform: scaleX(1); }
-.link-more svg { transition: transform .3s ease; }
+.link-more svg { transition: transform var(--dur-base) var(--ease-out); }
 .link-more:hover svg { transform: translateX(4px); }
 .btn-outline {
   background: #fff;
@@ -624,7 +645,7 @@ body {
   font-weight: 800;
   letter-spacing: .12em;
   text-transform: uppercase;
-  transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out);
 }
 .chip:hover { transform: translateY(-1px); box-shadow: 0 6px 14px -6px rgba(20,26,94,.25); }
 .icon-chip {
@@ -637,7 +658,7 @@ body {
   background: #eef1fe;
   color: #1e27d4;
   flex-shrink: 0;
-  transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out);
 }
 .icon-chip:hover { transform: scale(1.08); background: #dfe3fd; box-shadow: 0 6px 16px -6px rgba(39,53,245,.35); }
 
@@ -651,7 +672,7 @@ body {
   font-size: .875rem;
   font-weight: 600;
   color: #141a5e;
-  transition: border-color .2s, box-shadow .2s;
+  transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
 }
 .input::placeholder { color: #94a3b8; font-weight: 500; }
 .input:focus {
@@ -664,4 +685,59 @@ body {
 :focus-visible {
   outline: 3px solid #f5a623;
   outline-offset: 2px;
+}
+
+/* ===== M7 — umpan balik tekan untuk semua tombol & link tombol ===== */
+@media (hover: hover) {
+  button:not(:disabled):active,
+  a[role="button"]:active {
+    transform: scale(0.97);
+  }
+}
+button, a[role="button"] {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+button:disabled { transform: none !important; }
+/* ===== P1 — cincin fokus keyboard (tidak muncul saat diklik mouse) ===== */
+:focus-visible {
+  outline: 2px solid #2735F5;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+/* Di atas latar gelap, gunakan cincin terang agar tetap terlihat. */
+.bg-navy :focus-visible,
+.bg-deepsea :focus-visible,
+footer :focus-visible {
+  outline-color: #ffffff;
+}
+/* Matikan outline bawaan yang muncul saat klik mouse. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ===== P2 — kilau lembut pada badge juara 1 ===== */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  animation: shineSweep 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes shineSweep {
+  0%, 60% { transform: translateX(-120%); }
+  100%    { transform: translateX(120%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shine::after { animation: none; }
 }

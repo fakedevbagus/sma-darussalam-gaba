@@ -1,5 +1,6 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
+import Reveal from "@/components/Reveal";
 import { useState, useMemo } from "react";
 import { STAFF } from "@/lib/demo-data";
 import { Search, Filter, BookOpen, BadgeCheck } from "lucide-react";
@@ -31,7 +32,8 @@ export default function GuruPage() {
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((s, i) => (
-            <article key={s.id} className="group relative bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col">
+            <Reveal key={s.id} delay={Math.min(i * 0.06, 0.4)}>
+              <article className="group relative bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col">
               {/* Foto + overlay premium */}
               <div className="relative aspect-[4/5] overflow-hidden bg-primary-50">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -56,7 +58,8 @@ export default function GuruPage() {
                 <p className="text-xs leading-5 text-slate-600 line-clamp-2 flex-1">{s.bio}</p>
                 <span className={`mt-3 h-1 rounded-full bg-gradient-to-r ${i % 3 === 0 ? "from-primary-400 to-accent" : i % 3 === 1 ? "from-mint to-emerald-400" : "from-sun to-amber-400"} opacity-70 group-hover:opacity-100 transition`} />
               </div>
-            </article>
+              </article>
+            </Reveal>
           ))}
         </div>
 

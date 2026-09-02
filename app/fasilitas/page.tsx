@@ -1,5 +1,6 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
+import Reveal from "@/components/Reveal";
 import { useState, useMemo } from "react";
 import { Search, Filter, MapPin } from "lucide-react";
 import { FACILITIES } from "@/lib/demo-data";
@@ -34,7 +35,8 @@ export default function FasilitasPage() {
           {filtered.map((f, i) => {
             const Icon = iconMap[f.icon] ?? Building2;
             return (
-              <div key={f.id} className={`group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-1.5 transition flex flex-col ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
+              <Reveal key={f.id} delay={Math.min(i * 0.06, 0.4)}>
+              <div className={`group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
                 <div className="relative h-44 overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img loading="lazy" src={f.image} alt={f.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
@@ -52,6 +54,7 @@ export default function FasilitasPage() {
                   </div>
                 </div>
               </div>
+              </Reveal>
             );
           })}
         </div>
