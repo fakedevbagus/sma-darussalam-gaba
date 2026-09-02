@@ -1,5 +1,7 @@
 import PageHeader from "@/components/PageHeader";
+import GlowCard from "@/components/GlowCard";
 import Link from "next/link";
+import Image from "next/image";
 import { JURUSAN } from "@/lib/demo-data";
 import { ArrowRight } from "lucide-react";
 
@@ -18,10 +20,10 @@ export default function JurusanPage() {
       <section className="max-w-[1280px] mx-auto px-6">
         <div className="grid sm:grid-cols-2 gap-6">
           {JURUSAN.map(j => (
-            <Link key={j.slug} href={`/jurusan/${j.slug}`} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col">
-              <div className="h-52 overflow-hidden relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img loading="lazy" src={j.image} alt={j.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+            <GlowCard key={j.slug} tilt className="h-full rounded-[28px]">
+            <Link href={`/jurusan/${j.slug}`} className="group card-3d h-full bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col">
+              <div className="h-52 overflow-hidden relative bg-slate-100">
+                <Image src={j.image} alt={j.name} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover group-hover:scale-110 transition duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
                 <span className="absolute bottom-3 left-4 font-display font-extrabold text-white text-xl">{j.name}</span>
               </div>
@@ -31,6 +33,7 @@ export default function JurusanPage() {
                 <span className="mt-4 text-sm font-bold text-primary-600 inline-flex items-center gap-1">Lihat Detail Jurusan <ArrowRight className="w-4 h-4" /></span>
               </div>
             </Link>
+            </GlowCard>
           ))}
         </div>
       </section>

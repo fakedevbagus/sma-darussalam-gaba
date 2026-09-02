@@ -78,9 +78,8 @@ export default function Home() {
         <Reveal className="bg-white rounded-[36px] shadow-card border border-[#ece4d4] p-6 sm:p-8 md:p-10 grid lg:grid-cols-12 gap-8 items-center relative overflow-hidden">
           <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full pattern-dots opacity-70" />
           <div className="lg:col-span-5 relative">
-            <div className="relative arch overflow-hidden shadow-3d border-4 border-white tilt">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img loading="lazy" src={SCHOOL.principal.imageUrl} alt={SCHOOL.principal.name} className="w-full aspect-[4/5] sm:aspect-[5/6] object-cover object-top" />
+            <div className="relative arch overflow-hidden shadow-3d border-4 border-white tilt bg-slate-100">
+              <Image src={SCHOOL.principal.imageUrl} alt={SCHOOL.principal.name} width={800} height={1000} sizes="(max-width: 1024px) 100vw, 420px" className="w-full aspect-[4/5] sm:aspect-[5/6] object-cover object-top" />
               <div className="absolute bottom-3 left-3 glass rounded-xl px-3 py-2 text-xs font-extrabold text-navy">Kepala Sekolah</div>
             </div>
             <div className="absolute -bottom-5 -right-3 w-20 h-20 rounded-2xl bg-gradient-to-br from-sun to-amber-400 shadow-float hidden lg:flex items-center justify-center rotate-6">
@@ -112,8 +111,7 @@ export default function Home() {
         <Reveal className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {JURUSAN.map((j, i) => (
             <Link key={j.slug} href={`/jurusan/${j.slug}`} className={`group relative rounded-[28px] overflow-hidden shadow-card hover:shadow-3d hover:-translate-y-0.5 transition border-4 border-white block ${i % 2 ? "lg:-rotate-1" : "lg:rotate-1"} hover:rotate-0`}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img loading="lazy" src={j.image} alt={j.name} className="w-full h-[240px] sm:h-[260px] object-cover group-hover:scale-110 transition duration-700" />
+              <Image src={j.image} alt={j.name} width={800} height={240} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="w-full h-[240px] sm:h-[260px] object-cover group-hover:scale-110 transition duration-700 bg-slate-100" />
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
               <div className="absolute bottom-0 p-5 text-white">
                 <div className="font-display font-bold text-lg leading-tight group-hover:text-cyan-300 transition">{j.name}</div>
@@ -139,9 +137,8 @@ export default function Home() {
           <Reveal className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {prestasiTop.map(a => (
               <div key={a.id} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col">
-                <div className="relative h-40 overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img loading="lazy" src={ACHIEVEMENT_IMAGES[a.id] ?? "https://picsum.photos/seed/prestasi-fallback/640/420"} alt={a.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+                <div className="relative h-40 overflow-hidden bg-slate-100">
+                  <Image src={ACHIEVEMENT_IMAGES[a.id] ?? "https://picsum.photos/seed/prestasi-fallback/640/420"} alt={a.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover group-hover:scale-110 transition duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/55 to-transparent" />
                   <span className={`absolute top-3 left-3 rounded-full px-3 py-1 text-[10px] font-extrabold tracking-widest uppercase text-white shadow ${a.rank === "Juara 1" ? "bg-gradient-to-r from-sun to-amber-500" : "bg-primary-500"}`}>
                     {a.rank} • {a.year}
@@ -187,8 +184,7 @@ export default function Home() {
             <iframe src={SCHOOL.profileVideoUrl} title="Video Profil Sekolah" allowFullScreen className="w-full aspect-video" loading="lazy" />
           ) : (
             <div className="relative w-full aspect-video">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img loading="lazy" src={SCHOOL.heroImageUrl} alt={`Suasana ${SCHOOL.name}`} className="absolute inset-0 w-full h-full object-cover" />
+              <Image src={SCHOOL.heroImageUrl} alt={`Suasana ${SCHOOL.name}`} fill sizes="(max-width: 1280px) 100vw, 1232px" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent" />
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
                 <span className="w-16 h-16 rounded-full bg-white text-primary-600 flex items-center justify-center shadow-float mb-4 group-hover:scale-110 transition"><Play className="w-7 h-7 ml-0.5" /></span>
@@ -213,9 +209,8 @@ export default function Home() {
         <Reveal className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {latestNews.map(b => (
             <Link key={b.id} href={`/berita/${b.slug}`} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col">
-              <div className="h-40 overflow-hidden relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img loading="lazy" src={b.coverUrl} alt={b.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+              <div className="relative h-40 overflow-hidden bg-slate-100">
+                <Image src={b.coverUrl} alt={b.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover group-hover:scale-110 transition duration-700" />
                 <span className={`absolute top-3 left-3 rounded-full px-2.5 py-1 text-[9px] font-extrabold tracking-widest uppercase shadow ${b.category === "pengumuman" ? "bg-sun text-navy" : "bg-primary-600 text-white"}`}>{b.category}</span>
               </div>
               <div className="p-5 flex flex-col flex-1">

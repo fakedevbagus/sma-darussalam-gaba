@@ -42,8 +42,7 @@ export default function PpdbPopup() {
               {/* Bingkai arch mihrab dengan logo */}
               <div className="relative w-24 h-28 mx-auto">
                 <div className="absolute inset-0 arch-sm bg-white/15 border-2 border-sun/70" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.png" alt="" className="absolute inset-0 m-auto w-14 h-14 object-contain drop-shadow" />
+                <Image src="/logo.png" alt="" width={56} height={56} className="absolute inset-0 m-auto w-14 h-14 object-contain drop-shadow" />
               </div>
 
               <div className="relative mt-3 inline-flex items-center gap-1.5 bg-sun text-navy rounded-full px-3 py-1 text-[10px] font-extrabold tracking-widest uppercase shadow-yellow">
