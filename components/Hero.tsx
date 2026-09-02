@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { SCHOOL } from "@/config/school";
 import SocialLinks from "@/components/SocialLinks";
@@ -39,7 +40,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
       {/* ===== BACKGROUND VIDEO / POSTER ===== */}
-      <div className="hero-video-wrap">
+      <div className="hero-video-wrap bg-slate-100">
         {S.heroVideoUrl ? (
           <video
             autoPlay
@@ -52,7 +53,15 @@ export default function Hero() {
             <source src={S.heroVideoUrl} type="video/mp4" />
           </video>
         ) : (
-          <img src={S.heroPosterUrl} alt="" aria-hidden className="absolute inset-0 w-full h-full object-cover" />
+          <Image
+            src={S.heroPosterUrl}
+            alt=""
+            aria-hidden
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
         )}
         <div className="hero-overlay" />
         <div className="absolute inset-0 pattern-stripes opacity-60" />
