@@ -6,6 +6,7 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import { EXTRACURRICULARS } from "@/lib/demo-data";
 import { Search, Filter, Clock, UserRound } from "lucide-react";
+import EmptyState from "@/components/EmptyState";
 import { motion } from "framer-motion";
 
 export default function EkskulPage() {
@@ -25,17 +26,19 @@ export default function EkskulPage() {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
           <input value={q} onChange={e => setQ(e.target.value)} placeholder="Cari ekskul atau pelatih..." aria-label="Cari ekstrakurikuler" className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-bold shadow-card focus:outline-none focus:ring-2 focus:ring-primary-400" />
         </div>
+        {/* G5-7 — chip kategori memakai pola yang sama persis dengan /berita */}
         <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button onClick={() => setCat(null)} className={`relative px-4 py-2 rounded-full text-xs font-extrabold border transition ${cat === null ? "text-white border-navy shadow-pop" : "bg-white border-slate-200 text-slate-600 hover:border-primary-300"}`}>
+          <button onClick={() => setCat(null)} className={`relative px-5 py-2 rounded-full text-xs font-bold border ${cat === null ? "text-white border-navy" : "bg-white border-slate-200 text-slate-600"}`}>
             {cat === null && <motion.span layoutId="filter-pill-ekskul" className="absolute inset-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
             <span className="relative z-10"><Filter className="w-3.5 h-3.5 inline mr-1" /> Semua</span>
           </button>
-          {cats.map(c => (<button key={c} onClick={() => setCat(c)} className={`relative px-4 py-2 rounded-full text-xs font-extrabold border transition ${cat === c ? "text-white border-primary-500 shadow-pop" : "bg-white border-slate-200 text-slate-600 hover:border-primary-300"}`}>
-            {cat === c && <motion.span layoutId="filter-pill-ekskul" className="absolute inset-0 rounded-full bg-primary-500" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+          {cats.map(c => (<button key={c} onClick={() => setCat(c)} className={`relative px-5 py-2 rounded-full text-xs font-bold border ${cat === c ? "text-white border-navy" : "bg-white border-slate-200 text-slate-600"}`}>
+            {cat === c && <motion.span layoutId="filter-pill-ekskul" className="absolute inset-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
             <span className="relative z-10">{c}</span>
           </button>))}
         </div>
-        <p className="text-center text-[11px] font-extrabold tracking-widest text-slate-500 uppercase mt-6">{filtered.length} ekstrakurikuler ditampilkan</p>
+        {/* G5-7 — hitungan hasil dengan gaya /unduhan */}
+        <p className="text-center text-xs font-bold tracking-widest text-slate-500 mt-6">{filtered.length} kegiatan</p>
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((e, i) => (
@@ -51,22 +54,24 @@ export default function EkskulPage() {
               <div className="p-5 flex flex-col flex-1">
                 <p className="text-sm leading-6 text-slate-600 flex-1">{e.description}</p>
                 <div className="mt-4 space-y-2 border-t border-dashed border-slate-200 pt-3.5 text-xs font-bold text-slate-600">
-                  <div className="flex gap-2 items-center"><span className="w-7 h-7 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center shrink-0"><Clock className="w-3.5 h-3.5" /></span> {e.schedule}</div>
-                  <div className="flex gap-2 items-center"><span className="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0"><UserRound className="w-3.5 h-3.5" /></span> {e.coach}</div>
+                  {/* G5-7 — animasi ikon lembut saat hover kartu (maks scale-110 / rotate-3),
+                      dibungkus @media(hover:hover) agar tidak aktif di perangkat sentuh */}
+                  <div className="flex gap-2 items-center"><span className="w-7 h-7 rounded-lg bg-primary-50 text-primary-600 flex items-center justify-center shrink-0 [@media(hover:hover)]:group-hover:scale-110 [@media(hover:hover)]:group-hover:rotate-3 transition duration-300"><Clock className="w-3.5 h-3.5" /></span> {e.schedule}</div>
+                  <div className="flex gap-2 items-center"><span className="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 [@media(hover:hover)]:group-hover:scale-110 [@media(hover:hover)]:group-hover:rotate-3 transition duration-300"><UserRound className="w-3.5 h-3.5" /></span> {e.coach}</div>
                 </div>
               </div>
             </div>
             </GlowCard>
             </Reveal>
           ))}
-        </div>
 
-        {filtered.length === 0 && (
-          <div className="bg-white rounded-[28px] p-12 text-center border border-dashed border-slate-200 mt-8">
-            <Search className="w-10 h-10 mx-auto text-slate-300" />
-            <p className="text-sm text-slate-500 mt-3">Tidak ada ekstrakurikuler yang cocok.</p>
-          </div>
-        )}
+          {/* G5-7 — empty state dari G2-3, membentang selebar grid */}
+          {filtered.length === 0 && (
+            <div className="col-span-full">
+              <EmptyState title="Tidak ada kegiatan yang cocok" desc="Coba kata kunci lain atau pilih kategori “Semua”." icon={Search} />
+            </div>
+          )}
+        </div>
       </section>
     </div>
   );

@@ -1,9 +1,15 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
-import { MapPin, Phone, Mail, Clock, Send, Loader2 } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, Loader2, ExternalLink, Navigation } from "lucide-react";
 import { useState } from "react";
-import { SCHOOL, WHATSAPP_READY } from "@/config/school";
+import { SCHOOL, DAPODIK, WHATSAPP_READY } from "@/config/school";
 import CopyButton from "@/components/CopyButton";
+
+/** Alamat lengkap + kode pos — untuk teks & tombol "Salin Alamat". */
+const FULL_ADDRESS = `${SCHOOL.address}, ${SCHOOL.kodePos}`;
+
+/** Tautan rute Google Maps ke koordinat Dapodik sekolah (API gratis, tanpa kunci). */
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${DAPODIK.koordinat.lat},${DAPODIK.koordinat.lng}`;
 
 const FAQ = [
   { q: "Bagaimana mendaftarkan anak?", a: "Via halaman PPDB Online atau hubungi admin pada jam kerja." },
@@ -92,11 +98,16 @@ export default function KontakPage() {
 
           <div className="space-y-6">
             <div className="rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] bg-white p-2">
-              <iframe title="Peta lokasi sekolah" src={SCHOOL.mapEmbedUrl} className="w-full h-[220px] rounded-[20px] border-0" loading="lazy" />
+              <iframe title="Peta lokasi SMA Darussalam" src={SCHOOL.mapEmbedUrl} className="w-full h-[220px] rounded-[20px] border-0" loading="lazy" />
               <div className="p-4">
                 <div className="text-xs font-bold text-navy">{SCHOOL.name}</div>
-                <div className="text-xs text-slate-500 mt-1">{SCHOOL.address}</div>
-                <a href={SCHOOL.mapOpenUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex text-xs font-bold text-primary-600">Buka di Google Maps →</a>
+                <div className="text-xs text-slate-500 mt-1">{FULL_ADDRESS}</div>
+                <p className="mt-2 text-[11px] text-slate-400">Titik koordinat sekolah: <b className="text-navy">{DAPODIK.koordinat.lat}, {DAPODIK.koordinat.lng}</b></p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a href={SCHOOL.mapOpenUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-navy text-white px-4 py-2.5 rounded-full text-xs font-extrabold hover:bg-primary-600 transition">Buka di Google Maps <ExternalLink className="w-3.5 h-3.5" /></a>
+                  <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-primary-50 text-primary-700 border border-primary-100 px-4 py-2.5 rounded-full text-xs font-extrabold hover:bg-softblue transition">Petunjuk Arah <Navigation className="w-3.5 h-3.5" /></a>
+                  <CopyButton value={FULL_ADDRESS} label="Salin Alamat" showLabel className="!rounded-full border border-primary-100 !px-4 !py-2.5 !bg-primary-50 !text-primary-700 hover:!bg-softblue hover:!text-primary-700" />
+                </div>
               </div>
             </div>
 

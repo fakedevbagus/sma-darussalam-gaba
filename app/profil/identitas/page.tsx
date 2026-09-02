@@ -6,9 +6,16 @@ import { SCHOOL, DAPODIK, DAPO_URL, WHATSAPP_READY } from "@/config/school";
 import {
   Building2, Hash, Award, Globe, MapPin, Phone, Mail, User, FileText,
   BadgeCheck, Users, GraduationCap, DoorOpen, Landmark, ExternalLink,
-  Banknote, MapPinned,
+  Banknote, MapPinned, Navigation,
 } from "lucide-react";
+import CopyButton from "@/components/CopyButton";
 import Link from "next/link";
+
+/** Alamat lengkap + kode pos — untuk tombol "Salin Alamat" di Blok 04. */
+const FULL_ADDRESS = `${SCHOOL.address}, ${SCHOOL.kodePos}`;
+
+/** Tautan rute Google Maps ke koordinat Dapodik sekolah (API gratis, tanpa kunci). */
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${DAPODIK.koordinat.lat},${DAPODIK.koordinat.lng}`;
 
 export const metadata: Metadata = {
   title: "Identitas Sekolah",
@@ -199,7 +206,7 @@ export default function IdentitasPage() {
           <SectionHeading eyebrow="Lokasi" title="Peta & Verifikasi" number="04" />
           <div className="mt-6 grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
             <div className="rounded-[28px] overflow-hidden border-4 border-white shadow-3d">
-              <iframe src={SCHOOL.mapEmbedUrl} width="100%" height="340" style={{ border: 0 }} loading="lazy" title={`Lokasi ${SCHOOL.name}`} />
+              <iframe src={SCHOOL.mapEmbedUrl} width="100%" height="340" style={{ border: 0 }} loading="lazy" title="Peta lokasi SMA Darussalam" />
             </div>
             <div className="bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] flex flex-col">
               <div className="flex items-center gap-3">
@@ -211,6 +218,8 @@ export default function IdentitasPage() {
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <a href={SCHOOL.mapOpenUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-navy text-white px-4 py-2.5 rounded-full text-xs font-extrabold hover:bg-primary-600 transition">Buka di Google Maps <ExternalLink className="w-3.5 h-3.5" /></a>
+                <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-primary-50 text-primary-700 border border-primary-100 px-4 py-2.5 rounded-full text-xs font-extrabold hover:bg-softblue transition">Petunjuk Arah <Navigation className="w-3.5 h-3.5" /></a>
+                <CopyButton value={FULL_ADDRESS} label="Salin Alamat" showLabel className="!rounded-full border border-primary-100 !px-4 !py-2.5 !bg-primary-50 !text-primary-700 hover:!bg-softblue hover:!text-primary-700" />
                 <a href={DAPO_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 bg-primary-50 text-primary-700 border border-primary-100 px-4 py-2.5 rounded-full text-xs font-extrabold hover:bg-softblue transition">Verifikasi di Dapodik <ExternalLink className="w-3.5 h-3.5" /></a>
               </div>
               <p className="mt-4 text-[11px] text-slate-400">Seluruh angka di halaman ini bersumber dari rekap portal Dapodik Kemendikdasmen untuk NPSN {SCHOOL.npsn}.</p>

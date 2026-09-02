@@ -75,7 +75,7 @@ export default function PrestasiPage() {
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
             transition={{ duration: 0.18 }}
           >
-            <div className="mt-6 grid gap-4 max-w-4xl mx-auto">
+            <div className="mt-6 grid gap-4 lg:grid-cols-2 max-w-6xl mx-auto">
           {filtered.map((a, i)=> {
             const Icon = a.rank==="Juara 1"?Trophy:Medal;
             const top = a.rank==="Juara 1";
@@ -100,7 +100,7 @@ export default function PrestasiPage() {
               </Reveal>
             );
           })}
-          {filtered.length===0 && <div className="bg-white rounded-2xl p-12 text-center border border-dashed border-slate-200"><Medal className="w-10 h-10 mx-auto text-slate-300" /><p className="text-sm text-slate-500 mt-3">Tidak ada prestasi cocok.</p></div>}
+          {filtered.length===0 && <div className="bg-white rounded-2xl p-12 text-center border border-dashed border-slate-200 lg:col-span-2"><Medal className="w-10 h-10 mx-auto text-slate-300" /><p className="text-sm text-slate-500 mt-3">Tidak ada prestasi cocok.</p></div>}
             </div>
           </motion.div>
         </AnimatePresence>

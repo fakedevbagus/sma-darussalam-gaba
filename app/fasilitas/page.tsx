@@ -11,6 +11,9 @@ import { BookOpen, FlaskConical, Cpu, Music, Moon, Building2, Dumbbell, Utensils
 const iconMap: Record<string, any> = { book: BookOpen, flask: FlaskConical, cpu: Cpu, music: Music, moon: Moon, building: Building2, volleyball: Dumbbell, utensils: Utensils, heart: Heart, tree: Sprout };
 
 export default function FasilitasPage() {
+  // G5-6: bento — entri pertama jadi tile hero (2x2), satu entri tengah jadi tile
+  // lebar. SPANS[i] ?? "" agar tetap aman bila jumlah fasilitas berubah.
+  const SPANS = ["md:col-span-2 md:row-span-2", "", "", "", "md:col-span-2", "", "", "", "", ""];
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string | null>(null);
   const cats = useMemo(() => [...new Set(FACILITIES.map(f => f.category))].sort(), []);
@@ -33,14 +36,17 @@ export default function FasilitasPage() {
         </div>
         <p className="text-center text-[11px] font-extrabold tracking-widest text-slate-500 uppercase mt-6">{filtered.length} fasilitas ditampilkan</p>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 auto-rows-[minmax(200px,auto)]">
           {filtered.map((f, i) => {
             const Icon = iconMap[f.icon] ?? Building2;
+            const span = SPANS[i] ?? "";
+            const isHero = span.includes("md:row-span-2");
+            const isWide = span.includes("md:col-span-2") && !isHero;
             return (
-              <Reveal key={f.id} delay={Math.min(i * 0.06, 0.4)}>
-              <GlowCard tilt className="rounded-[28px]">
-              <div className={`group card-3d bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
-                <div className="relative h-44 overflow-hidden bg-slate-100">
+              <Reveal key={f.id} delay={Math.min(i * 0.06, 0.4)} className={span}>
+              <GlowCard tilt className="rounded-[28px] h-full">
+              <div className={`group card-3d bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col h-full ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
+                <div className={`relative overflow-hidden bg-slate-100 ${isHero ? "h-56 md:h-auto md:flex-1 md:min-h-[280px]" : isWide ? "h-44 md:h-56" : "h-44"}`}>
                   <Image src={f.image} alt={f.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover group-hover:scale-110 transition duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/55 via-transparent to-transparent" />
                   <span className="absolute top-3 left-3 glass rounded-full px-3 py-1.5 text-[10px] font-extrabold tracking-widest text-navy uppercase shadow">{f.category}</span>

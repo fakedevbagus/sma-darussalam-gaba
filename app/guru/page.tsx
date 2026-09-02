@@ -6,16 +6,31 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import { STAFF } from "@/lib/demo-data";
 import { Search, Filter, BookOpen, BadgeCheck } from "lucide-react";
+import { motion } from "framer-motion";
+
+// G5-8 — kelompok chip diturunkan dari data STAFF: satu chip per mapel
+// (dari staf berposisi "Guru") + satu chip "Tenaga Kependidikan" untuk semua
+// peran non-mengajar. Tidak ada nama/posisi individual yang di-hardcode.
+const TENDIK_KEY = "tenaga-kependidikan";
 
 export default function GuruPage() {
   const [q, setQ] = useState("");
-  const [pos, setPos] = useState<string | null>(null);
-  const positions = useMemo(() => [...new Set(STAFF.map(s => s.position))].sort(), []);
+  const [group, setGroup] = useState<string | null>(null); // null = Semua
+  const subjects = useMemo(
+    () => [...new Set(STAFF.filter(s => s.position === "Guru").map(s => s.subject))].sort(),
+    []
+  );
   const filtered = STAFF.filter(s => {
-    const mPos = pos === null || s.position === pos;
+    const mGroup = group === null || (group === TENDIK_KEY ? s.position !== "Guru" : s.subject === group);
     const mQ = q === "" || s.name.toLowerCase().includes(q.toLowerCase()) || s.subject.toLowerCase().includes(q.toLowerCase());
-    return mPos && mQ;
+    return mGroup && mQ;
   });
+  // G5-8 — kartu Kepala Sekolah selalu paling atas setiap kali ia lolos filter
+  // (sort stabil, urutan staf lain tidak berubah).
+  const ordered = useMemo(
+    () => [...filtered].sort((a, b) => Number(b.position === "Kepala Sekolah") - Number(a.position === "Kepala Sekolah")),
+    [filtered]
+  );
 
   return (
     <div>
@@ -26,14 +41,25 @@ export default function GuruPage() {
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
           <input value={q} onChange={e => setQ(e.target.value)} placeholder="Cari nama atau mapel..." aria-label="Cari guru" className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-bold shadow-card focus:outline-none focus:ring-2 focus:ring-primary-400" />
         </div>
+        {/* G5-8 — chip kelompok memakai pola yang sama persis dengan /berita */}
         <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button onClick={() => setPos(null)} className={`px-4 py-2 rounded-full text-xs font-extrabold border transition ${pos === null ? "bg-navy text-white border-navy shadow-pop" : "bg-white border-slate-200 text-slate-600 hover:border-primary-300"}`}><Filter className="w-3.5 h-3.5 inline mr-1" /> Semua</button>
-          {positions.map(p => (<button key={p} onClick={() => setPos(p)} className={`px-4 py-2 rounded-full text-xs font-extrabold border transition ${pos === p ? "bg-primary-500 text-white border-primary-500 shadow-pop" : "bg-white border-slate-200 text-slate-600 hover:border-primary-300"}`}>{p}</button>))}
+          <button onClick={() => setGroup(null)} className={`relative px-5 py-2 rounded-full text-xs font-bold border ${group === null ? "text-white border-navy" : "bg-white border-slate-200 text-slate-600"}`}>
+            {group === null && <motion.span layoutId="filter-pill-guru" className="absolute inset-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+            <span className="relative z-10"><Filter className="w-3.5 h-3.5 inline mr-1" /> Semua</span>
+          </button>
+          {subjects.map(sub => (<button key={sub} onClick={() => setGroup(sub)} className={`relative px-5 py-2 rounded-full text-xs font-bold border ${group === sub ? "text-white border-navy" : "bg-white border-slate-200 text-slate-600"}`}>
+            {group === sub && <motion.span layoutId="filter-pill-guru" className="absolute inset-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+            <span className="relative z-10">{sub}</span>
+          </button>))}
+          <button onClick={() => setGroup(TENDIK_KEY)} className={`relative px-5 py-2 rounded-full text-xs font-bold border ${group === TENDIK_KEY ? "text-white border-navy" : "bg-white border-slate-200 text-slate-600"}`}>
+            {group === TENDIK_KEY && <motion.span layoutId="filter-pill-guru" className="absolute inset-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+            <span className="relative z-10">Tenaga Kependidikan</span>
+          </button>
         </div>
         <p className="text-center text-[11px] font-extrabold tracking-widest text-slate-500 uppercase mt-6">{filtered.length} staf ditampilkan</p>
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((s, i) => (
+          {ordered.map((s, i) => (
             <Reveal key={s.id} delay={Math.min(i * 0.06, 0.4)}>
               <GlowCard className="rounded-[28px]">
               <article className="group relative bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col">
@@ -48,7 +74,10 @@ export default function GuruPage() {
                 {/* Nama di atas foto */}
                 <div className="absolute bottom-0 inset-x-0 p-4 text-white">
                   <h3 className="font-display font-bold text-[15px] uppercase leading-tight drop-shadow">{s.name}</h3>
-                  <p className="mt-1 inline-flex items-center gap-1.5 bg-white/20 backdrop-blur rounded-full px-2.5 py-1 text-[10px] font-extrabold tracking-wide">
+                  {/* G5-8 — mapel & peran sudah selalu terlihat (terbaca di HP tanpa
+                      hover); saat hover hanya diberi penekanan halus tanpa mengubah
+                      tampilan diam maupun tinggi kartu */}
+                  <p className="mt-1 inline-flex items-center gap-1.5 bg-white/20 backdrop-blur rounded-full px-2.5 py-1 text-[10px] font-extrabold tracking-wide group-hover:bg-white/35 transition-colors">
                     <BookOpen className="w-3 h-3" /> {s.subject}
                   </p>
                 </div>
