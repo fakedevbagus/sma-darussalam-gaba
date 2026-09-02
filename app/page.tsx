@@ -254,8 +254,7 @@ export default function Home() {
         <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4">
           {FASILITAS_FOTO.map((f, i) => (
             <div key={f.name} className={`rounded-[20px] overflow-hidden shadow-card border-4 border-white relative group ${i === 0 ? "col-span-2 sm:col-span-1" : ""} ${i % 2 ? "rotate-1" : "-rotate-1"} hover:rotate-0 hover:shadow-3d hover:-translate-y-0.5 transition`}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img loading="lazy" src={f.img} alt={f.name} className={`w-full object-cover group-hover:scale-110 transition duration-700 ${i === 0 ? "h-[180px] sm:h-[160px]" : "h-[130px] sm:h-[150px]"}`} />
+              <Image src={f.img} alt={f.name} width={600} height={150} sizes="(max-width: 640px) 50vw, 240px" className={`w-full object-cover group-hover:scale-110 transition duration-700 bg-slate-100 ${i === 0 ? "h-[180px] sm:h-[160px]" : "h-[130px] sm:h-[150px]"}`} />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/80 to-transparent p-3"><span className="text-white text-xs font-extrabold">{f.name}</span></div>
             </div>
           ))}

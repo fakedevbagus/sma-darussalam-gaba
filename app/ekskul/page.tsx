@@ -1,9 +1,12 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
+import GlowCard from "@/components/GlowCard";
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import { EXTRACURRICULARS } from "@/lib/demo-data";
 import { Search, Filter, Clock, UserRound } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function EkskulPage() {
   const [q, setQ] = useState("");
@@ -23,18 +26,24 @@ export default function EkskulPage() {
           <input value={q} onChange={e => setQ(e.target.value)} placeholder="Cari ekskul atau pelatih..." aria-label="Cari ekstrakurikuler" className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-bold shadow-card focus:outline-none focus:ring-2 focus:ring-primary-400" />
         </div>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button onClick={() => setCat(null)} className={`px-4 py-2 rounded-full text-xs font-extrabold border transition ${cat === null ? "bg-navy text-white border-navy shadow-pop" : "bg-white border-slate-200 text-slate-600 hover:border-primary-300"}`}><Filter className="w-3.5 h-3.5 inline mr-1" /> Semua</button>
-          {cats.map(c => (<button key={c} onClick={() => setCat(c)} className={`px-4 py-2 rounded-full text-xs font-extrabold border transition ${cat === c ? "bg-primary-500 text-white border-primary-500 shadow-pop" : "bg-white border-slate-200 text-slate-600 hover:border-primary-300"}`}>{c}</button>))}
+          <button onClick={() => setCat(null)} className={`relative px-4 py-2 rounded-full text-xs font-extrabold border transition ${cat === null ? "text-white border-navy shadow-pop" : "bg-white border-slate-200 text-slate-600 hover:border-primary-300"}`}>
+            {cat === null && <motion.span layoutId="filter-pill-ekskul" className="absolute inset-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+            <span className="relative z-10"><Filter className="w-3.5 h-3.5 inline mr-1" /> Semua</span>
+          </button>
+          {cats.map(c => (<button key={c} onClick={() => setCat(c)} className={`relative px-4 py-2 rounded-full text-xs font-extrabold border transition ${cat === c ? "text-white border-primary-500 shadow-pop" : "bg-white border-slate-200 text-slate-600 hover:border-primary-300"}`}>
+            {cat === c && <motion.span layoutId="filter-pill-ekskul" className="absolute inset-0 rounded-full bg-primary-500" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+            <span className="relative z-10">{c}</span>
+          </button>))}
         </div>
         <p className="text-center text-[11px] font-extrabold tracking-widest text-slate-500 uppercase mt-6">{filtered.length} ekstrakurikuler ditampilkan</p>
 
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((e, i) => (
             <Reveal key={e.id} delay={Math.min(i * 0.06, 0.4)}>
+            <GlowCard className="rounded-[28px]">
             <div className={`group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col ${i % 2 ? "lg:rotate-[0.5deg]" : "lg:-rotate-[0.5deg]"} hover:rotate-0`}>
-              <div className="relative h-40 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img loading="lazy" src={e.image} alt={e.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+              <div className="relative h-40 overflow-hidden bg-slate-100">
+                <Image src={e.image} alt={e.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw" className="object-cover group-hover:scale-110 transition duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
                 <span className="absolute top-3 left-3 glass rounded-full px-3 py-1.5 text-[10px] font-extrabold tracking-widest text-navy uppercase shadow">{e.category}</span>
                 <h3 className="absolute bottom-3 left-4 right-4 font-display font-bold text-white text-lg leading-tight drop-shadow">{e.name}</h3>
@@ -47,6 +56,7 @@ export default function EkskulPage() {
                 </div>
               </div>
             </div>
+            </GlowCard>
             </Reveal>
           ))}
         </div>

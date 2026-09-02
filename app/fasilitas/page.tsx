@@ -1,7 +1,9 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
+import GlowCard from "@/components/GlowCard";
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import { Search, Filter, MapPin } from "lucide-react";
 import { FACILITIES } from "@/lib/demo-data";
 import { BookOpen, FlaskConical, Cpu, Music, Moon, Building2, Dumbbell, Utensils, Heart, Sprout } from "lucide-react";
@@ -36,10 +38,10 @@ export default function FasilitasPage() {
             const Icon = iconMap[f.icon] ?? Building2;
             return (
               <Reveal key={f.id} delay={Math.min(i * 0.06, 0.4)}>
-              <div className={`group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
-                <div className="relative h-44 overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img loading="lazy" src={f.image} alt={f.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" />
+              <GlowCard tilt className="rounded-[28px]">
+              <div className={`group card-3d bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col ${i % 3 === 1 ? "lg:rotate-[0.6deg]" : "lg:-rotate-[0.6deg]"} hover:rotate-0`}>
+                <div className="relative h-44 overflow-hidden bg-slate-100">
+                  <Image src={f.image} alt={f.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover group-hover:scale-110 transition duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/55 via-transparent to-transparent" />
                   <span className="absolute top-3 left-3 glass rounded-full px-3 py-1.5 text-[10px] font-extrabold tracking-widest text-navy uppercase shadow">{f.category}</span>
                   <span className="absolute bottom-3 right-3 w-11 h-11 rounded-2xl bg-white/95 text-primary-600 flex items-center justify-center shadow-float group-hover:rotate-6 group-hover:scale-110 transition">
@@ -54,6 +56,7 @@ export default function FasilitasPage() {
                   </div>
                 </div>
               </div>
+              </GlowCard>
               </Reveal>
             );
           })}
