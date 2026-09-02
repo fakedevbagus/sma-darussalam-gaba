@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { GALLERY } from "@/lib/demo-data";
 import { Camera, ChevronLeft, ChevronRight, Images } from "lucide-react";
 
@@ -17,9 +18,8 @@ function MemoryCard({ item, caption, tilt }: { item: (typeof GALLERY)[number]; c
 
   return (
     <div className={`group relative rounded-[28px] overflow-hidden border-4 border-white shadow-card hover:shadow-3d transition ${tilt}`}>
-      <div className="relative h-[250px]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img key={photos[i]} src={photos[i]} alt={caption} loading="lazy" className="absolute inset-0 w-full h-full object-cover animate-[popIn_.45s_ease_both]" />
+      <div className="relative h-[250px] bg-slate-100">
+        <Image key={photos[i]} src={photos[i]} alt={caption} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover animate-[popIn_.45s_ease_both]" />
         <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-navy/85 to-transparent">
           <div className="text-white font-bold text-sm leading-snug">{caption}</div>
           <div className="text-white/70 text-xs">{item.category}</div>
