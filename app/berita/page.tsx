@@ -2,7 +2,9 @@
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ANNOUNCEMENTS, formatDateId } from "@/lib/demo-data";
 import { SCHOOL } from "@/config/school";
 import { Calendar, Tag, Search, Pin, ArrowRight } from "lucide-react";
@@ -22,23 +24,37 @@ export default function BeritaPage() {
     return mCat&&mQ;
   });
   const pinned = ANNOUNCEMENTS.find(a=>a.pinned) ?? null;
+  const reduceMotion = useReducedMotion();
 
   return (
     <div>
       <PageHeader badge="INFORMASI • BERITA & PENGUMUMAN" title="Kabar Terbaru" accent={SCHOOL.shortName} desc="Ikuti kabar terkini — prestasi, kegiatan & info resmi sekolah." img="https://images.unsplash.com/photo-1494172961521-33799ddd43a5?q=80&w=800&auto=format&fit=crop" breadcrumb="Informasi / Berita" />
 
       <section className="max-w-[1280px] mx-auto px-6">
-        <div className="max-w-md mx-auto relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Cari berita atau pengumuman..." className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-semibold shadow-card focus:outline-none focus:ring-2 focus:ring-primary-500" />
+        <div className="sticky top-0 z-20 -mx-6 px-6 py-3 bg-pale/85 backdrop-blur supports-[backdrop-filter]:bg-pale/70 sticky-filter">
+          <div className="max-w-md mx-auto relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Cari berita atau pengumuman..." className="w-full bg-white border border-slate-200 rounded-2xl pl-12 pr-4 py-3.5 text-sm font-semibold shadow-card focus:outline-none focus:ring-2 focus:ring-primary-500" />
+          </div>
+
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {FILTERS.map(f=> (
+              <button key={f.label} onClick={()=>setFilter(f.value)} className={`relative px-5 py-2 rounded-full text-xs font-bold border ${filter===f.value?"text-white border-navy":"bg-white border-slate-200 text-slate-600"}`}>
+                {filter===f.value && <motion.span layoutId="filter-pill-berita" className="absolute inset-0 rounded-full bg-navy" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
+                <span className="relative z-10">{f.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          {FILTERS.map(f=> (
-            <button key={f.label} onClick={()=>setFilter(f.value)} className={`px-5 py-2 rounded-full text-xs font-bold border ${filter===f.value?"bg-navy text-white border-navy":"bg-white border-slate-200 text-slate-600"}`}>{f.label}</button>
-          ))}
-        </div>
-
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={`${q}-${filter}`}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+          >
         {filter==="all" && pinned && !q && (
           <Link href={`/berita/${pinned.slug}`} className="mt-8 block bg-gradient-to-br from-primary-600 to-primary-800 text-white rounded-[28px] p-6 md:p-8 shadow-3d hover:-translate-y-0.5 transition">
             <div className="flex gap-4">
@@ -57,7 +73,7 @@ export default function BeritaPage() {
           {filtered.map((a, i)=> (
             <Reveal key={a.id} delay={Math.min(i * 0.06, 0.4)}>
             <Link href={`/berita/${a.slug}`} className="group bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition">
-              {a.coverUrl && <div className="h-48 overflow-hidden"><img loading="lazy" src={a.coverUrl} alt={a.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" /></div>}
+              {a.coverUrl && <div className="relative h-48 overflow-hidden bg-slate-100"><Image src={a.coverUrl} alt={a.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-110 transition duration-700" /></div>}
               <div className="p-6">
                 <div className="flex gap-2 items-center text-xs"><span className="bg-primary-600 text-white px-2.5 py-1 rounded-full text-[10px] font-bold tracking-widest">{a.category}</span><span className="text-slate-500 flex gap-1 items-center"><Calendar className="w-3.5 h-3.5" /> {formatDateId(a.createdAt)}</span></div>
                 <h3 className="font-bold text-navy mt-3 leading-tight group-hover:text-primary-700 transition line-clamp-2">{a.title}</h3>
@@ -70,6 +86,8 @@ export default function BeritaPage() {
         </div>
 
         {filtered.length===0 && <div className="bg-white rounded-2xl p-12 text-center border border-dashed border-slate-200 mt-8"><p className="text-sm text-slate-500">Tidak ada hasil untuk “{q}”.</p></div>}
+          </motion.div>
+        </AnimatePresence>
 
         <div className="mt-10 bg-slate-50 border border-slate-200 rounded-[28px] p-6 text-center">
           <p className="text-sm text-slate-600">Butuh pengumuman resmi? Cek juga halaman <Link href="/pengumuman" className="text-primary-600 font-bold underline">Pengumuman</Link> & <Link href="/agenda" className="text-primary-600 font-bold underline">Agenda</Link>.</p>

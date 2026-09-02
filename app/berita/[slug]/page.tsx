@@ -1,5 +1,6 @@
 import { ANNOUNCEMENTS, formatDateId } from "@/lib/demo-data";
 import PageHeader from "@/components/PageHeader";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, UserRound, Tag } from "lucide-react";
@@ -22,7 +23,7 @@ export default function BeritaDetail({ params }: { params: { slug: string } }) {
             <span className="flex gap-1 items-center text-slate-500"><UserRound className="w-3.5 h-3.5" /> {item.authorName}</span>
           </div>
           <h1 className="font-display font-extrabold text-3xl text-navy mt-4 leading-tight">{item.title}</h1>
-          {item.coverUrl && <img loading="lazy" src={item.coverUrl} alt={item.title} className="w-full h-[380px] object-cover rounded-2xl mt-6" />}
+          {item.coverUrl && <Image src={item.coverUrl} alt={item.title} width={800} height={380} sizes="(max-width: 800px) 100vw, 800px" className="w-full h-[380px] object-cover rounded-2xl mt-6 bg-slate-100" />}
           <div className="mt-6 whitespace-pre-line text-sm leading-7 text-slate-700">{item.content}</div>
           <div className="mt-8 flex gap-3">
             <Link href="/berita" className="bg-white border border-slate-200 px-5 py-2.5 rounded-full text-sm font-bold text-navy">← Semua Berita</Link>

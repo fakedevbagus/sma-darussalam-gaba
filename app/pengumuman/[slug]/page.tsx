@@ -1,5 +1,6 @@
 import { ANNOUNCEMENTS, formatDateId } from "@/lib/demo-data";
 import PageHeader from "@/components/PageHeader";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -16,7 +17,7 @@ export default function PengumumanDetail({ params }: { params: { slug: string } 
       <section className="max-w-[800px] mx-auto px-6">
         <div className="bg-white rounded-[36px] p-8 md:p-10 shadow-card border border-[#ece4d4]">
           <h1 className="font-display font-extrabold text-3xl text-navy leading-tight">{item.title}</h1>
-          {item.coverUrl && <img loading="lazy" src={item.coverUrl} alt={item.title} className="w-full h-[380px] object-cover rounded-2xl mt-6" />}
+          {item.coverUrl && <Image src={item.coverUrl} alt={item.title} width={800} height={380} sizes="(max-width: 800px) 100vw, 800px" className="w-full h-[380px] object-cover rounded-2xl mt-6 bg-slate-100" />}
           <div className="mt-6 whitespace-pre-line text-sm leading-7 text-slate-700">{item.content}</div>
           <div className="mt-8 flex gap-3">
             <Link href="/pengumuman" className="bg-white border border-slate-200 px-5 py-2.5 rounded-full text-sm font-bold text-navy">← Semua Pengumuman</Link>
