@@ -55,25 +55,30 @@ export default function IdentitasPage() {
       <section className="max-w-[1280px] mx-auto px-6 pb-16">
         {/* ── 01. Identitas Lembaga ── */}
         <SectionHeading eyebrow="Identitas" title="Data Resmi Lembaga" desc="Informasi lembaga sesuai Dapodik Kemendikdasmen" number="01" />
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
-          {items.map((it) => (
-            <div key={it.label} className="bg-white rounded-2xl border border-[#ece4d4] p-5 shadow-card flex gap-4 hover:shadow-3d transition w-full min-w-0">
-              <span className="w-10 h-10 rounded-xl bg-primary-50 text-primary-700 flex items-center justify-center shrink-0"><it.icon className="w-5 h-5" /></span>
-              <div className="min-w-0"><div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">{it.label}</div><div className="font-bold text-navy mt-1 text-sm break-words">{it.value}</div></div>
-            </div>
-          ))}
+        <div className="mt-8 max-w-4xl mx-auto bg-white rounded-[28px] border border-[#ece4d4] shadow-card overflow-hidden">
+          <dl className="divide-y divide-[#f2ece0]">
+            {items.map((it) => (
+              <div key={it.label} className="grid sm:grid-cols-[220px_1fr] gap-1 sm:gap-4 px-6 py-4">
+                <dt className="flex items-center gap-2.5 text-sm font-bold text-slate-500">
+                  <it.icon className="w-4 h-4 text-primary-600 shrink-0" />
+                  {it.label}
+                </dt>
+                <dd className="text-sm font-semibold text-navy break-words">{it.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
         {/* ── 02. Legalitas ── */}
         <div className="mt-12">
           <SectionHeading eyebrow="Legalitas" title="Dokumen Resmi" number="02" />
-          <div className="mt-6 grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+          <div className="mt-6 max-w-4xl mx-auto bg-gradient-to-br from-primary-50/70 to-white rounded-[20px] border border-primary-100 shadow-card overflow-hidden divide-y divide-primary-100/60">
             {legal.map((l) => (
-              <div key={l.label} className="bg-gradient-to-br from-primary-50/70 to-white rounded-[20px] border border-primary-100 p-5 flex gap-4 shadow-card">
+              <div key={l.label} className="flex gap-4 items-start px-6 py-4">
                 <span className="w-10 h-10 rounded-xl bg-white text-primary-700 flex items-center justify-center shrink-0 shadow-card"><l.icon className="w-5 h-5" /></span>
-                <div>
+                <div className="min-w-0">
                   <div className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">{l.label}</div>
-                  <div className="font-bold text-navy mt-1 text-sm">{l.value}</div>
+                  <div className="font-bold text-navy mt-1 text-sm break-words">{l.value}</div>
                   <div className="text-xs text-slate-500 mt-0.5">Tanggal: {l.date}</div>
                 </div>
               </div>
@@ -164,13 +169,13 @@ export default function IdentitasPage() {
                 <b className="font-display text-lg tabular-nums text-white">{DAPODIK.indikator.skor}%</b>
               </div>
             </div>
-            <div className="mt-5 grid sm:grid-cols-3 gap-6">
+            <div className="mt-5 grid gap-6 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-white/10">
               {[
                 { label: "Kelengkapan", value: DAPODIK.indikator.kelengkapan, detail: DAPODIK.indikator.rincian.kelengkapan, bar: "bg-sun" },
                 { label: "Validitas", value: DAPODIK.indikator.validitas, detail: DAPODIK.indikator.rincian.validitas, bar: "bg-accent" },
                 { label: "Kemutakhiran", value: DAPODIK.indikator.mutakhir, detail: DAPODIK.indikator.rincian.mutakhir, bar: "bg-mint" },
               ].map((ind) => (
-                <div key={ind.label} className="bg-white/5 rounded-2xl border border-white/10 p-4">
+                <div key={ind.label} className="sm:px-6 sm:first:pl-0 sm:last:pr-0">
                   <div className="flex items-baseline justify-between">
                     <span className="text-xs font-extrabold tracking-widest uppercase text-white/70">{ind.label}</span>
                     <span className="font-display font-bold text-xl tabular-nums text-white">{ind.value}%</span>
