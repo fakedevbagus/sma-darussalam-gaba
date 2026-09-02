@@ -3,9 +3,22 @@ import GlowCard from "@/components/GlowCard";
 import Link from "next/link";
 import Image from "next/image";
 import { JURUSAN } from "@/lib/demo-data";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Scale } from "lucide-react";
 
 export const metadata = { title: "Program Jurusan" };
+
+type Jurusan = (typeof JURUSAN)[number];
+
+/**
+ * Baris tabel perbandingan — HANYA field yang dimiliki KEDUA entri JURUSAN.
+ * `careers` sengaja tidak ditampilkan: daftar prospek karier di demo-data
+ * tidak dapat diverifikasi sebagai kebijakan sekolah yang dipublikasikan.
+ */
+const COMPARISON_ROWS: { label: string; value: (j: Jurusan) => string }[] = [
+  { label: "Nama Lengkap", value: (j) => j.full },
+  { label: "Fokus Pembelajaran", value: (j) => j.desc },
+  { label: "Mata Pelajaran Peminatan", value: (j) => j.subjects.join(", ") },
+];
 
 export default function JurusanPage() {
   return (
@@ -35,6 +48,48 @@ export default function JurusanPage() {
             </Link>
             </GlowCard>
           ))}
+        </div>
+
+        {/* ── Perbandingan MIPA vs IPS (pola tabel sama dengan sarana di /profil/identitas) ── */}
+        <div className="mt-6 max-w-5xl mx-auto bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4]">
+          <div className="flex items-center gap-2 text-navy font-display font-bold"><Scale className="w-5 h-5 text-primary-600" /> Perbandingan {JURUSAN[0]?.name} &amp; {JURUSAN[1]?.name}</div>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full text-sm min-w-[560px]">
+              <caption className="text-left text-xs text-slate-500 pb-3">
+                Ringkasan berdampingan kedua program jurusan — rincian lengkap tersedia di halaman masing-masing jurusan.
+              </caption>
+              <thead>
+                <tr className="text-left text-[10px] font-extrabold tracking-widest text-slate-500 uppercase border-b border-[#ece4d4]">
+                  <th scope="col" className="py-2 pr-4">Aspek</th>
+                  {JURUSAN.map((j) => (
+                    <th scope="col" key={j.slug} className="py-2 pr-4">
+                      {j.name}
+                      <span className="block text-[10px] font-semibold normal-case tracking-normal text-slate-400">{j.full}</span>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARISON_ROWS.map((row) => (
+                  <tr key={row.label} className="border-b border-slate-50 last:border-0 align-top">
+                    <th scope="row" className="py-2.5 pr-4 text-left font-bold text-navy whitespace-nowrap">{row.label}</th>
+                    {JURUSAN.map((j) => (
+                      <td key={j.slug} className="py-2.5 pr-4 text-slate-600 leading-6">{row.value(j)}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="mt-3 text-[11px] text-slate-400">
+              Pelajari lebih lanjut:{" "}
+              {JURUSAN.map((j, i) => (
+                <span key={j.slug}>
+                  {i > 0 && " · "}
+                  <Link href={`/jurusan/${j.slug}`} className="font-bold text-primary-600 hover:underline">{j.name}</Link>
+                </span>
+              ))}
+            </p>
+          </div>
         </div>
       </section>
     </div>
