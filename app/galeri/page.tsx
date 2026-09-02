@@ -3,14 +3,16 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { GALLERY } from "@/lib/demo-data";
 import { SCHOOL } from "@/config/school";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { Camera, Film, Expand, ChevronLeft, ChevronRight } from "lucide-react";
+import { Camera, Film, Expand } from "lucide-react";
+import GaleriLightbox from "@/components/GaleriLightbox";
 
 export default function GaleriPage() {
   const [filter, setFilter] = useState<"all"|"foto"|"video">("all");
   const [idx, setIdx] = useState<number|null>(null);
+  const triggerRef = useRef<HTMLButtonElement|null>(null);
   const items = filter==="all"?GALLERY: filter==="video"? GALLERY.filter(i=>!!i.videoUrl): GALLERY.filter(i=>!i.videoUrl);
   const viewing = idx!==null? items[idx]: null;
   const reduceMotion = useReducedMotion();
@@ -42,7 +44,7 @@ export default function GaleriPage() {
         <div className="mt-8 columns-2 md:columns-3 gap-4">
           {items.map((item,i)=> (
             <Reveal key={item.id} delay={Math.min(i * 0.06, 0.4)} className="mb-4 break-inside-avoid">
-            <button onClick={()=>setIdx(i)} className={`group relative text-left bg-white rounded-[28px] p-3 pb-5 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition overflow-hidden ${i%4===0?"rotate-[0.5deg]": i%4===1?"-rotate-[0.5deg]": i%4===2?"rotate-[0.3deg]":"-rotate-[0.3deg]"}`}>
+            <button onClick={(e)=>{triggerRef.current = e.currentTarget; setIdx(i);}} className={`group relative text-left bg-white rounded-[28px] p-3 pb-5 shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition overflow-hidden ${i%4===0?"rotate-[0.5deg]": i%4===1?"-rotate-[0.5deg]": i%4===2?"rotate-[0.3deg]":"-rotate-[0.3deg]"}`}>
               {/* Video embed: kunci 16:9 agar tidak terdistorsi oleh alur masonry.
                   Foto: rasio asli (picsum 900×650) — tanpa crop/letterbox. */}
               {item.videoUrl ? (
@@ -73,29 +75,27 @@ export default function GaleriPage() {
         </AnimatePresence>
 
         {viewing && (
-          <div className="fixed inset-0 z-50 bg-navy/80 backdrop-blur flex items-center justify-center p-4" onClick={()=>setIdx(null)}>
-            <div className="bg-white rounded-[28px] overflow-hidden max-w-3xl w-full shadow-3d" onClick={e=>e.stopPropagation()}>
-              <div className="relative bg-black">
-                {viewing.videoUrl ? <iframe src={viewing.videoUrl} className="w-full aspect-video" allowFullScreen title={viewing.title} /> : <Image src={viewing.imageUrl} alt={viewing.title} width={1200} height={800} sizes="(max-width: 768px) 100vw, 768px" className="w-full max-h-[65vh] object-contain" />}
-                <button onClick={()=> setIdx(idx===0? items.length-1 : (idx!-1))} className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-card"><ChevronLeft className="w-5 h-5" /></button>
-                <button onClick={()=> setIdx(idx===items.length-1?0: (idx!+1))} className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-card"><ChevronRight className="w-5 h-5" /></button>
-                <span className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white px-3 py-1 rounded-full text-[10px] font-bold shadow-card">{(idx??0)+1} / {items.length}</span>
-              </div>
-              <div className="p-6">
-                <div className="font-bold text-navy text-lg">{viewing.title}</div>
-                <div className="text-[10px] font-bold tracking-widest text-primary-600">{viewing.category}</div>
-                <p className="text-sm text-slate-600 mt-2">{viewing.caption}</p>
-                <button onClick={()=>setIdx(null)} className="mt-4 bg-navy text-white px-5 py-2.5 rounded-full text-xs font-bold">Tutup</button>
-              </div>
-            </div>
-          </div>
+          <GaleriLightbox
+            items={items}
+            index={idx ?? 0}
+            onNavigate={setIdx}
+            onClose={()=>setIdx(null)}
+            returnFocusRef={triggerRef}
+          />
         )}
 
         <div className="mt-10 bg-white rounded-[36px] p-8 shadow-card border border-[#ece4d4]">
           <h3 className="font-extrabold text-navy">Video Pilihan</h3>
           <div className="mt-6 grid md:grid-cols-3 gap-6">
             {GALLERY.filter(g=>g.videoUrl).slice(0,3).map(v=> (
-              <button key={v.id} onClick={()=> setIdx(GALLERY.findIndex(x=>x.id===v.id))} className="rounded-[28px] overflow-hidden bg-navy text-white relative aspect-video flex items-center justify-center group">
+              <button key={v.id} onClick={(e)=>{
+                triggerRef.current = e.currentTarget;
+                const vi = GALLERY.filter(g=>g.videoUrl).findIndex(x=>x.id===v.id);
+                /* Di bawah filter "foto", video tidak ada di daftar aktif — pindah
+                   ke filter "video" agar indeks lightbox valid (set batched). */
+                if (filter==="foto") setFilter("video");
+                setIdx(filter==="all" ? GALLERY.findIndex(x=>x.id===v.id) : vi);
+              }} className="rounded-[28px] overflow-hidden bg-navy text-white relative aspect-video flex items-center justify-center group">
                 <Image src={v.imageUrl} alt={v.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-60 group-hover:scale-105 transition duration-700" />
                 <div className="relative w-12 h-12 bg-white text-navy rounded-full flex items-center justify-center shadow-float">▶</div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-left">
