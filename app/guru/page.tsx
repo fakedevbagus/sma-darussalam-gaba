@@ -1,7 +1,9 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
+import GlowCard from "@/components/GlowCard";
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import { STAFF } from "@/lib/demo-data";
 import { Search, Filter, BookOpen, BadgeCheck } from "lucide-react";
 
@@ -17,7 +19,7 @@ export default function GuruPage() {
 
   return (
     <div>
-      <PageHeader badge="PENDIDIK & TENAGA KEPENDIDIKAN" title="Guru &" accent="Staf" desc="Mengenal lebih dekat para pendidik profesional berdedikasi tinggi yang membimbing siswa setiap hari." img="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=800&auto=format&fit=crop" breadcrumb="Profil Kami / Guru dan Tendik" />
+      <PageHeader badge="PENDIDIK & TENAGA KEPENDIDIKAN" title="Guru &" accent="Staf" desc="Mengenal lebih dekat para pendidik profesional berdedikasi tinggi yang membimbing siswa setiap hari." img="https://images.unsplash.com/photo-1588075592446-265fd1e6e76f?q=80&w=800&auto=format&fit=crop" breadcrumb={[{ label: "Profil", href: "/profil" }, { label: "Guru & Tendik" }]} />
 
       <section className="max-w-[1280px] mx-auto px-5 md:px-6 pb-4">
         <div className="max-w-lg mx-auto relative">
@@ -33,11 +35,11 @@ export default function GuruPage() {
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((s, i) => (
             <Reveal key={s.id} delay={Math.min(i * 0.06, 0.4)}>
+              <GlowCard className="rounded-[28px]">
               <article className="group relative bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d hover:-translate-y-0.5 transition flex flex-col">
               {/* Foto + overlay premium */}
               <div className="relative aspect-[4/5] overflow-hidden bg-primary-50">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img loading="lazy" src={s.photoUrl} alt={s.name} className="w-full h-full object-cover object-top group-hover:scale-105 transition duration-700" />
+                <Image src={s.photoUrl} alt={s.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw" className="object-cover object-top group-hover:scale-105 transition duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/5 to-transparent" />
                 {/* Badge posisi */}
                 <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 glass rounded-full px-3 py-1.5 text-[10px] font-extrabold tracking-widest text-navy uppercase shadow">
@@ -59,6 +61,7 @@ export default function GuruPage() {
                 <span className={`mt-3 h-1 rounded-full bg-gradient-to-r ${i % 3 === 0 ? "from-primary-400 to-accent" : i % 3 === 1 ? "from-mint to-emerald-400" : "from-sun to-amber-400"} opacity-70 group-hover:opacity-100 transition`} />
               </div>
               </article>
+              </GlowCard>
             </Reveal>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SCHOOL, DAPODIK, DAPO_URL } from "@/config/school";
 import {
   ANNOUNCEMENTS, ACHIEVEMENTS, ACHIEVEMENT_IMAGES, JURUSAN, GALLERY, STAFF, HERO_STATS,
@@ -9,6 +10,7 @@ import PpdbPopup from "@/components/PpdbPopup";
 import CountUp from "@/components/CountUp";
 import { SectionHeading } from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
+import GlowCard from "@/components/GlowCard";
 import TestimoniSlider from "@/components/TestimoniSlider";
 import GaleriSlider from "@/components/GaleriSlider";
 import {
@@ -166,12 +168,14 @@ export default function Home() {
         </div>
         <Reveal className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {KENAPA.map(k => (
-            <div key={k.title} className="group bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] card-3d relative overflow-hidden">
+            <GlowCard key={k.title} tilt className="h-full rounded-[28px]">
+            <div className="group card-3d h-full bg-white rounded-[28px] p-6 shadow-card border border-[#ece4d4] relative overflow-hidden">
               <div className="absolute -right-8 -bottom-8 w-28 h-28 rounded-full bg-primary-50 opacity-70 group-hover:opacity-100 group-hover:scale-125 transition duration-500" />
               <div className={`relative w-12 h-12 rounded-2xl bg-gradient-to-br ${k.color} text-white flex items-center justify-center shadow-md group-hover:rotate-6 group-hover:scale-110 transition`}><k.icon className="w-6 h-6" /></div>
               <h3 className="relative mt-4 font-display font-bold text-navy text-lg leading-tight">{k.title}<br />{k.accent}</h3>
               <p className="relative mt-2 text-sm leading-6 text-slate-600">{k.desc}</p>
             </div>
+            </GlowCard>
           ))}
         </Reveal>
       </section>
@@ -270,9 +274,8 @@ export default function Home() {
         <Marquee duration={80} bg="transparent" className="pb-2">
           {STAFF.map(s => (
             <div key={s.id} className="group shrink-0 w-[170px] sm:w-[190px] bg-white rounded-[20px] overflow-hidden border border-[#ece4d4] shadow-card hover:shadow-3d hover:-translate-y-1 transition">
-              <div className="aspect-square overflow-hidden bg-primary-50">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img loading="lazy" src={s.photoUrl} alt={s.name} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+              <div className="relative aspect-square overflow-hidden bg-primary-50">
+                <Image src={s.photoUrl} alt={s.name} fill sizes="(max-width: 640px) 170px, 190px" className="object-cover group-hover:scale-105 transition duration-700" />
               </div>
               <div className="p-3.5">
                 <h3 className="font-display font-bold text-navy text-[13px] uppercase leading-snug truncate">{s.name}</h3>

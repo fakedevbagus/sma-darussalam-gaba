@@ -1,5 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import EmptyState from "@/components/EmptyState";
+import Image from "next/image";
 import { ALUMNI } from "@/lib/demo-data";
 import { Quote } from "lucide-react";
 
@@ -37,8 +38,8 @@ export default function AlumniPage() {
           <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {ALUMNI.map(a=> (
             <div key={a.id} className="bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d transition">
-              <div className="h-[220px] relative overflow-hidden">
-                <img loading="lazy" src={a.photoUrl} alt={a.name} className="w-full h-full object-cover" />
+              <div className="h-[220px] relative overflow-hidden bg-slate-100">
+                <Image src={a.photoUrl} alt={a.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent" />
               </div>
               <div className="p-5">
