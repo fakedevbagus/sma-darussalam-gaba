@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SCHOOL } from "@/config/school";
 import {
   Check, Clock, Wallet, Gift, HelpCircle, ChevronDown, Phone, FileText, ArrowRight,
-  Search, Users, ClipboardCheck, BadgeCheck, CalendarCheck, PartyPopper, CheckCircle2,
+  Users, ClipboardCheck, BadgeCheck, CalendarCheck, PartyPopper, CheckCircle2,
 } from "lucide-react";
 
 const JALUR = [
@@ -35,39 +35,45 @@ const REQUIREMENTS = [
 const FAQS = [
   { q: "Bagaimana cara mendaftar?", a: "Isi formulir online di bawah, unggah berkas yang diperlukan, dan tunggu verifikasi panitia — seluruh proses daring." },
   { q: "Apa saja jalur pendaftaran?", a: "Empat jalur: Zonasi, Afirmasi, Prestasi, dan Perpindahan Tugas Orang Tua — masing-masing punya kuota sendiri." },
-  { q: "Bagaimana cek status?", a: "Gunakan kolom Cek Status di bagian bawah halaman ini, masukkan nomor registrasi Anda." },
+  { q: "Bagaimana cek status?", a: "Panitia menghubungi setiap pendaftar langsung melalui WhatsApp. Balas pesan pendaftaranmu untuk menanyakan perkembangan." },
   { q: "Apakah ada beasiswa?", a: "Sekolah menyediakan jalur bantuan biaya pendidikan. Kategori dan besarannya ditetapkan setiap tahun ajaran — silakan tanyakan ke panitia PPDB." },
 ];
 
 export default function PPDBPage() {
   const [jalur, setJalur] = useState<string>("zonasi");
   const [sent, setSent] = useState(false);
-  const [regNumber, setRegNumber] = useState("");
   const [nama, setNama] = useState("");
   const [openFaq, setOpenFaq] = useState<number|null>(0);
-  const [statusNo, setStatusNo] = useState("");
-  const [statusResult, setStatusResult] = useState<null | { found: boolean; name?: string; jalurLabel?: string; statusLabel?: string }>(null);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     if (f.get("website")) { setSent(true); return; } // honeypot anti-spam
-    setNama(String(f.get("nama") || "Calon Siswa"));
-    const num = `PPDB-2026-${String(Math.floor(Math.random()*900)+100).padStart(4,"0")}`;
-    setRegNumber(num);
-    setSent(true);
-  }
 
-  function checkStatus() {
-    if (!statusNo.trim()) return;
-    // Demo: PPDB-2026-0001 s/d 0003 dikenali
-    const known: Record<string, { name: string; jalurLabel: string; statusLabel: string }> = {
-      "PPDB-2026-0001": { name: "Aisyah Rahmadani Putri", jalurLabel: "Zonasi", statusLabel: "Menunggu Verifikasi" },
-      "PPDB-2026-0002": { name: "Bagas Prakoso", jalurLabel: "Prestasi", statusLabel: "Terverifikasi" },
-      "PPDB-2026-0003": { name: "Citra Ayu Lestari", jalurLabel: "Afirmasi", statusLabel: "Diterima" },
-    };
-    const r = known[statusNo.trim().toUpperCase()];
-    setStatusResult(r ? { found: true, ...r } : { found: false });
+    const jalurLabel = JALUR.find(j => j.value === f.get("jalur"))?.label ?? String(f.get("jalur") ?? "-");
+    const val = (k: string) => String(f.get(k) ?? "-").trim() || "-";
+
+    setNama(val("nama"));
+
+    const lines = [
+      "Halo panitia PPDB SMA Darussalam.",
+      "Saya ingin mendaftar dengan data berikut:",
+      "",
+      `Nama calon siswa: ${val("nama")}`,
+      `Tempat/tanggal lahir: ${val("tempat_lahir")}, ${val("tanggal_lahir")}`,
+      `NISN: ${val("nisn")}`,
+      `Asal SMP: ${val("asal_smp")}`,
+      `Jalur: ${jalurLabel}`,
+      `Nama orang tua/wali: ${val("nama_orangtua")}`,
+      `No. HP orang tua: ${val("hp_orangtua")}`,
+      `Alamat: ${val("alamat")}`,
+      "",
+      "Mohon informasi langkah selanjutnya. Terima kasih.",
+    ];
+
+    const url = `https://wa.me/${SCHOOL.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    setSent(true);
   }
 
   return (
@@ -177,13 +183,11 @@ export default function PPDBPage() {
                 {sent ? (
                   <div className="py-14 text-center">
                     <span className="w-16 h-16 mx-auto rounded-full bg-primary-50 text-primary-700 flex items-center justify-center"><PartyPopper className="w-8 h-8" /></span>
-                    <h2 className="font-display font-extrabold text-2xl text-navy mt-5">Pendaftaran Berhasil!</h2>
-                    <p className="text-sm text-slate-600 mt-2 max-w-md mx-auto">Simpan nomor pendaftaran untuk cek status selanjutnya.</p>
-                    <div className="mt-5 inline-flex bg-navy text-white px-5 py-3 rounded-2xl font-mono font-bold tracking-widest rotate-[-1deg]">{regNumber}</div>
+                    <h2 className="font-display font-extrabold text-2xl text-navy mt-5">Data terkirim ke WhatsApp panitia</h2>
+                    <p className="text-sm text-slate-600 mt-2 max-w-md mx-auto">Terima kasih, {nama}. Jendela WhatsApp sudah terbuka dengan data pendaftaranmu — tekan kirim di WhatsApp agar panitia menerimanya. Pendaftaran dianggap masuk setelah panitia membalas.</p>
                     <div className="mt-7 flex flex-wrap justify-center gap-3">
-                      <a href={`https://wa.me/${SCHOOL.whatsapp}?text=${encodeURIComponent(`Halo panitia PPDB SMA Darussalam 👋\n\nSaya ${nama}, baru saja mendaftar online dengan nomor ${regNumber}.\nMohon informasi langkah selanjutnya untuk verifikasi berkas.\n\nTerima kasih.`)}`} target="_blank" rel="noopener noreferrer" className="btn-gold">Konfirmasi via WhatsApp</a>
+                      <a href={SCHOOL.social.whatsapp} target="_blank" rel="noopener noreferrer" className="btn-gold">Buka WhatsApp Panitia</a>
                       <Link href="/" className="btn-navy">Kembali ke Beranda</Link>
-                      <button onClick={()=>{setStatusNo(regNumber); checkStatus();}} className="btn-outline">Cek Status Sekarang</button>
                     </div>
                   </div>
                 ) : (
@@ -202,38 +206,11 @@ export default function PPDBPage() {
                     <input required name="hp_orangtua" placeholder="No. HP Orang Tua *" className="input" />
                     <textarea required rows={3} name="alamat" placeholder="Alamat Lengkap *" className="sm:col-span-2 resize-none input" />
                     <button className="sm:col-span-2 inline-flex justify-center items-center gap-2 bg-navy text-white py-4 rounded-xl font-bold hover:bg-primary-800 transition"><Send2 /> Kirim Pendaftaran</button>
-                    <p className="sm:col-span-2 text-xs text-slate-500 text-center flex gap-2 justify-center items-start"><CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" /> Data demo — tidak dikirim ke server. Dengan mendaftar, Anda menyetujui syarat & ketentuan PPDB.</p>
+                    <p className="sm:col-span-2 text-xs text-slate-500 text-center flex gap-2 justify-center items-start"><CheckCircle2 className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" /> Setelah dikirim, data akan diteruskan ke WhatsApp panitia PPDB untuk diverifikasi. Dengan mendaftar, Anda menyetujui syarat & ketentuan PPDB.</p>
                   </form>
                 )}
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Cek Status */}
-        <section id="cek-status" className="mt-12">
-          <div className="max-w-xl mx-auto text-center">
-            <div className="inline-flex gap-2 items-center bg-primary-50 text-primary-700 px-4 py-2 rounded-full text-xs font-bold"><Search className="w-3.5 h-3.5" /> CEK STATUS PENDAFTARAN</div>
-            <h2 className="font-display font-extrabold text-2xl text-navy mt-4">Sudah Mendaftar?</h2>
-            <p className="text-sm text-slate-600 mt-2">Masukkan nomor pendaftaran untuk melihat status verifikasi & hasil seleksi.</p>
-            <div className="mt-5 flex gap-2">
-              <input value={statusNo} onChange={e=>{setStatusNo(e.target.value); setStatusResult(null);}} placeholder="cth. PPDB-2026-0001" className="flex-1 border border-slate-200 rounded-xl px-4 py-3 text-sm font-mono font-bold uppercase text-center focus:outline-none focus:ring-2 focus:ring-primary-500" onKeyDown={e=>e.key==="Enter"&&checkStatus()} />
-              <button onClick={checkStatus} disabled={!statusNo.trim()} className="bg-navy text-white px-6 rounded-xl text-sm font-bold disabled:opacity-40">Cek</button>
-            </div>
-
-            {statusResult && !statusResult.found && (
-              <div className="mt-5 bg-white rounded-2xl border border-slate-200 p-5 text-sm text-slate-600">Nomor pendaftaran tidak ditemukan. Coba contoh demo: <b>PPDB-2026-0001</b>.</div>
-            )}
-            {statusResult?.found && (
-              <div className="mt-5 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-card text-left">
-                <div className="bg-emerald-50 text-emerald-700 px-6 py-4 font-bold text-sm flex gap-2 items-center"><BadgeCheck className="w-5 h-5" /> {statusResult.statusLabel}</div>
-                <div className="divide-y divide-slate-100 px-6">
-                  {[["Nomor",statusNo.toUpperCase()],["Nama",statusResult.name||"-"],["Jalur",statusResult.jalurLabel||"-"]].map(([k,v])=> (
-                    <div key={k} className="flex justify-between py-3 text-sm"><span className="text-slate-500">{k}</span><b className="text-navy">{v}</b></div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </section>
 

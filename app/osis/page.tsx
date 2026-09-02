@@ -1,4 +1,5 @@
 import PageHeader from "@/components/PageHeader";
+import EmptyState from "@/components/EmptyState";
 import { OSIS_DATA } from "@/lib/demo-data";
 import { Users, Target, Activity, Mail } from "lucide-react";
 
@@ -22,15 +23,23 @@ export default function OsisPage() {
 
         <div>
           <h3 className="font-display font-extrabold text-xl text-navy">Struktur Organisasi</h3>
-          <p className="text-sm text-slate-600 mt-1">Periode {osis.structure[0].year}</p>
-          <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {osis.structure.map((p,i)=> (
-              <div key={i} className="bg-white rounded-2xl p-4 shadow-card border border-[#ece4d4] flex gap-4 items-center">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary-600 to-accent flex items-center justify-center text-white font-bold text-lg">{p.name.split(" ").slice(0,2).map(w=>w[0]).join("")}</div>
-                <div><div className="font-bold text-navy text-sm">{p.name}</div><div className="text-[10px] font-bold tracking-widest text-primary-600 uppercase">{p.position}</div></div>
+          {osis.structure.length === 0 ? (
+            <div className="mt-6">
+              <EmptyState title="Struktur OSIS segera hadir" />
+            </div>
+          ) : (
+            <>
+              <p className="text-sm text-slate-600 mt-1">Periode {osis.structure[0].year}</p>
+              <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {osis.structure.map((p,i)=> (
+                  <div key={i} className="bg-white rounded-2xl p-4 shadow-card border border-[#ece4d4] flex gap-4 items-center">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary-600 to-accent flex items-center justify-center text-white font-bold text-lg">{p.name.split(" ").slice(0,2).map(w=>w[0]).join("")}</div>
+                    <div><div className="font-bold text-navy text-sm">{p.name}</div><div className="text-[10px] font-bold tracking-widest text-primary-600 uppercase">{p.position}</div></div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
         </div>
 
         <div>

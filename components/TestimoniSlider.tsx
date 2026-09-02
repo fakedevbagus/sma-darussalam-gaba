@@ -4,10 +4,20 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { TESTIMONI } from "@/lib/demo-data";
+import EmptyState from "@/components/EmptyState";
 import { Quote } from "lucide-react";
 
 /** Testimoni alumni — slide otomatis (Swiper autoplay, loop, pagination) */
 export default function TestimoniSlider() {
+  if (TESTIMONI.length === 0) {
+    return (
+      <EmptyState
+        title="Testimoni alumni segera hadir"
+        desc="Kami sedang mengumpulkan cerita dari para alumni."
+      />
+    );
+  }
+
   return (
     <Swiper
       modules={[Autoplay, Pagination]}

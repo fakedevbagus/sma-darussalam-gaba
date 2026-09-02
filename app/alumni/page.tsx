@@ -1,6 +1,7 @@
 import PageHeader from "@/components/PageHeader";
+import EmptyState from "@/components/EmptyState";
 import { ALUMNI } from "@/lib/demo-data";
-import { Quote, User } from "lucide-react";
+import { Quote } from "lucide-react";
 
 const STATS = [
   { value: "3", label: "Angkatan Lulusan" },
@@ -14,19 +15,26 @@ export default function AlumniPage() {
     <div>
       <PageHeader badge="KESISWAAN • ALUMNI" title="Alumni &" accent="Testimoni" desc="Jejak langkah lulusan yang sukses di berbagai bidang & perguruan tinggi terkemuka — inspirasi untuk adik kelas." img="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" breadcrumb="Kesiswaan / Alumni" />
       <section className="max-w-[1280px] mx-auto px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {STATS.map(s=> (
-            <div key={s.label} className="bg-white rounded-2xl p-5 text-center shadow-card border border-[#ece4d4]">
-              <div className="text-2xl font-extrabold gradient-text">{s.value}</div>
-              <div className="text-xs font-bold text-slate-600 mt-1">{s.label}</div>
-            </div>
-          ))}
-        </div>
+        {ALUMNI.length > 0 && (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {STATS.map(s=> (
+              <div key={s.label} className="bg-white rounded-2xl p-5 text-center shadow-card border border-[#ece4d4]">
+                <div className="text-2xl font-extrabold gradient-text">{s.value}</div>
+                <div className="text-xs font-bold text-slate-600 mt-1">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        )}
 
         <h3 className="font-display font-extrabold text-2xl text-navy mt-10">Cerita Alumni</h3>
-        <p className="text-sm text-slate-600 mt-2">Testimoni lulusan — demo, bisa ganti foto & quotes via lib/demo-data.ts</p>
+        <p className="text-sm text-slate-600 mt-2">Kesan &amp; pesan dari para lulusan.</p>
 
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {ALUMNI.length === 0 ? (
+          <div className="mt-8">
+            <EmptyState title="Data alumni segera hadir" />
+          </div>
+        ) : (
+          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {ALUMNI.map(a=> (
             <div key={a.id} className="bg-white rounded-[28px] overflow-hidden shadow-card border border-[#ece4d4] hover:shadow-3d transition">
               <div className="h-[220px] relative overflow-hidden">
@@ -45,7 +53,8 @@ export default function AlumniPage() {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        )}
       </section>
     </div>
   );
